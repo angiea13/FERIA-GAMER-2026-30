@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ibbforeucl4n"]
+
+[ext_resource type="PackedScene" uid="uid://c8rdism70ldge" path="res://scenes/auto_scroll_level.tscn" id="1_rus8k"]
+[ext_resource type="PackedScene" uid="uid://ctq14dgep25ts" path="res://scenes/plataforma.tscn" id="2_5xbjy"]
+[ext_resource type="PackedScene" uid="uid://1can08s4fxkp" path="res://scenes/player.tscn" id="3_4nkto"]
+[ext_resource type="Texture2D" uid="uid://yogmkirmcm7t" path="res://assets/icon.svg" id="4_5xbjy"]
+
+[node name="Level1" type="Node2D" unique_id=49675082]
+
+[node name="AutoScrollLevel" parent="." unique_id=413652132 instance=ExtResource("1_rus8k")]
+
+[node name="Plataforma" parent="." unique_id=2092135741 instance=ExtResource("2_5xbjy")]
+position = Vector2(358, -151)
+scale = Vector2(2, 2)
+
+[node name="Player" parent="." unique_id=1446005476 instance=ExtResource("3_4nkto")]
+position = Vector2(0, -66)
+scale = Vector2(2, 2)
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1291372081]
+position = Vector2(16262, 122)
+scale = Vector2(267.85934, 1.96875)
+texture = ExtResource("4_5xbjy")

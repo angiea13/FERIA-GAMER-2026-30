@@ -1,17 +1,8 @@
 [gd_scene format=3 uid="uid://c3y1sg3cbb1go"]
 
-[ext_resource type="PackedScene" uid="uid://c8rdism70ldge" path="res://scenes/auto_scroll_level.tscn" id="1_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://1can08s4fxkp" path="res://scenes/player.tscn" id="2_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://ctq14dgep25ts" path="res://scenes/plataforma.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://cb4a0yijfe7b7" path="res://scenes/menu_principal.tscn" id="1_lbhrr"]
 
 [node name="Game" type="Node2D" unique_id=1657811310]
 
-[node name="AutoScrollLevel" parent="." unique_id=413652132 instance=ExtResource("1_lnu2h")]
-
-[node name="Player" parent="AutoScrollLevel" unique_id=1446005476 instance=ExtResource("2_lnu2h")]
-position = Vector2(0, -66)
-scale = Vector2(2, 2)
-
-[node name="Plataforma" parent="AutoScrollLevel" unique_id=2092135741 instance=ExtResource("4_lbhrr")]
-position = Vector2(358, -151)
-scale = Vector2(2, 2)
+[node name="MenuPrincipal" parent="." unique_id=1336107057 instance=ExtResource("1_lbhrr")]
+position = Vector2(675, 450)

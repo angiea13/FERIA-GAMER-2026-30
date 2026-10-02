@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cb4a0yijfe7b7"]
+
+[ext_resource type="Script" uid="uid://ddl4pky75bnag" path="res://scripts/menu_principal.gd" id="1_i85hu"]
+
+[node name="MenuPrincipal" type="Node2D" unique_id=1336107057]
+position = Vector2(-128, -34)
+script = ExtResource("1_i85hu")
+
+[node name="ButtonManager" type="Control" parent="." unique_id=1246316951]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 200.0
+offset_right = 240.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="INICIO" type="Button" parent="ButtonManager" unique_id=146212594]
+layout_mode = 0
+offset_left = -267.0
+offset_top = -246.0
+offset_right = 132.0
+offset_bottom = -150.0
+text = "Iniciar"
+metadata/_edit_use_anchors_ = true
+
+[node name="CONFIGURACION" type="Button" parent="ButtonManager" unique_id=2103633691]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.35
+anchor_bottom = -0.35
+offset_left = -267.0
+offset_right = 132.0
+offset_bottom = 96.0
+text = "Configuración"
+metadata/_edit_use_anchors_ = true
+
+[node name="SALIR" type="Button" parent="ButtonManager" unique_id=215161311]
+layout_mode = 0
+offset_left = -267.0
+offset_top = 214.0
+offset_right = 132.0
+offset_bottom = 310.0
+text = "Salir"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="ButtonManager/INICIO" to="." method="_on_inicio_pressed"]
+[connection signal="pressed" from="ButtonManager/CONFIGURACION" to="." method="_on_configuracion_pressed"]
+[connection signal="pressed" from="ButtonManager/SALIR" to="." method="_on_salir_pressed"]

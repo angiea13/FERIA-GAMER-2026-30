@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dmy6ykupif1a7"]
+
+[ext_resource type="Script" uid="uid://dfupr87d7ox8o" path="res://scripts/camera_auto_scroll.gd" id="1_8ygmh"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_jimjb"]
+a = Vector2(-800, 450)
+b = Vector2(-800, -450)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_1xham"]
+a = Vector2(800, 450)
+b = Vector2(800, -450)
+
+[node name="CameraAutoScroll" type="Camera2D" unique_id=698775426]
+script = ExtResource("1_8ygmh")
+velocidad = Vector2(500, 0)
+
+[node name="limites" type="StaticBody2D" parent="." unique_id=1500315902]
+
+[node name="limiteIzq" type="CollisionShape2D" parent="limites" unique_id=188688384]
+shape = SubResource("SegmentShape2D_jimjb")
+
+[node name="limiteDer" type="CollisionShape2D" parent="limites" unique_id=1630745318]
+shape = SubResource("SegmentShape2D_1xham")

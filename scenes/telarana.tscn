@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dc7tavmho7un7"]
+
+[ext_resource type="Script" uid="uid://cceu4l3kocdnb" path="res://scripts/telarana.gd" id="1_ens8t"]
+[ext_resource type="Texture2D" uid="uid://rstwnyfdc535" path="res://assets/capullo.png" id="2_qbv1t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yuyls"]
+radius = 78.025635
+
+[node name="Telarana" type="Area2D" unique_id=1261314171]
+script = ExtResource("1_ens8t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1461443818]
+position = Vector2(-1, -5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_qbv1t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=313657269]
+position = Vector2(5, 54)
+shape = SubResource("CircleShape2D_yuyls")

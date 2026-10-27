@@ -10,17 +10,28 @@ extends Area2D
 
 # "anterior" NO se asigna a mano: se calcula solo
 var anterior: Telarana = null
-
+const SALIDA_HILO:=Vector2(0,-32)
 
 func _ready():
 	# Si yo apunto a "siguiente", entonces yo soy su "anterior"
 	if siguiente:
 		siguiente.anterior = self
-
-	
 	body_entered.connect(_al_entrar)
+	if not Engine.is_editor_hint():
+		add_to_group("telaranas")
 
-
+func puntos_hilo() -> PackedVector2Array:
+	var puntos=PackedVector2Array()
+	if siguiente==null:
+		return puntos
+	var inicio:=SALIDA_HILO
+	var fin:= to_local(siguiente.global_position)+SALIDA_HILO
+	for i in range(21):
+		var t:=i/20.0
+		var p:=inicio.lerp(fin,t)
+		p.y	+=sin(t*PI)*40
+		puntos.append(p)
+	return puntos
 func _al_entrar(cuerpo):
 	if cuerpo is Jugador:
 		cuerpo.telarana_actual = self
@@ -34,17 +45,19 @@ func _process(_delta):
 
 # --- Parte visual ---
 func _draw():
-	if siguiente == null:
-		return                      # la última no dibuja hilo
-
-	var inicio := Vector2(0, -32)                                       # punto de salida en mi telarana
-	var fin := to_local(siguiente.global_position) + Vector2(0, -32)    # punto de llegada en el otro
-
-	var hilo := PackedVector2Array()
-	for i in range(21):
-		var t := i / 20.0              
-		var p := inicio.lerp(fin, t)   
-		p.y += sin(t * PI) * 40         # lo cuelga hacia abajo en el centro
-		hilo.append(p)
-
-	draw_polyline(hilo, Color(1, 1, 1, 0.8), 2)
+	var pts := puntos_hilo()
+	if pts.size() > 1:
+		draw_polyline(pts, Color(1, 1, 1, 0.8), 2)
+func toca_hilo(punto_global: Vector2, radio: float) -> bool:
+	var p := to_local(punto_global)
+	var pts := puntos_hilo()
+	for i in range(pts.size() - 1):
+		var cercano := Geometry2D.get_closest_point_to_segment(p, pts[i], pts[i + 1])
+		if p.distance_to(cercano) <= radio:
+			return true
+	return false
+func cortar():
+	if siguiente:
+		siguiente.anterior = null
+	siguiente = null 
+	

@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var arma: Node2D = $Armas
 @onready var anim_arma: AnimationPlayer = $Armas/AnimationPlayer
+@onready var hitbox_espada: CollisionShape2D=$Armas/CollisionShape2D
+const RADIO_CORTE=30.0
 #Atributos del personaje
 var vida=100
 #Moviento
@@ -69,9 +71,13 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	if Input.is_action_just_pressed("atacar") and not anim_arma.is_playing():
-		print("Ataco")
 		arma.visible=true
 		anim_arma.play("ataque")
+	# Cortar hilos mientras el golpe está activo
+	if anim_arma.is_playing() and not hitbox_espada.disabled:
+		for t in get_tree().get_nodes_in_group("telaranas"):
+			if t.toca_hilo(hitbox_espada.global_position, RADIO_CORTE):
+				t.cortar()
 	arma.scale.x=direccion_dash
 
 	move_and_slide()

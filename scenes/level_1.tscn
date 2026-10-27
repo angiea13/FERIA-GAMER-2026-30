@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ctq14dgep25ts" path="res://scenes/plataforma.tscn" id="2_5xbjy"]
 [ext_resource type="PackedScene" uid="uid://1can08s4fxkp" path="res://scenes/player.tscn" id="3_4nkto"]
 [ext_resource type="Texture2D" uid="uid://b6q13yb1kdnnf" path="res://assets/floor.png" id="4_5xbjy"]
+[ext_resource type="PackedScene" uid="uid://dc7tavmho7un7" path="res://scenes/telarana.tscn" id="5_4nkto"]
 
 [node name="Level1" type="Node2D" unique_id=49675082]
 
@@ -21,3 +22,16 @@ scale = Vector2(2, 2)
 [node name="Player" parent="." unique_id=1446005476 instance=ExtResource("3_4nkto")]
 position = Vector2(-155, -179)
 scale = Vector2(0.5, 0.5)
+
+[node name="Plataforma2" parent="." unique_id=1661262514 instance=ExtResource("2_5xbjy")]
+position = Vector2(974, -288)
+
+[node name="T1" parent="." unique_id=1261314171 node_paths=PackedStringArray("siguiente") instance=ExtResource("5_4nkto")]
+position = Vector2(975, -451)
+siguiente = NodePath("../T2")
+
+[node name="T2" parent="." unique_id=1441666053 instance=ExtResource("5_4nkto")]
+position = Vector2(1585, -266)
+
+[node name="Plataforma3" parent="." unique_id=337692069 instance=ExtResource("2_5xbjy")]
+position = Vector2(1577, -89)

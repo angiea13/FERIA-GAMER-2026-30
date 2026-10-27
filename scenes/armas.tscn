@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://cdgnvvnwawkeq"]
+
+[ext_resource type="Texture2D" uid="uid://c5nswfe7neeaf" path="res://assets/espada.png" id="1_a0fsf"]
+
+[sub_resource type="Animation" id="Animation_a0fsf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.0943952]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_stwem"]
+resource_name = "ataque"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.1, 0.18),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.0943952, 1.2217305]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.22, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n3wsc"]
+_data = {
+&"RESET": SubResource("Animation_a0fsf"),
+&"ataque": SubResource("Animation_stwem")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]
+size = Vector2(78, 175)
+
+[node name="Armas" type="Area2D" unique_id=759737048]
+position = Vector2(15, 7)
+rotation = -2.0943952
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2077545169]
+texture_filter = 1
+position = Vector2(8, 33)
+scale = Vector2(3, 3)
+texture = ExtResource("1_a0fsf")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=101726540]
+libraries/ = SubResource("AnimationLibrary_n3wsc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=140756571]
+position = Vector2(49.174973, 122.18766)
+shape = SubResource("RectangleShape2D_qnpof")
+disabled = true

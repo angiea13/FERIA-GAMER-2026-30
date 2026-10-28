@@ -10,6 +10,8 @@ var vida=100
 #Moviento
 const SPEED = 500.0
 const JUMP_VELOCITY = -600.0
+const COYOTE_TIEMPO = 0.2   
+var coyote_restante := 0.0
 #Ataque
 const RADIO_CORTE=30.0
 ##Telaranas
@@ -34,7 +36,7 @@ func _physics_process(delta: float) -> void:
     #Variable de duplicado
     Time_Actual_Dupli+=delta
     #Va a ser el dash este no va a ser afectado por la gravedad en el momento del dash
-    
+    #Variables de 
     if Input.is_action_just_pressed("hacer_dash"):
         var dir := Input.get_axis("move_left", "move_right")
         if dir != 0:
@@ -48,11 +50,15 @@ func _physics_process(delta: float) -> void:
         move_and_slide()
         return
     # Gravedad
+    
     if not is_on_floor():
+        coyote_restante-=delta
         if Deslizarse():
             velocity += get_gravity() * delta /4
         else:
             velocity += get_gravity() * delta
+    else:
+        coyote_restante=COYOTE_TIEMPO
     if Jump_Slide() and Input.is_action_just_pressed("jump"):
         velocity.y = JUMP_VELOCITY
     # Teletransporte
@@ -63,10 +69,10 @@ func _physics_process(delta: float) -> void:
             teletransportar(telarana_actual.anterior)
 
     # Salto
-    if Input.is_action_just_pressed("jump") and is_on_floor():
+    if Input.is_action_just_pressed("jump") and coyote_restante>0:
         velocity.y = JUMP_VELOCITY
-    if Input.is_action_just_pressed("jump") and Coyote():
-        velocity.y = JUMP_VELOCITY
+        coyote_restante=0
+   
 
     # Movimiento horizontal
     
@@ -87,7 +93,8 @@ func _physics_process(delta: float) -> void:
             if t.toca_hilo(hitbox_espada.global_position, RADIO_CORTE):
                 t.cortar()
     arma.scale.x=direccion_dash
-
+    $Deslizarse.target_position.x = abs($Deslizarse.target_position.x) * direccion_dash
+    $Brincar.target_position.x = abs($Brincar.target_position.x) * direccion_dash
     move_and_slide()
     _update_animation(direction)
 
@@ -125,8 +132,6 @@ func crear_duplicado():
     duplicado.pause()
     await get_tree().create_timer(Time_Life_Dupli).timeout
     duplicado.queue_free()
-func Coyote():
-    return $Coyote.is_colliding()
 func Deslizarse():
     return $Deslizarse.is_colliding()
 func Jump_Slide():

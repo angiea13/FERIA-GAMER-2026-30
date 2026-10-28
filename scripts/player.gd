@@ -1,16 +1,17 @@
 class_name Jugador
 extends CharacterBody2D
-
+#Variables externas
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var arma: Node2D = $Armas
 @onready var anim_arma: AnimationPlayer = $Armas/AnimationPlayer
 @onready var hitbox_espada: CollisionShape2D=$Armas/CollisionShape2D
-const RADIO_CORTE=30.0
 #Atributos del personaje
 var vida=100
 #Moviento
 const SPEED = 500.0
 const JUMP_VELOCITY = -600.0
+#Ataque
+const RADIO_CORTE=30.0
 ##Telaranas
 var telarana_actual: Telarana = null
 ##Dash
@@ -49,6 +50,10 @@ func _physics_process(delta: float) -> void:
 	# Gravedad
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	if Deslizarse():
+		velocity += get_gravity() * delta /4
+	if Jump_Slide() and Input.is_action_just_pressed("jump"):
+		velocity.y = JUMP_VELOCITY
 	# Teletransporte
 	if telarana_actual:
 		if Input.is_action_just_pressed("ir_siguiente"):
@@ -58,6 +63,8 @@ func _physics_process(delta: float) -> void:
 
 	# Salto
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("jump") and Coyote():
 		velocity.y = JUMP_VELOCITY
 
 	# Movimiento horizontal
@@ -117,3 +124,11 @@ func crear_duplicado():
 	duplicado.pause()
 	await get_tree().create_timer(Time_Life_Dupli).timeout
 	duplicado.queue_free()
+func Coyote():
+	
+	
+	return $Coyote.is_colliding()
+func Deslizarse():
+	return $Deslizarse.is_colliding()
+func Jump_Slide():
+	return $Brincar.is_colliding()

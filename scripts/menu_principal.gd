@@ -14,7 +14,7 @@ func _on_inicio_pressed() -> void:
 
 
 func _on_configuracion_pressed() -> void:
-	pass
+	get_tree().change_scene_to_file("res://scenes/Configuraciones.tscn")
 
 
 func _on_salir_pressed() -> void:

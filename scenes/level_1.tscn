@@ -35,7 +35,3 @@ position = Vector2(1585, -266)
 
 [node name="Plataforma3" parent="." unique_id=337692069 instance=ExtResource("2_5xbjy")]
 position = Vector2(1577, -89)
-
-[node name="Plataforma4" parent="." unique_id=1519296238 instance=ExtResource("2_5xbjy")]
-position = Vector2(4430.0005, -319)
-scale = Vector2(20, 20)

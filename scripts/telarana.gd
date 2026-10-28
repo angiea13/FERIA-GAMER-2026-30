@@ -17,6 +17,7 @@ func _ready():
 	if siguiente:
 		siguiente.anterior = self
 	body_entered.connect(_al_entrar)
+	body_exited.connect(_al_salir)
 	if not Engine.is_editor_hint():
 		add_to_group("telaranas")
 
@@ -35,6 +36,11 @@ func puntos_hilo() -> PackedVector2Array:
 func _al_entrar(cuerpo):
 	if cuerpo is Jugador:
 		cuerpo.telarana_actual = self
+func _al_salir(cuerpo):
+	if cuerpo is Jugador:
+		if cuerpo.telarana_actual==self:
+			cuerpo.telarana_actual=null
+		
 
 
 func _process(_delta):

@@ -16,11 +16,11 @@ texture = ExtResource("4_5xbjy")
 [node name="AutoScrollLevel" parent="." unique_id=413652132 instance=ExtResource("1_rus8k")]
 
 [node name="Plataforma" parent="." unique_id=2092135741 instance=ExtResource("2_5xbjy")]
-position = Vector2(358, -151)
+position = Vector2(403, -171)
 scale = Vector2(2, 2)
 
 [node name="Player" parent="." unique_id=1446005476 instance=ExtResource("3_4nkto")]
-position = Vector2(-155, -179)
+position = Vector2(-186, -103)
 scale = Vector2(0.5, 0.5)
 
 [node name="Plataforma2" parent="." unique_id=1661262514 instance=ExtResource("2_5xbjy")]
@@ -35,3 +35,7 @@ position = Vector2(1585, -266)
 
 [node name="Plataforma3" parent="." unique_id=337692069 instance=ExtResource("2_5xbjy")]
 position = Vector2(1577, -89)
+
+[node name="Plataforma4" parent="." unique_id=1519296238 instance=ExtResource("2_5xbjy")]
+position = Vector2(4430.0005, -319)
+scale = Vector2(20, 20)

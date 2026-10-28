@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ibbforeucl4n"]
 
-[ext_resource type="PackedScene" uid="uid://c8rdism70ldge" path="res://scenes/auto_scroll_level.tscn" id="1_rus8k"]
+[ext_resource type="PackedScene" uid="uid://bivgotvup4047" path="res://scenes/level.tscn" id="1_4nkto"]
 [ext_resource type="PackedScene" uid="uid://ctq14dgep25ts" path="res://scenes/plataforma.tscn" id="2_5xbjy"]
 [ext_resource type="PackedScene" uid="uid://1can08s4fxkp" path="res://scenes/player.tscn" id="3_4nkto"]
 [ext_resource type="Texture2D" uid="uid://b6q13yb1kdnnf" path="res://assets/floor.png" id="4_5xbjy"]
@@ -8,7 +8,7 @@
 
 [node name="Level1" type="Node2D" unique_id=49675082]
 
-[node name="AutoScrollLevel" parent="." unique_id=413652132 instance=ExtResource("1_rus8k")]
+[node name="Level" parent="." unique_id=187470174 instance=ExtResource("1_4nkto")]
 
 [node name="Floor" type="Sprite2D" parent="." unique_id=791418029]
 position = Vector2(22255, 250)
@@ -22,6 +22,10 @@ scale = Vector2(2, 2)
 [node name="Player" parent="." unique_id=1446005476 instance=ExtResource("3_4nkto")]
 position = Vector2(-186, -103)
 scale = Vector2(0.5, 0.5)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=892470718]
+position = Vector2(372, 206)
+scale = Vector2(2, 2)
 
 [node name="Plataforma2" parent="." unique_id=1661262514 instance=ExtResource("2_5xbjy")]
 position = Vector2(974, -288)

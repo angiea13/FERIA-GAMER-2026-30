@@ -8,12 +8,12 @@
 
 [node name="Level1" type="Node2D" unique_id=49675082]
 
+[node name="AutoScrollLevel" parent="." unique_id=413652132 instance=ExtResource("1_rus8k")]
+
 [node name="Floor" type="Sprite2D" parent="." unique_id=791418029]
 position = Vector2(22255, 250)
 scale = Vector2(9.248, 1)
 texture = ExtResource("4_5xbjy")
-
-[node name="AutoScrollLevel" parent="." unique_id=413652132 instance=ExtResource("1_rus8k")]
 
 [node name="Plataforma" parent="." unique_id=2092135741 instance=ExtResource("2_5xbjy")]
 position = Vector2(403, -171)
@@ -35,7 +35,3 @@ position = Vector2(1585, -266)
 
 [node name="Plataforma3" parent="." unique_id=337692069 instance=ExtResource("2_5xbjy")]
 position = Vector2(1577, -89)
-
-[node name="Plataforma4" parent="." unique_id=1519296238 instance=ExtResource("2_5xbjy")]
-position = Vector2(4430.0005, -319)
-scale = Vector2(20, 20)

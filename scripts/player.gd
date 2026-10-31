@@ -13,6 +13,7 @@ const JUMP_VELOCITY = -650.0
 const COYOTE_TIEMPO = 0.2
 var coyote_restante := 0.0
 var jump_buffer_restante := 0.0
+var tiempo_teletranporte=2
 #Ataque
 const ANIM_ATAQUE = "atacando"       
 const BUFFER_ATAQUE = 0.15
@@ -43,6 +44,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
     Time_Actual_Dupli += delta
+    tiempo_teletranporte+=delta
     if Input.is_action_just_pressed("Guardar Partida"):
         UtilsGlobal.save_game()
     #Dash
@@ -97,10 +99,17 @@ func _physics_process(delta: float) -> void:
 
     # Teletransporte
     if telarana_actual:
+      if tiempo_teletranporte>2:
         if Input.is_action_just_pressed("ir_siguiente"):
             teletransportar(telarana_actual.siguiente)
+            tiempo_teletranporte=0
         elif Input.is_action_just_pressed("ir_anterior"):
             teletransportar(telarana_actual.anterior)
+            tiempo_teletranporte=0
+    
+            
+        
+     
 
     # Movimiento horizontal
     var direction := Input.get_axis("move_left", "move_right")
@@ -163,11 +172,11 @@ func procesar_ataque(delta: float) -> void:
     var puntos := puntos_colision()
     delay=max(delay-delta,0)
     if delay==0:
-     for t in get_tree().get_nodes_in_group("telaranas"):
+      for t in get_tree().get_nodes_in_group("telaranas"):
         for p in puntos:
             if t.toca_hilo(p, RADIO_CORTE):
                 t.cortar()
-                delay=5000
+                delay=4
                 break
         if delay>0:
             break

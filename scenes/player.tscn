@@ -163,9 +163,8 @@ script = ExtResource("1_g2els")
 material = SubResource("ShaderMaterial_8mdrf")
 position = Vector2(1, 21)
 sprite_frames = SubResource("SpriteFrames_uii18")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.16573036
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1919632315]
 position = Vector2(-5, 32)
@@ -192,3 +191,7 @@ target_position = Vector2(104, 0)
 position = Vector2(5, 0)
 rotation = 4.712389
 target_position = Vector2(7.0356793e-07, 59)
+
+[node name="Revisar_Esquinas" type="RayCast2D" parent="." unique_id=43201949]
+position = Vector2(0, -114)
+target_position = Vector2(76, 0)

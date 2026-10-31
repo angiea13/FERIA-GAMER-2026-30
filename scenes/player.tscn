@@ -186,6 +186,7 @@ radius = 224.49231
 height = 913.7231
 
 [node name="Player" type="CharacterBody2D" unique_id=1446005476 groups=["jugador"]]
+collision_mask = 3
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1069817929]
@@ -246,6 +247,3 @@ position = Vector2(-48, -45)
 rotation = 3.1415927
 polygon = PackedVector2Array(0, -150, 119, -130, 186, -88, 194, -32, 142, -12, 12, -1)
 disabled = true
-
-[node name="Tiemp_Teletransporte" type="Timer" parent="." unique_id=1968554157]
-wait_time = 0.586

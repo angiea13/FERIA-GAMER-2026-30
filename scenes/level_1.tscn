@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://1can08s4fxkp" path="res://scenes/player.tscn" id="3_4nkto"]
 [ext_resource type="Texture2D" uid="uid://b6q13yb1kdnnf" path="res://assets/floor.png" id="4_5xbjy"]
 [ext_resource type="PackedScene" uid="uid://dc7tavmho7un7" path="res://scenes/telarana.tscn" id="5_4nkto"]
+[ext_resource type="PackedScene" uid="uid://c4j2fv3it820u" path="res://scenes/Caballero_Enemy.tscn" id="6_fcfvj"]
 
 [node name="Level1" type="Node2D" unique_id=49675082]
 
@@ -46,3 +47,6 @@ position = Vector2(2041, -803)
 
 [node name="Plataforma4" parent="." unique_id=1183585633 instance=ExtResource("2_5xbjy")]
 position = Vector2(2038, -634)
+
+[node name="Pig_Enemy" parent="." unique_id=1723259553 instance=ExtResource("6_fcfvj")]
+position = Vector2(388, -297)

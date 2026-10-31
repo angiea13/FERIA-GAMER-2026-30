@@ -31,6 +31,54 @@ region = Rect2(400, 212, 100, 53)
 atlas = ExtResource("2_c1vts")
 region = Rect2(500, 212, 100, 53)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kfmx"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(0, 638, 100, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssjsy"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(100, 638, 100, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vxkf"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(200, 638, 100, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tttem"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(300, 638, 100, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bswe"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(0, 116, 100, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mci0"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(100, 116, 100, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnbf2"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(200, 116, 100, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h1yj"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(300, 116, 100, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h28tc"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(400, 116, 100, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4g4q"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(500, 116, 100, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcox7"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(600, 116, 100, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ie4bc"]
+atlas = ExtResource("2_c1vts")
+region = Rect2(700, 116, 100, 58)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_qnpof"]
 animations = [{
 "frames": [{
@@ -52,16 +100,62 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3vxfk")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"Ataque",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kfmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssjsy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vxkf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tttem")
+}],
+"loop": 1,
+"name": &"Golpeado",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bswe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mci0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnbf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5h1yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h28tc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4g4q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcox7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ie4bc")
+}],
+"loop": 1,
+"name": &"Movimiento",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yuyls"]
-size = Vector2(56, 65)
+size = Vector2(56, 121)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]
-size = Vector2(23, 36)
+size = Vector2(23, 121.25)
 
 [node name="Caballero_Enemy" type="CharacterBody2D" unique_id=1723259553]
 texture_filter = 1
@@ -74,25 +168,24 @@ script = ExtResource("1_2dyq1")
 light_mask = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_naha6")
-scale = Vector2(5, 5)
+scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_qnpof")
 animation = &"Ataque"
-frame_progress = 0.3558407
+frame = 5
+frame_progress = 1.0
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1777075416]
 light_mask = 2
-position = Vector2(2, 24.5)
+position = Vector2(2, 52.5)
 shape = SubResource("RectangleShape2D_yuyls")
 
 [node name="Ataque_Derecha" type="CollisionShape2D" parent="." unique_id=1970560452]
-visible = false
-position = Vector2(32, 31)
+position = Vector2(40, 50)
 shape = SubResource("RectangleShape2D_qnpof")
 disabled = true
 
 [node name="Ataque_Izquierda" type="CollisionShape2D" parent="." unique_id=2099686288]
-visible = false
-position = Vector2(-27, 30)
+position = Vector2(-37, 51)
 shape = SubResource("RectangleShape2D_qnpof")
 disabled = true
 

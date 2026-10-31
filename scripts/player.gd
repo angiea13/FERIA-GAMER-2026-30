@@ -14,6 +14,10 @@ const COYOTE_TIEMPO = 0.2
 var coyote_restante := 0.0
 var jump_buffer_restante := 0.0
 var tiempo_teletranporte=2
+const VELOCIDAD_DESLIZAR = 120.0 
+const EMPUJE_PARED = 900.0        
+const BLOQUEO_PARED = 0.35   
+var bloqueo_control := 0.0
 #Ataque
 const ANIM_ATAQUE = "atacando"       
 const BUFFER_ATAQUE = 0.15
@@ -28,6 +32,7 @@ var telarana_actual: Telarana = null
 ##Dash
 @onready var dash: Dash = $Dash
 var direccion_dash = 1
+var dash_arriba=false
 ##Efectos
 var Time_Actual_Dupli: float = 0
 var Time_Dupli: float = 0.05
@@ -38,6 +43,7 @@ func _ready():
     colision_derecha.disabled = true
     colision_izquierda.disabled = true
     colision_ataque = colision_derecha
+    
     dash.configurar(1)
     UtilsGlobal.load_game()
 
@@ -45,6 +51,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
     Time_Actual_Dupli += delta
     tiempo_teletranporte+=delta
+    bloqueo_control-=delta
     if Input.is_action_just_pressed("Guardar Partida"):
         UtilsGlobal.save_game()
     #Dash
@@ -56,26 +63,32 @@ func _physics_process(delta: float) -> void:
         if dash.activo:
             terminar_ataque()
     if dash.activo:
-        velocity = Vector2(dash.direccion * dash.velocidad, 0)
+        if !Deslizarse():
+         if !dash_arriba:
+          velocity = Vector2(dash.direccion * dash.velocidad, 0)
+        else:
+          velocity = Vector2(0,dash.direccion * dash.velocidad/4)
+          dash_arriba=true
         if Time_Actual_Dupli >= Time_Dupli:
             Time_Actual_Dupli = 0
             crear_duplicado()
+        
         move_and_slide()
         _update_animation(0.0)
         return
 
-    # Gravedad
+   # Gravedad
     if not is_on_floor():
         coyote_restante -= delta
-        if Deslizarse():
-            velocity += get_gravity() * delta / 4
-            dash.recuperar()
-        else:
-            Pasar_Esquinas()
-            velocity += get_gravity() * delta
+        velocity += get_gravity() * delta
+        if Deslizarse() and velocity.y > 0:
+            velocity.y = min(velocity.y, VELOCIDAD_DESLIZAR)
+            if !dash_arriba:
+             dash.recuperar()
     else:
         coyote_restante = COYOTE_TIEMPO
         dash.recuperar()
+        dash_arriba=false
 
     # Jump buffer
     if Input.is_action_just_pressed("jump"):
@@ -83,10 +96,14 @@ func _physics_process(delta: float) -> void:
     else:
         jump_buffer_restante = max(jump_buffer_restante - delta, 0)
 
-    # Salto de pared
-    if Jump_Slide() and jump_buffer_restante > 0:
+   # Salto de pared
+    if not is_on_floor() and Jump_Slide() and jump_buffer_restante > 0:
         velocity.y = JUMP_VELOCITY
-        velocity.x = -direccion_dash * SPEED
+        velocity.x = -direccion_dash * EMPUJE_PARED
+        direccion_dash = -direccion_dash
+        bloqueo_control = BLOQUEO_PARED
+        dash.recuperar()
+        dash_arriba=false
         jump_buffer_restante = 0
     # Salto normal
     elif jump_buffer_restante > 0 and coyote_restante > 0:
@@ -107,17 +124,14 @@ func _physics_process(delta: float) -> void:
             teletransportar(telarana_actual.anterior)
             tiempo_teletranporte=0
     
-            
-        
-     
-
     # Movimiento horizontal
     var direction := Input.get_axis("move_left", "move_right")
-    if direction:
-        velocity.x = direction * SPEED
-        direccion_dash = sign(direction)    
-    else:
-        velocity.x = move_toward(velocity.x, 0, SPEED)
+    if bloqueo_control <= 0:
+        if direction:
+            velocity.x = direction * SPEED
+            direccion_dash = sign(direction)
+        else:
+            velocity.x = move_toward(velocity.x, 0, SPEED)
 
     # Ataque
     if Input.is_action_just_pressed("atacar"):
@@ -126,7 +140,7 @@ func _physics_process(delta: float) -> void:
         buffer_ataque -= delta
     if buffer_ataque > 0 and not atacando:
         empezar_ataque()
-
+  
     $Deslizarse.target_position.x = abs($Deslizarse.target_position.x) * direccion_dash
     $Brincar.target_position.x = abs($Brincar.target_position.x) * direccion_dash
     $Revisar_Esquinas.target_position.x = abs($Revisar_Esquinas.target_position.x) * direccion_dash
@@ -246,15 +260,14 @@ func crear_duplicado():
     duplicado.pause()
     await get_tree().create_timer(Time_Life_Dupli).timeout
     duplicado.queue_free()
-
-
-func Pasar_Esquinas():
-    if Jump_Slide() and !$Revisar_Esquinas.is_colliding():
-        position.y -= 4
-
-
 func Deslizarse():
-    return $Deslizarse.is_colliding()
+    $Deslizarse.force_raycast_update()
+
+    if $Deslizarse.is_colliding():
+        print("Detectó: ", $Deslizarse.get_collider())
+        return true
+
+    return false
 
 
 func Jump_Slide():

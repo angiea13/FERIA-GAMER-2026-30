@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://b6q13yb1kdnnf" path="res://assets/floor.png" id="4_5xbjy"]
 [ext_resource type="PackedScene" uid="uid://dc7tavmho7un7" path="res://scenes/telarana.tscn" id="5_4nkto"]
 [ext_resource type="PackedScene" uid="uid://c4j2fv3it820u" path="res://scenes/Caballero_Enemy.tscn" id="6_fcfvj"]
+[ext_resource type="Texture2D" uid="uid://yogmkirmcm7t" path="res://assets/icon.svg" id="7_pa8r4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]
+size = Vector2(118, 488)
 
 [node name="Level1" type="Node2D" unique_id=49675082]
 
@@ -50,3 +54,25 @@ position = Vector2(2038, -634)
 
 [node name="Pig_Enemy" parent="." unique_id=1723259553 instance=ExtResource("6_fcfvj")]
 position = Vector2(388, -297)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1678885540]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=2001996361]
+position = Vector2(-814.5, -267)
+scale = Vector2(0.8515625, 4.265625)
+texture = ExtResource("7_pa8r4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=55978933]
+position = Vector2(-816, -273)
+shape = SubResource("RectangleShape2D_qnpof")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=2082232174]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2" unique_id=995936992]
+position = Vector2(140.99997, -854)
+scale = Vector2(0.8515625, 4.265625)
+texture = ExtResource("7_pa8r4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1247107140]
+position = Vector2(150, -864)
+shape = SubResource("RectangleShape2D_qnpof")

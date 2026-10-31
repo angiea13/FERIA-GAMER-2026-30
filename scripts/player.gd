@@ -34,6 +34,7 @@ func _ready():
     arma.visible = false  
     anim_arma.animation_finished.connect(_al_terminar_ataque)
     dash.configurar(1)
+    UtilsGlobal.load_game()
 func _al_terminar_ataque(_nombre):
     arma.visible = false
 func _physics_process(delta: float) -> void:
@@ -113,7 +114,7 @@ func _physics_process(delta: float) -> void:
     $Revisar_Esquinas.target_position.x = abs($Revisar_Esquinas.target_position.x) * direccion_dash
     move_and_slide()
     _update_animation(direction)
-
+    UtilsGlobal.save_game()
 
 func teletransportar(destino: Telarana) -> void:
     if destino == null:

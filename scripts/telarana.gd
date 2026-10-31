@@ -7,7 +7,11 @@ extends Area2D
 	set(valor):
 		siguiente = valor
 		queue_redraw()    # redibuja el hilo si cambias el enlace
-
+@export var sustitutos:Array[Telarana]=[]:
+	set(valor):
+		sustitutos=valor
+		queue_redraw()
+		
 # "anterior" NO se asigna a mano: se calcula solo
 var anterior: Telarana = null
 const SALIDA_HILO:=Vector2(0,-32)
@@ -65,5 +69,8 @@ func toca_hilo(punto_global: Vector2, radio: float) -> bool:
 func cortar():
 	if siguiente:
 		siguiente.anterior = null
-	siguiente = null 
+	if not sustitutos.is_empty():
+		siguiente=sustitutos.pop_front()
+	else:
+		siguiente=null
 	

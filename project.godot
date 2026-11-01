@@ -25,6 +25,7 @@ UtilsGlobal="*uid://bm3n1q2xqgsgs"
 window/size/viewport_width=1600
 window/size/viewport_height=900
 window/size/mode=3
+window/size/initial_position=Vector2i(0, -460)
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

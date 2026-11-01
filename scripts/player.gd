@@ -72,6 +72,7 @@ func _physics_process(delta: float) -> void:
     #Impulso
     if en_impulso:
         tiempo_impulso-=delta
+        dash.recuperar()
         move_and_slide()
         if tiempo_impulso<=0:
             en_impulso=false

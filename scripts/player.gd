@@ -12,7 +12,7 @@ const SPEED = 500.0
 const JUMP_VELOCITY = -650.0
 #Relacion con las paredes
 const VELOCIDAD_DESLIZAR = 120.0 
-const EMPUJE_PARED = 700.0        
+const EMPUJE_PARED = 600.0        
 #Temporizadores
 #Salto
 const COYOTE_TIEMPO = 0.2
@@ -25,7 +25,8 @@ var coyote_restante_desliz := 0.0
 const BLOQUEO_PARED = 0.30   
 var bloqueo_control := 0.0
 #Teletransporte
-var tiempo_teletranporte=2       
+var tiempo_teletranporte=2   
+var tiempo_teletransporte_ant=2    
 var en_impulso:bool=false
 #Impulso:
 var tiempo_impulso:float=0.0
@@ -64,6 +65,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
     Time_Actual_Dupli += delta
     tiempo_teletranporte+=delta
+    tiempo_teletransporte_ant+=delta
     bloqueo_control-=delta
     if Input.is_action_just_pressed("Guardar Partida"):
         UtilsGlobal.save_game()
@@ -87,7 +89,7 @@ func _physics_process(delta: float) -> void:
          if !dash_arriba:
           velocity = Vector2(dash.direccion * dash.velocidad, 0)
         else:
-          velocity = Vector2(0,dash.direccion * dash.velocidad/3.5)
+          velocity = Vector2(0,-dash.velocidad/3.5)
           dash_arriba=true
         if Time_Actual_Dupli >= Time_Dupli:
             Time_Actual_Dupli = 0
@@ -137,11 +139,11 @@ func _physics_process(delta: float) -> void:
 
     # Teletransporte
     if telarana_actual:
-      if tiempo_teletranporte>2:
-        if Input.is_action_just_pressed("ir_siguiente"):
+        
+        if Input.is_action_just_pressed("ir_siguiente") and tiempo_teletranporte>0.4:
             teletransportar(telarana_actual.siguiente)
             tiempo_teletranporte=0
-        elif Input.is_action_just_pressed("ir_anterior"):
+        elif Input.is_action_just_pressed("ir_anterior") and tiempo_teletransporte_ant>0.4:
             teletransportar(telarana_actual.anterior)
             tiempo_teletranporte=0
     
@@ -265,6 +267,7 @@ func teletransportar(destino: Telarana) -> void:
     global_position = destino.global_position + Vector2(0, -16)
     velocity = Vector2.ZERO
     telarana_actual = destino
+    dash.recuperar()
 
 
 func crear_duplicado():

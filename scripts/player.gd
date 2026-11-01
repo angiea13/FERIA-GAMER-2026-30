@@ -10,21 +10,34 @@ var vida = Vida.new(100)
 #Movimiento
 const SPEED = 500.0
 const JUMP_VELOCITY = -650.0
+#Relacion con las paredes
+const VELOCIDAD_DESLIZAR = 120.0 
+const EMPUJE_PARED = 700.0        
+#Temporizadores
+#Salto
 const COYOTE_TIEMPO = 0.2
 var coyote_restante := 0.0
 var jump_buffer_restante := 0.0
-var tiempo_teletranporte=2
-const VELOCIDAD_DESLIZAR = 120.0 
-const EMPUJE_PARED = 900.0        
-const BLOQUEO_PARED = 0.35   
+#Deslizamiento
+const COYOTE_TIEMPO_desliz = 0.2
+var coyote_restante_desliz := 0.0
+#Salto de pared
+const BLOQUEO_PARED = 0.30   
 var bloqueo_control := 0.0
+#Teletransporte
+var tiempo_teletranporte=2       
+var en_impulso:bool=false
+#Impulso:
+var tiempo_impulso:float=0.0
 #Ataque
 const ANIM_ATAQUE = "atacando"       
 const BUFFER_ATAQUE = 0.15
 const RADIO_CORTE = 30.0
 var atacando := false
+#Temporizadores Ataque
 var tiempo_ataque := 0.0
 var buffer_ataque := 0.0
+#Funcion Ataque
 var colision_ataque: CollisionPolygon2D
 var ya_golpeados: Array = []
 ##Telaranas
@@ -54,6 +67,13 @@ func _physics_process(delta: float) -> void:
     bloqueo_control-=delta
     if Input.is_action_just_pressed("Guardar Partida"):
         UtilsGlobal.save_game()
+    #Impulso
+    if en_impulso:
+        tiempo_impulso-=delta
+        move_and_slide()
+        if tiempo_impulso<=0:
+            en_impulso=false
+        return
     #Dash
     if Input.is_action_just_pressed("hacer_dash"):
         var dir := Input.get_axis("move_left", "move_right")
@@ -67,7 +87,7 @@ func _physics_process(delta: float) -> void:
          if !dash_arriba:
           velocity = Vector2(dash.direccion * dash.velocidad, 0)
         else:
-          velocity = Vector2(0,dash.direccion * dash.velocidad/4)
+          velocity = Vector2(0,dash.direccion * dash.velocidad/3.5)
           dash_arriba=true
         if Time_Actual_Dupli >= Time_Dupli:
             Time_Actual_Dupli = 0
@@ -81,15 +101,16 @@ func _physics_process(delta: float) -> void:
     if not is_on_floor():
         coyote_restante -= delta
         velocity += get_gravity() * delta
-        if Deslizarse() and velocity.y > 0:
+        if (Deslizarse() and velocity.y > 0) or (coyote_restante<COYOTE_TIEMPO and coyote_restante>0):
             velocity.y = min(velocity.y, VELOCIDAD_DESLIZAR)
+            coyote_restante_desliz-=delta
             if !dash_arriba:
              dash.recuperar()
     else:
         coyote_restante = COYOTE_TIEMPO
         dash.recuperar()
         dash_arriba=false
-
+        coyote_restante_desliz=COYOTE_TIEMPO
     # Jump buffer
     if Input.is_action_just_pressed("jump"):
         jump_buffer_restante = 0.15

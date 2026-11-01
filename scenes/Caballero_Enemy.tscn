@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c4j2fv3it820u"]
 
-[ext_resource type="Script" uid="uid://bj8ym11co6qyx" path="res://scenes/enemigo.gd" id="1_2dyq1"]
+[ext_resource type="Script" uid="uid://bj8ym11co6qyx" path="res://scripts/enemigo.gd" id="1_2dyq1"]
 [ext_resource type="Texture2D" uid="uid://qic18pjo8sr0" path="res://assets/Enemigo/Soldier.png" id="2_c1vts"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sk4q6"]

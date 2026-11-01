@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dc7tavmho7un7" path="res://scenes/telarana.tscn" id="5_4nkto"]
 [ext_resource type="PackedScene" uid="uid://c4j2fv3it820u" path="res://scenes/Caballero_Enemy.tscn" id="6_fcfvj"]
 [ext_resource type="Texture2D" uid="uid://yogmkirmcm7t" path="res://assets/icon.svg" id="7_pa8r4"]
+[ext_resource type="PackedScene" uid="uid://bbe772m58rq6g" path="res://scenes/tunel_impulso.tscn" id="8_15mv3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]
 size = Vector2(118, 488)
@@ -35,10 +36,9 @@ scale = Vector2(2, 2)
 [node name="Plataforma2" parent="." unique_id=1661262514 instance=ExtResource("2_5xbjy")]
 position = Vector2(974, -288)
 
-[node name="T1" parent="." unique_id=1261314171 node_paths=PackedStringArray("siguiente", "sustitutos") instance=ExtResource("5_4nkto")]
+[node name="T1" parent="." unique_id=1261314171 node_paths=PackedStringArray("siguiente") instance=ExtResource("5_4nkto")]
 position = Vector2(975, -451)
 siguiente = NodePath("../T2")
-sustitutos = [NodePath("../Telarana")]
 
 [node name="T2" parent="." unique_id=1441666053 instance=ExtResource("5_4nkto")]
 position = Vector2(1585, -266)
@@ -76,3 +76,14 @@ texture = ExtResource("7_pa8r4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1247107140]
 position = Vector2(150, -864)
 shape = SubResource("RectangleShape2D_qnpof")
+
+[node name="Tunel_Impulso" parent="." unique_id=803496209 instance=ExtResource("8_15mv3")]
+position = Vector2(-435, -82)
+
+[node name="Tunel_Impulso2" parent="." unique_id=1122653733 instance=ExtResource("8_15mv3")]
+position = Vector2(-430, -370)
+
+[node name="Salida" parent="Tunel_Impulso2" index="2" unique_id=1344616579]
+position = Vector2(500, 0)
+
+[editable path="Tunel_Impulso2"]

@@ -47,7 +47,6 @@ scale = Vector2(0.5, 0.5)
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=892470718]
 position = Vector2(372, 206)
 scale = Vector2(2, 2)
-zoom = Vector2(0.75, 0.75)
 
 [node name="Plataforma2" parent="." unique_id=1661262514 instance=ExtResource("2_5xbjy")]
 position = Vector2(974, -288)

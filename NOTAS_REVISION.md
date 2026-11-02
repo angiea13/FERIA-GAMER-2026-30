@@ -19,7 +19,10 @@ Lo que ya estaba bien: dash, salto de pared, coyote/jump buffer, telarañas con 
 | `Utils_Global.gd` | Guarda en `res://` (solo lectura al exportar) y **al cargar cualquier nivel te mueve a las coordenadas guardadas del nivel 1**. | Ahora guarda en `user://` y anota la escena |
 | `Vida.gd` | `extends Node` pero nunca se agrega al árbol → fuga de memoria con cada `Vida.new()`. | `extends RefCounted` |
 | `savegame.bin` | Estaba subido al repo. | Quitado y agregado al `.gitignore` |
-
+| 'player.gd'| Hice que el dash, lo volviera invulnerable por 0.2 segundos
+| 'tunel_impulso.tscn'| Le hice una animacion de explosion y que desaparezca mientras tanto
+| 'Lvl 1 que es el 3'| le agregue un fondo no se que tal les parezca
+| 'Lvl 2' hice como q aparezca la tecla a revisar 
 ### Pendiente / a revisar (no lo toqué)
 - `player.gd`: tras caminar fuera de un borde, durante 0.2 s la caída se limita a 120 px/s (la condición `coyote_restante < COYOTE_TIEMPO and > 0` dentro del bloque de deslizamiento). Se siente "flotante"; probablemente no es intencional. 
 - `Enemigo.tscn` (Pig_Enemy) quedó obsoleto: no tiene animación "Movimiento". Usen `Caballero_Enemy.tscn`.
@@ -28,7 +31,7 @@ Lo que ya estaba bien: dash, salto de pared, coyote/jump buffer, telarañas con 
 - `project.godot`: `window/size/initial_position=Vector2i(0,-460)` es de tu monitor; en otra PC la ventana puede salir fuera de pantalla.
 - `level_1.tscn` tiene su TileSet **incrustado**; conviene cambiarlo a `resources/tileset_mundo.tres` para compartir uno solo.
 - `level_1` no tiene `Meta`: ponle una con `siguiente_nivel = level_2.tscn`.
-
+- 'camara', se debe definir bien como va a ser la camara en cada nivel porque es muy pequeba
 ## 2. Tileset compartido
 **Arte nuevo:** `assets/Mundo/tileset_telaranas.png` (512×384, tiles de 32×32, pixel art con la paleta del personaje: ladrillo morado oscuro, vetas rojas, hilos de telaraña colgando). Mantiene **el mismo orden de celdas** que el placeholder, así que se puede pintar igual.
 **Configuración:** `resources/tileset_mundo.tres` usa ese PNG. Diferencias con el que estaba incrustado en level_1:

@@ -93,6 +93,7 @@ func procesar_dash(delta):
         dash.intentar(direccion_dash)
         if dash.activo:
             terminar_ataque()
+            invulnerable+=0.2
     if dash.activo:
         if !Deslizarse():
             if !dash_arriba:
@@ -147,8 +148,7 @@ func todo_relacionado_a_saltos(delta):
     if Input.is_action_just_released("jump") and velocity.y < 0.0:
         velocity.y *= 0.6
 func teletransporte_en_phisycs(delta):
-     if telarana_actual:
-        
+    if telarana_actual:
         if Input.is_action_just_pressed("ir_siguiente") and tiempo_teletranporte>0.4:
             teletransportar(telarana_actual.siguiente)
             tiempo_teletranporte=0
@@ -158,8 +158,8 @@ func teletransporte_en_phisycs(delta):
             tiempo_teletransporte_ant=0
 func movimiento_horizontal(delta):
     
-     var direction := Input.get_axis("move_left", "move_right")
-     if bloqueo_control <= 0:
+    var direction := Input.get_axis("move_left", "move_right")
+    if bloqueo_control <= 0:
         if direction:
             velocity.x = direction * SPEED
             direccion_dash = sign(direction)

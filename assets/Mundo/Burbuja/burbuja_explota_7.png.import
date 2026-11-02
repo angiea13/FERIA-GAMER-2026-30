@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db4kekl3354ob"
-path="res://.godot/imported/burbuja_morada_3.png-db82a3b97723dab1ced3390900af1e7c.ctex"
+uid="uid://babefkt0noql8"
+path="res://.godot/imported/burbuja_explota_7.png-836b1d45c4b14424514ddba7a9d80e2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Mundo/burbuja_morada_3.png"
-dest_files=["res://.godot/imported/burbuja_morada_3.png-db82a3b97723dab1ced3390900af1e7c.ctex"]
+source_file="res://assets/Mundo/Burbuja/burbuja_explota_7.png"
+dest_files=["res://.godot/imported/burbuja_explota_7.png-836b1d45c4b14424514ddba7a9d80e2d.ctex"]
 
 [params]
 

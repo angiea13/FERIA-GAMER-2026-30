@@ -1,10 +1,53 @@
 [gd_scene format=3 uid="uid://bbe772m58rq6g"]
 
 [ext_resource type="Script" uid="uid://jwvqg0xkdapa" path="res://scripts/World Building/tunel_impulso.gd" id="1_gh11s"]
-[ext_resource type="Texture2D" uid="uid://db4kekl3354ob" path="res://assets/Mundo/burbuja_morada_3.png" id="2_nsbhx"]
+[ext_resource type="Texture2D" uid="uid://cgvp37nwyt4p" path="res://assets/Mundo/Burbuja/burbuja_explota_1.png" id="2_n1qx7"]
+[ext_resource type="Texture2D" uid="uid://b2jqqiis1nmqx" path="res://assets/Mundo/Burbuja/burbuja_explota_2.png" id="3_3qsy4"]
+[ext_resource type="Texture2D" uid="uid://fca6yw28k3uk" path="res://assets/Mundo/Burbuja/burbuja_explota_3.png" id="4_lvuso"]
+[ext_resource type="Texture2D" uid="uid://dng6jldvx6lbl" path="res://assets/Mundo/Burbuja/burbuja_explota_4.png" id="5_3u8nu"]
+[ext_resource type="Texture2D" uid="uid://daow7b66gnpcg" path="res://assets/Mundo/Burbuja/burbuja_explota_5.png" id="6_upt7l"]
+[ext_resource type="Texture2D" uid="uid://xktocjmsf0xe" path="res://assets/Mundo/Burbuja/burbuja_explota_6.png" id="7_jd4c2"]
+[ext_resource type="Texture2D" uid="uid://babefkt0noql8" path="res://assets/Mundo/Burbuja/burbuja_explota_7.png" id="8_rw4r8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yk5ud"]
-radius = 18.027756
+radius = 32.06244
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qnpof"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n1qx7")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n1qx7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3qsy4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lvuso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3u8nu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_upt7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_jd4c2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rw4r8")
+}],
+"loop": 0,
+"name": &"explotar",
+"speed": 5.0
+}]
 
 [node name="Tunel_Impulso" type="Area2D" unique_id=803496209]
 script = ExtResource("1_gh11s")
@@ -12,9 +55,13 @@ script = ExtResource("1_gh11s")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1601757884]
 shape = SubResource("CircleShape2D_yk5ud")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=422343645]
-texture = ExtResource("2_nsbhx")
-
 [node name="Salida" type="Marker2D" parent="." unique_id=1344616579]
 position = Vector2(-1, -108)
 gizmo_extents = 6.0
+
+[node name="Burbuja" type="AnimatedSprite2D" parent="." unique_id=537090048]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_qnpof")
+animation = &"explotar"
+frame = 6
+frame_progress = 1.0

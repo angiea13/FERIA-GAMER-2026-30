@@ -55,6 +55,10 @@ var tiempo_impulso:float=0.0
 var tiempo_ataque := 0.0
 var buffer_ataque := 0.0
 
+#Daño recibido
+var invulnerable := 0.0
+var muerto := false
+
 #Variables externas
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var slash_area: Area2D = $Slash_Area
@@ -148,9 +152,10 @@ func teletransporte_en_phisycs(delta):
         if Input.is_action_just_pressed("ir_siguiente") and tiempo_teletranporte>0.4:
             teletransportar(telarana_actual.siguiente)
             tiempo_teletranporte=0
+            tiempo_teletransporte_ant=0
         elif Input.is_action_just_pressed("ir_anterior") and tiempo_teletransporte_ant>0.4:
             teletransportar(telarana_actual.anterior)
-            tiempo_teletranporte=0
+            tiempo_teletransporte_ant=0
 func movimiento_horizontal(delta):
     
      var direction := Input.get_axis("move_left", "move_right")
@@ -177,6 +182,7 @@ func _physics_process(delta: float) -> void:
     tiempo_teletranporte+=delta
     tiempo_teletransporte_ant+=delta
     bloqueo_control-=delta
+    invulnerable = maxf(invulnerable - delta, 0.0)
     if Input.is_action_just_pressed("Guardar Partida"):
         UtilsGlobal.save_game()
     #Impulso
@@ -312,7 +318,6 @@ func Deslizarse():
     $Deslizarse.force_raycast_update()
 
     if $Deslizarse.is_colliding():
-        print("Detectó: ", $Deslizarse.get_collider())
         return true
 
     return false
@@ -320,3 +325,47 @@ func Deslizarse():
 
 func Jump_Slide():
     return $Brincar.is_colliding()
+
+
+# ---------------- Daño y muerte ----------------
+func recibir_dano(cantidad: int, origen_x: float = 0.0) -> void:
+    if muerto or invulnerable > 0.0:
+        return
+    vida._recibir_dano(cantidad)
+    invulnerable = 1.0
+    bloqueo_control = 0.25
+    var dir := signf(global_position.x - origen_x)
+    if dir == 0.0:
+        dir = -float(direccion_dash)
+    velocity = Vector2(dir * 450.0, -350.0)
+    parpadear()
+    if vida.muerte:
+        morir()
+
+
+func parpadear() -> void:
+    # El shader del sprite sobreescribe COLOR, por eso se parpadea con su
+    # parámetro "opacity" (modulate no tendría efecto).
+    var t := create_tween().set_loops(5)
+    t.tween_callback(func(): sprite.material.set_shader_parameter("opacity", 0.35))
+    t.tween_interval(0.1)
+    t.tween_callback(func(): sprite.material.set_shader_parameter("opacity", 1.0))
+    t.tween_interval(0.1)
+
+
+func matar() -> void:
+    # Muerte instantánea (caídas al vacío), ignora la invulnerabilidad.
+    if muerto:
+        return
+    vida._recibir_dano(vida.vida)
+    morir()
+
+
+func morir() -> void:
+    if muerto:
+        return
+    muerto = true
+    velocity = Vector2.ZERO
+    set_physics_process(false)
+    await get_tree().create_timer(0.8).timeout
+    get_tree().reload_current_scene()

@@ -188,7 +188,9 @@ shape = SubResource("RectangleShape2D_qnpof")
 disabled = true
 
 [node name="Derecha" type="RayCast2D" parent="." unique_id=1631592812]
-position = Vector2(35, 58)
+position = Vector2(42, 100)
+target_position = Vector2(0, 40)
 
 [node name="Izquierda" type="RayCast2D" parent="." unique_id=579646956]
-position = Vector2(-32, 56)
+position = Vector2(-38, 100)
+target_position = Vector2(0, 40)

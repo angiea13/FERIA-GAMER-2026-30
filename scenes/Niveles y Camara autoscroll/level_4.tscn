@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" path="res://scenes/World/zona_muerte.tscn" id="11_26u0m"]
 [ext_resource type="PackedScene" path="res://scenes/World/meta.tscn" id="12_es4sw"]
 [ext_resource type="PackedScene" uid="uid://c4j2fv3it820u" path="res://scenes/Entidades/Caballero_Enemy.tscn" id="13_jng2p"]
+[ext_resource type="PackedScene" uid="uid://cvxftovlx7tqd" path="res://scenes/Niveles y Camara autoscroll/check_points.tscn" id="14_srp1y"]
 
 [node name="Level4" type="Node2D" unique_id=49675082]
 metadata/_edit_horizontal_guides_ = [-1784.0]
@@ -102,3 +103,13 @@ siguiente_nivel = "uid://c3y1sg3cbb1go"
 
 [node name="Enemigo3" parent="." unique_id=2047742871 instance=ExtResource("13_jng2p")]
 position = Vector2(5350, -996)
+
+[node name="CheckPoints" parent="." unique_id=761614622 instance=ExtResource("14_srp1y")]
+position = Vector2(3023, -754)
+scale = Vector2(1.5, 1.5)
+
+[node name="CheckPoints2" parent="." unique_id=944528772 instance=ExtResource("14_srp1y")]
+position = Vector2(385, -304)
+
+[node name="CheckPoints3" parent="." unique_id=328906419 instance=ExtResource("14_srp1y")]
+position = Vector2(5190, -961)

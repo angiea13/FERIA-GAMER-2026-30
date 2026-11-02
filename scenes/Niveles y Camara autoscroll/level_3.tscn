@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://qrk1om3b67eu"]
 
+[ext_resource type="PackedScene" uid="uid://cvxftovlx7tqd" path="res://scenes/Niveles y Camara autoscroll/check_points.tscn" id="8_b636m"]
 [ext_resource type="PackedScene" uid="uid://c4j2fv3it820u" path="res://scenes/Entidades/Caballero_Enemy.tscn" id="enemigo"]
 [ext_resource type="PackedScene" path="res://scenes/World/meta.tscn" id="meta"]
 [ext_resource type="Script" uid="uid://dh4x8b2foxbk7" path="res://scripts/World Building/tilemap_peligros.gd" id="peligros"]
@@ -82,3 +83,10 @@ position = Vector2(372, 206)
 scale = Vector2(2, 2)
 limit_left = -1100
 limit_bottom = 450
+
+[node name="CheckPoints" parent="." unique_id=761614622 instance=ExtResource("8_b636m")]
+position = Vector2(-607, -105)
+
+[node name="CheckPoints2" parent="." unique_id=30513038 instance=ExtResource("8_b636m")]
+position = Vector2(4508, -930)
+scale = Vector2(3, 3)

@@ -23,7 +23,7 @@ const RADIO_CORTE = 30.0
 
 #Variables
 #Atributos del personaje
-var vida = Vida.new(100)
+var vida = Vida.new(20)
 #Ataque
 var atacando := false
 #Funcion Ataque
@@ -181,6 +181,7 @@ func todo_relacionado_a_saltos(delta):
         velocity.y *= 0.6
 func teletransporte_en_phisycs(delta):
     if telarana_actual:
+        
         if Input.is_action_just_pressed("ir_siguiente") and tiempo_teletranporte>0.4:
             teletransportar(telarana_actual.siguiente)
             saltos(delta,1,0)
@@ -276,8 +277,8 @@ func procesar_ataque(delta: float) -> void:
         for t in get_tree().get_nodes_in_group("telaranas"):
             for p in puntos:
                 if t.toca_hilo(p, RADIO_CORTE):
-                    t.cortar()
-                    delay=4
+                    t.cortar(delta)
+                    delay=1.5
                     break
             if delay>0:
                 break

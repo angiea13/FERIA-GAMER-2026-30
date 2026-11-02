@@ -1,7 +1,6 @@
 extends TileMapLayer
 # Capa de terreno con tiles peligrosos (pinchos). Los tiles con el dato
-# personalizado "dano" > 0 lastiman al jugador cuando sus pies los tocan.
-
+# personalizado "dano" > 0 lastiman al jugador cuando sus pies los toca
 func _physics_process(_delta: float) -> void:
 	var j := get_tree().get_first_node_in_group("jugador") as Jugador
 	if j == null or j.muerto:

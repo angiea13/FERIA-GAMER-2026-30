@@ -43,7 +43,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Enemigo1" parent="." unique_id=46556003 instance=ExtResource("enemigo")]
-position = Vector2(1029, -131)
+position = Vector2(982, -270)
 
 [node name="Enemigo2" parent="." unique_id=1172607285 instance=ExtResource("enemigo")]
 position = Vector2(2842, -152)

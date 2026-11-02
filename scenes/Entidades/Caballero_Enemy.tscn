@@ -31,21 +31,21 @@ region = Rect2(400, 212, 100, 53)
 atlas = ExtResource("2_c1vts")
 region = Rect2(500, 212, 100, 53)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0kfmx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkdot"]
 atlas = ExtResource("2_c1vts")
-region = Rect2(0, 638, 100, 58)
+region = Rect2(0, 630, 100, 35)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ssjsy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xnoo"]
 atlas = ExtResource("2_c1vts")
-region = Rect2(100, 638, 100, 58)
+region = Rect2(100, 630, 100, 35)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3vxkf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wilvd"]
 atlas = ExtResource("2_c1vts")
-region = Rect2(200, 638, 100, 58)
+region = Rect2(200, 630, 100, 35)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tttem"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0n1n"]
 atlas = ExtResource("2_c1vts")
-region = Rect2(300, 638, 100, 58)
+region = Rect2(300, 630, 100, 35)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0bswe"]
 atlas = ExtResource("2_c1vts")
@@ -106,16 +106,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0kfmx")
+"texture": SubResource("AtlasTexture_wkdot")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ssjsy")
+"texture": SubResource("AtlasTexture_3xnoo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3vxkf")
+"texture": SubResource("AtlasTexture_wilvd")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tttem")
+"texture": SubResource("AtlasTexture_f0n1n")
 }],
 "loop": 1,
 "name": &"Golpeado",
@@ -172,6 +172,8 @@ material = SubResource("ShaderMaterial_naha6")
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_qnpof")
 animation = &"Golpeado"
+frame = 3
+frame_progress = 1.0
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1777075416]
 light_mask = 2

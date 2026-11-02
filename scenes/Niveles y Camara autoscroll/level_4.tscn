@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://ibbforeucl4n"]
 
 [ext_resource type="Texture2D" uid="uid://c2upkxsoeask3" path="res://assets/Mundo/fondo_niebla.png" id="1_4rgqc"]
+[ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_o3nvj"]
 [ext_resource type="PackedScene" uid="uid://bivgotvup4047" path="res://scenes/Niveles y Camara autoscroll/level.tscn" id="2_srp1y"]
 [ext_resource type="Texture2D" uid="uid://b6q13yb1kdnnf" path="res://assets/Mundo/floor.png" id="3_o3nvj"]
 [ext_resource type="PackedScene" uid="uid://ctq14dgep25ts" path="res://scenes/World/plataforma.tscn" id="4_3e6gy"]
@@ -22,6 +23,8 @@ metadata/_edit_horizontal_guides_ = [-1784.0]
 scroll_scale = Vector2(0.2, 0)
 repeat_size = Vector2(3344, 0)
 repeat_times = 2
+
+[node name="Menu Pausa" parent="Parallax2D" unique_id=47701127 instance=ExtResource("1_o3nvj")]
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=674349019]
 modulate = Color(0.47843137, 0.43137255, 0.61960787, 1)

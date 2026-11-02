@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://qrk1om3b67eu"]
 
+[ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_p2elg"]
 [ext_resource type="PackedScene" uid="uid://cvxftovlx7tqd" path="res://scenes/Niveles y Camara autoscroll/check_points.tscn" id="8_b636m"]
 [ext_resource type="PackedScene" uid="uid://c4j2fv3it820u" path="res://scenes/Entidades/Caballero_Enemy.tscn" id="enemigo"]
 [ext_resource type="PackedScene" path="res://scenes/World/meta.tscn" id="meta"]
@@ -21,6 +22,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.05, 0.035, 0.09, 1)
+
+[node name="Menu Pausa" parent="Fondo" unique_id=47701127 instance=ExtResource("1_p2elg")]
 
 [node name="Terreno" type="TileMapLayer" parent="." unique_id=1303589932]
 texture_filter = 1

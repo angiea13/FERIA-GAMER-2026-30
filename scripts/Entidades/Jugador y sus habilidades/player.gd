@@ -26,6 +26,8 @@ const RADIO_CORTE = 30.0
 var vida = Vida.new(20)
 #Ataque
 var atacando := false
+#
+var en_telarana:=false
 #Funcion Ataque
 var colision_ataque: CollisionPolygon2D
 var ya_golpeados: Array = []
@@ -77,6 +79,9 @@ func _ready():
     
     dash.configurar(1)
     UtilsGlobal.load_game()
+func _telarana():
+    if en_telarana:
+        return
 func saltos(delta,suma,resta):
     if (not is_on_floor() and not Jump_Slide())   and !ya_paso_salto:
         num_saltos=1
@@ -329,7 +334,13 @@ func puntos_colision() -> Array:
 func teletransportar(destino: Telarana) -> void:
     if destino == null:
         return
-    global_position = destino.global_position + Vector2(0, -16)
+    var inicio = global_position
+    var fin = destino.global_position + Vector2(0, -16)
+    var tween = create_tween()
+    tween.tween_method(func(t: float):
+        var p = inicio.lerp(fin, t)
+        p.y -= sin(t * PI) * 40
+        global_position = p, 0.0,1.0,0.8)
     velocity = Vector2.ZERO
     telarana_actual = destino
     dash.recuperar()

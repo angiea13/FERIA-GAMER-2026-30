@@ -23,6 +23,9 @@ Lo que ya estaba bien: dash, salto de pared, coyote/jump buffer, telarañas con 
 | 'tunel_impulso.tscn'| Le hice una animacion de explosion y que desaparezca mientras tanto
 | 'Lvl 1 que es el 3'| le agregue un fondo no se que tal les parezca
 | 'Lvl 2' hice como q aparezca la tecla a revisar 
+| CheckPoints| 
+|Telarana| ahora parece q se mueve por la telarana todo bonito, se puede hacer eso similar para los enemigos
+|Menu de Pausa| Un menu de pausa q funciona pero se ve feo
 ### Pendiente / a revisar (no lo toqué)
 - `player.gd`: tras caminar fuera de un borde, durante 0.2 s la caída se limita a 120 px/s (la condición `coyote_restante < COYOTE_TIEMPO and > 0` dentro del bloque de deslizamiento). Se siente "flotante"; probablemente no es intencional. 
 - `Enemigo.tscn` (Pig_Enemy) quedó obsoleto: no tiene animación "Movimiento". Usen `Caballero_Enemy.tscn`.
@@ -32,6 +35,8 @@ Lo que ya estaba bien: dash, salto de pared, coyote/jump buffer, telarañas con 
 - `level_1.tscn` tiene su TileSet **incrustado**; conviene cambiarlo a `resources/tileset_mundo.tres` para compartir uno solo.
 - `level_1` no tiene `Meta`: ponle una con `siguiente_nivel = level_2.tscn`.
 - 'camara', se debe definir bien como va a ser la camara en cada nivel porque es muy pequeba
+- No me gusta como se ve la animacion en la telarana
+- Menu de pausa se ve muy feo
 ## 2. Tileset compartido
 **Arte nuevo:** `assets/Mundo/tileset_telaranas.png` (512×384, tiles de 32×32, pixel art con la paleta del personaje: ladrillo morado oscuro, vetas rojas, hilos de telaraña colgando). Mantiene **el mismo orden de celdas** que el placeholder, así que se puede pintar igual.
 **Configuración:** `resources/tileset_mundo.tres` usa ese PNG. Diferencias con el que estaba incrustado en level_1:

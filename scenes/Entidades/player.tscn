@@ -13,7 +13,18 @@
 [ext_resource type="PackedScene" uid="uid://cdgnvvnwawkeq" path="res://scenes/armas.tscn" id="7_fjrip"]
 [ext_resource type="Texture2D" uid="uid://d0uvpvx7g7u6l" path="res://assets/Jugador/Ataques/tajo_5.png" id="7_fulsm"]
 [ext_resource type="Texture2D" uid="uid://b66fdybs7pugg" path="res://assets/Jugador/Ataques/tajo_6.png" id="8_4r5pv"]
+[ext_resource type="Texture2D" uid="uid://bcobpj1x702q8" path="res://assets/Jugador/Entrar/entrar_1.png" id="9_8ipak"]
+[ext_resource type="Texture2D" uid="uid://yn1jddkgn5i4" path="res://assets/Jugador/Entrar/entrar_2.png" id="10_r6qhg"]
+[ext_resource type="Texture2D" uid="uid://dislxht6nl53y" path="res://assets/Jugador/Entrar/entrar_3.png" id="11_8adv2"]
+[ext_resource type="Texture2D" uid="uid://bpgn07s731ioj" path="res://assets/Jugador/Entrar/entrar_4.png" id="12_636yq"]
+[ext_resource type="Texture2D" uid="uid://ejsjcdh1k6km" path="res://assets/Jugador/Entrar/entrar_5.png" id="13_clify"]
 [ext_resource type="Script" uid="uid://bggawle7ioo35" path="res://scripts/Entidades/Jugador y sus habilidades/dash.gd" id="13_t4lbo"]
+[ext_resource type="Texture2D" uid="uid://b81v7hvojjdan" path="res://assets/Jugador/Entrar/entrar_6.png" id="14_kkgrq"]
+[ext_resource type="Texture2D" uid="uid://dsk78mv3m58wk" path="res://assets/Jugador/Entrar/entrar_7.png" id="15_h6sus"]
+[ext_resource type="Texture2D" uid="uid://di7ojo10t6qyn" path="res://assets/Jugador/Viajar/viajar_1.png" id="20_rlvvy"]
+[ext_resource type="Texture2D" uid="uid://wkouk5hybuj4" path="res://assets/Jugador/Viajar/viajar_2.png" id="21_j6mbd"]
+[ext_resource type="Texture2D" uid="uid://1xhwscilhbkj" path="res://assets/Jugador/Viajar/viajar_3.png" id="22_64r8p"]
+[ext_resource type="Texture2D" uid="uid://cnacnxr70r8bg" path="res://assets/Jugador/Viajar/viajar_4.png" id="23_k72eh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8mdrf"]
 shader = ExtResource("2_t4lbo")
@@ -113,6 +124,32 @@ animations = [{
 "speed": 12.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_8ipak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_r6qhg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8adv2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_636yq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_clify")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_kkgrq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_h6sus")
+}],
+"loop": 0,
+"name": &"entrar",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.5,
 "texture": SubResource("AtlasTexture_ur7pv")
 }, {
@@ -179,6 +216,23 @@ animations = [{
 "loop": 1,
 "name": &"moving",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_rlvvy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_j6mbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_64r8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_k72eh")
+}],
+"loop": 1,
+"name": &"viajar",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlg0r"]
@@ -192,9 +246,8 @@ script = ExtResource("1_g2els")
 material = SubResource("ShaderMaterial_8mdrf")
 position = Vector2(1, 21)
 sprite_frames = SubResource("SpriteFrames_uii18")
-animation = &"atacando"
+animation = &"entrar"
 autoplay = "idle"
-frame_progress = 0.078588516
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1919632315]
 position = Vector2(-5, 32)

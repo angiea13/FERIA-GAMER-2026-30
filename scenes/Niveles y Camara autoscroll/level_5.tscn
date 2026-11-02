@@ -29,7 +29,6 @@ grow_vertical = 2
 color = Color(0.05, 0.035, 0.09, 1)
 
 [node name="Menu Pausa" parent="Fondo" unique_id=47701127 instance=ExtResource("2_7as3h")]
-visible = false
 offset_left = 6.0
 offset_top = 6.0
 offset_right = 6.0
@@ -56,7 +55,8 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.75)
 theme_override_font_sizes/font_size = 28
 
 [node name="Meta" parent="." unique_id=1080128607 instance=ExtResource("meta")]
-position = Vector2(2600, 0)
+position = Vector2(1012, -1521)
+siguiente_nivel = "uid://c3y1sg3cbb1go"
 
 [node name="Player" parent="." unique_id=676112342 instance=ExtResource("player")]
 position = Vector2(-776, -1597)
@@ -130,7 +130,7 @@ position = Vector2(667, -1665)
 
 [node name="El_Q_Conecta_Con_Final" parent="." unique_id=614967998 node_paths=PackedStringArray("siguiente", "sustitutos") instance=ExtResource("web")]
 modulate = Color(0.9701949, 0.8627148, 0.847683, 1)
-position = Vector2(511, -1323)
+position = Vector2(498, -1363)
 siguiente = NodePath("../Telarana4")
 sustitutos = [NodePath("../Final")]
 

@@ -102,7 +102,7 @@ position = Vector2(547, 48)
 
 [node name="Meta" parent="." unique_id=1962765729 instance=ExtResource("12_es4sw")]
 position = Vector2(5505, -884)
-siguiente_nivel = "uid://c3y1sg3cbb1go"
+siguiente_nivel = "uid://kio43up0d10d"
 
 [node name="Enemigo3" parent="." unique_id=2047742871 instance=ExtResource("13_jng2p")]
 position = Vector2(5350, -996)

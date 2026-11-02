@@ -76,12 +76,16 @@ func _ready():
     colision_derecha.disabled = true
     colision_izquierda.disabled = true
     colision_ataque = colision_derecha
-    
+    print(sprite.sprite_frames)
+    print(sprite.sprite_frames.get_animation_names())
+    print(sprite.sprite_frames.get_frame_count("entrar"))
+    sprite.play("entrar")
     dash.configurar(1)
     UtilsGlobal.load_game()
 func _telarana():
     if en_telarana:
-        return
+        return true
+    return false
 func saltos(delta,suma,resta):
     if (not is_on_floor() and not Jump_Slide())   and !ya_paso_salto:
         num_saltos=1
@@ -102,7 +106,7 @@ func impulso(delta):
     if en_impulso:
         tiempo_impulso-=delta
         dash.recuperar()
-        saltos(delta,1,0)
+        num_saltos=1
         move_and_slide()
         if tiempo_impulso<=0:
             en_impulso=false
@@ -223,6 +227,8 @@ func _physics_process(delta: float) -> void:
     tiempo_teletransporte_ant+=delta
     bloqueo_control-=delta
     invulnerable = maxf(invulnerable - delta, 0.0)
+    if _telarana():
+        return
     if Input.is_action_just_pressed("Guardar Partida"):
         UtilsGlobal.save_game()
     #Impulso
@@ -245,6 +251,8 @@ func _physics_process(delta: float) -> void:
 
 func _update_animation(direction: float) -> void:
     sprite.flip_h = direccion_dash < 0
+    if en_telarana:
+        return
     if atacando and sprite.sprite_frames.has_animation(ANIM_ATAQUE):
         sprite.play(ANIM_ATAQUE)
     elif not is_on_floor():
@@ -332,19 +340,23 @@ func puntos_colision() -> Array:
 
 
 func teletransportar(destino: Telarana) -> void:
-    if destino == null:
+    if destino == null or en_telarana:
         return
+    en_telarana = true
+    velocity = Vector2.ZERO
     var inicio = global_position
     var fin = destino.global_position + Vector2(0, -16)
+    sprite.play("entrar")
+    await sprite.animation_finished
+    sprite.play("viajar")
     var tween = create_tween()
-    tween.tween_method(func(t: float):
-        var p = inicio.lerp(fin, t)
-        p.y -= sin(t * PI) * 40
-        global_position = p, 0.0,1.0,0.8)
-    velocity = Vector2.ZERO
+    tween.tween_property(self, "global_position", fin, 0.8)
+    await tween.finished
+    sprite.play_backwards("entrar")
+    await sprite.animation_finished
     telarana_actual = destino
     dash.recuperar()
-
+    en_telarana = false
 
 func crear_duplicado():
     var duplicado: AnimatedSprite2D = sprite.duplicate()

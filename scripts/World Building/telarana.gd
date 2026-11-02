@@ -3,10 +3,8 @@ class_name Telarana
 extends Area2D
 
 const SALIDA_HILO:=Vector2(0,-32)
-const Tiempo_Corte=0.3
 # "anterior" se calcula solo
 var anterior: Telarana = null
-var tiempo_para_pasar=Tiempo_Corte
 # "siguiente" se asigna a mano en el Inspector (@export)
 @export var siguiente: Telarana:
     set(valor):
@@ -41,9 +39,8 @@ func puntos_hilo() -> PackedVector2Array:
         puntos.append(p)
     return puntos
 func _al_entrar(cuerpo):
-    if cuerpo is Jugador and tiempo_para_pasar>0:
+    if cuerpo is Jugador:
         cuerpo.telarana_actual = self
-    else: cuerpo.telarana_actual=null
 func _al_salir(cuerpo):
     if cuerpo is Jugador:
         if cuerpo.telarana_actual==self:
@@ -70,19 +67,12 @@ func toca_hilo(punto_global: Vector2, radio: float) -> bool:
         if p.distance_to(cercano) <= radio:
             return true
     return false
-func cortar(delta):
-    tiempo_para_pasar+=delta
-    if tiempo_para_pasar>=Tiempo_Corte:
-        tiempo_para_pasar=Tiempo_Corte
+func cortar():
     if siguiente:
         siguiente.anterior = null
-        tiempo_para_pasar=0
     if not sustitutos.is_empty():
         siguiente=sustitutos.pop_front()
         siguiente.anterior=self
-        tiempo_para_pasar=0
     else:
         siguiente=null
-        tiempo_para_pasar=0
-    
     

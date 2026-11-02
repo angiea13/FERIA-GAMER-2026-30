@@ -277,7 +277,7 @@ func procesar_ataque(delta: float) -> void:
         for t in get_tree().get_nodes_in_group("telaranas"):
             for p in puntos:
                 if t.toca_hilo(p, RADIO_CORTE):
-                    t.cortar(delta)
+                    t.cortar()
                     delay=1.5
                     break
             if delay>0:

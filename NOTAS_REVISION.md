@@ -21,7 +21,7 @@ Lo que ya estaba bien: dash, salto de pared, coyote/jump buffer, telarañas con 
 | `savegame.bin` | Estaba subido al repo. | Quitado y agregado al `.gitignore` |
 
 ### Pendiente / a revisar (no lo toqué)
-- `player.gd`: tras caminar fuera de un borde, durante 0.2 s la caída se limita a 120 px/s (la condición `coyote_restante < COYOTE_TIEMPO and > 0` dentro del bloque de deslizamiento). Se siente "flotante"; probablemente no es intencional.
+- `player.gd`: tras caminar fuera de un borde, durante 0.2 s la caída se limita a 120 px/s (la condición `coyote_restante < COYOTE_TIEMPO and > 0` dentro del bloque de deslizamiento). Se siente "flotante"; probablemente no es intencional. 
 - `Enemigo.tscn` (Pig_Enemy) quedó obsoleto: no tiene animación "Movimiento". Usen `Caballero_Enemy.tscn`.
 - El nodo `Armas` sigue dentro de `player.tscn` pero `player.gd` ya no lo usa; se puede borrar (junto con `armas.tscn` y `espada.png` cuando cambien la espada).
 - `assets/world_tileset.png.import` está huérfano (no existe el .png) y `scripts/node_2d.tscn` es una escena vacía.

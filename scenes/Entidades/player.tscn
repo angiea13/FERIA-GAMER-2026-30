@@ -186,7 +186,6 @@ radius = 224.49231
 height = 913.7231
 
 [node name="Player" type="CharacterBody2D" unique_id=1446005476 groups=["jugador"]]
-collision_mask = 1
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1069817929]

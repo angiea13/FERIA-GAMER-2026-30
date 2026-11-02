@@ -160,9 +160,10 @@ size = Vector2(23, 121.25)
 [node name="Caballero_Enemy" type="CharacterBody2D" unique_id=1723259553]
 texture_filter = 1
 material = SubResource("ShaderMaterial_sk4q6")
-collision_layer = 2
-collision_mask = 2
+collision_layer = 6
+collision_mask = 6
 script = ExtResource("1_2dyq1")
+vida_maxima = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1257274974]
 light_mask = 2

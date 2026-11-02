@@ -1,10 +1,13 @@
 [gd_scene format=4 uid="uid://kio43up0d10d"]
 
 [ext_resource type="Script" uid="uid://dk8v8qryw7ssf" path="res://scripts/World Building/tile_maps_que_matan.gd" id="3_geaem"]
+[ext_resource type="PackedScene" uid="uid://ctq14dgep25ts" path="res://scenes/World/plataforma.tscn" id="6_gf0i2"]
+[ext_resource type="PackedScene" uid="uid://bbe772m58rq6g" path="res://scenes/World/tunel_impulso.tscn" id="8_ojovs"]
 [ext_resource type="PackedScene" path="res://scenes/World/meta.tscn" id="meta"]
 [ext_resource type="Script" uid="uid://dh4x8b2foxbk7" path="res://scripts/World Building/tilemap_peligros.gd" id="peligros"]
 [ext_resource type="PackedScene" uid="uid://1can08s4fxkp" path="res://scenes/Entidades/player.tscn" id="player"]
 [ext_resource type="TileSet" uid="uid://bnoc84ls8didp" path="res://resources/tileset_mundo.tres" id="tileset"]
+[ext_resource type="PackedScene" uid="uid://dc7tavmho7un7" path="res://scenes/World/telarana.tscn" id="web"]
 
 [node name="level_5" type="Node2D" unique_id=1051553276]
 
@@ -52,3 +55,18 @@ scale = Vector2(2, 2)
 zoom = Vector2(0.8, 0.8)
 limit_left = -10000
 limit_bottom = 2000
+
+[node name="Plataforma" parent="." unique_id=2092135741 instance=ExtResource("6_gf0i2")]
+position = Vector2(35, -982)
+
+[node name="Telarana" parent="." unique_id=1261314171 instance=ExtResource("web")]
+position = Vector2(45, -1154)
+
+[node name="Telarana2" parent="." unique_id=275555308 instance=ExtResource("web")]
+position = Vector2(-673, -1149)
+
+[node name="Telarana3" parent="." unique_id=2117741840 instance=ExtResource("web")]
+position = Vector2(-1461, -1134)
+
+[node name="Tunel_Impulso" parent="." unique_id=803496209 instance=ExtResource("8_ojovs")]
+position = Vector2(343, -1609)

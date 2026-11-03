@@ -45,16 +45,6 @@ texture = ExtResource("3_o3nvj")
 position = Vector2(456, -163)
 scale = Vector2(2, 2)
 
-[node name="Player" parent="." unique_id=1446005476 instance=ExtResource("5_83qi2")]
-position = Vector2(376, -309)
-scale = Vector2(0.5, 0.5)
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=892470718]
-position = Vector2(372, 206)
-scale = Vector2(2, 2)
-offset = Vector2(0, -50)
-zoom = Vector2(0.75, 0.75)
-
 [node name="Plataforma2" parent="." unique_id=1661262514 instance=ExtResource("4_3e6gy")]
 position = Vector2(974, -288)
 
@@ -116,3 +106,13 @@ position = Vector2(385, -304)
 
 [node name="CheckPoints3" parent="." unique_id=328906419 instance=ExtResource("14_srp1y")]
 position = Vector2(5190, -961)
+
+[node name="Player" parent="." unique_id=1446005476 instance=ExtResource("5_83qi2")]
+position = Vector2(376, -309)
+scale = Vector2(0.5, 0.5)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=892470718]
+position = Vector2(372, 206)
+scale = Vector2(2, 2)
+offset = Vector2(0, -50)
+zoom = Vector2(0.75, 0.75)

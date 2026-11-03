@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func _on_inicio_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/Niveles y Camara autoscroll/level_2.tscn")
+	get_tree().change_scene_to_file("res://scenes/Niveles y Camara autoscroll/level_6.tscn")
 
 
 func _on_configuracion_pressed() -> void:

@@ -73,7 +73,7 @@ position = Vector2(4576, -140)
 
 [node name="Meta" parent="." unique_id=2103477288 instance=ExtResource("meta")]
 position = Vector2(6560, 0)
-siguiente_nivel = "res://scenes/Niveles y Camara autoscroll/level_3.tscn"
+siguiente_nivel = "uid://crbijb3w8ffu5"
 
 [node name="ZonaMuerte" parent="." unique_id=418647562 instance=ExtResource("zona")]
 position = Vector2(0, 900)

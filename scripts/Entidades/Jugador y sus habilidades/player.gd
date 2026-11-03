@@ -23,7 +23,7 @@ const RADIO_CORTE = 30.0
 
 #Variables
 #Atributos del personaje
-var vida = Vida.new(20)
+var vida = Vida.new(50)
 #Ataque
 var atacando := false
 #
@@ -84,6 +84,7 @@ func _ready():
     UtilsGlobal.load_game()
 func _telarana():
     if en_telarana:
+        invulnerable=0.4
         return true
     return false
 func saltos(delta,suma,resta):
@@ -351,6 +352,7 @@ func teletransportar(destino: Telarana) -> void:
     sprite.play("viajar")
     var tween = create_tween()
     tween.tween_property(self, "global_position", fin, 0.8)
+    telarana_actual = destino
     await tween.finished
     sprite.play_backwards("entrar")
     await sprite.animation_finished

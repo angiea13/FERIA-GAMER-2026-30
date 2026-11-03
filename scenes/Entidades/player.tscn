@@ -147,7 +147,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"entrar",
-"speed": 5.0
+"speed": 11.0
 }, {
 "frames": [{
 "duration": 1.5,
@@ -178,7 +178,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"idle",
-"speed": 3.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -192,7 +192,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"jump",
-"speed": 2.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -215,7 +215,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"moving",
-"speed": 3.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -232,7 +232,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"viajar",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlg0r"]
@@ -246,8 +246,9 @@ script = ExtResource("1_g2els")
 material = SubResource("ShaderMaterial_8mdrf")
 position = Vector2(1, 21)
 sprite_frames = SubResource("SpriteFrames_uii18")
-animation = &"entrar"
+animation = &"jump"
 autoplay = "idle"
+frame_progress = 0.6457553
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1919632315]
 position = Vector2(-5, 32)

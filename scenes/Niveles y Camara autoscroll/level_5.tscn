@@ -58,17 +58,6 @@ theme_override_font_sizes/font_size = 28
 position = Vector2(1012, -1521)
 siguiente_nivel = "uid://c3y1sg3cbb1go"
 
-[node name="Player" parent="." unique_id=676112342 instance=ExtResource("player")]
-position = Vector2(-776, -1597)
-scale = Vector2(0.5, 0.5)
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1652777796]
-position = Vector2(372, 206)
-scale = Vector2(2, 2)
-zoom = Vector2(0.8, 0.8)
-limit_left = -10000
-limit_bottom = 100000
-
 [node name="Plataforma" parent="." unique_id=2092135741 instance=ExtResource("6_gf0i2")]
 position = Vector2(35, -982)
 
@@ -140,3 +129,14 @@ position = Vector2(1639, -1319)
 [node name="Telarana5" parent="." unique_id=1216923588 node_paths=PackedStringArray("siguiente") instance=ExtResource("web")]
 position = Vector2(1616, -794)
 siguiente = NodePath("../El_Q_Conecta_Con_Final")
+
+[node name="Player" parent="." unique_id=676112342 instance=ExtResource("player")]
+position = Vector2(-776, -1597)
+scale = Vector2(0.5, 0.5)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1652777796]
+position = Vector2(372, 206)
+scale = Vector2(2, 2)
+zoom = Vector2(0.8, 0.8)
+limit_left = -10000
+limit_bottom = 100000

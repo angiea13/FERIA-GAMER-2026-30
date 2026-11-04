@@ -165,43 +165,6 @@ _data = {
 &"RESET": SubResource("Animation_rgk7f")
 }
 
-[sub_resource type="Animation" id="Animation_pe82e"]
-resource_name = "Move"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.55),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1194, -1681), Vector2(1190, -1973)]
-}
-
-[sub_resource type="Animation" id="Animation_lnj83"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1194, -1681)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q085r"]
-_data = {
-&"Move": SubResource("Animation_pe82e"),
-&"RESET": SubResource("Animation_lnj83")
-}
-
 [node name="level 7" type="Node2D" unique_id=1469763414]
 
 [node name="Fondo" type="CanvasLayer" parent="." unique_id=1123093262]
@@ -230,7 +193,8 @@ tile_set = ExtResource("2_308j0")
 script = ExtResource("4_8xknb")
 
 [node name="Meta" parent="." unique_id=60765829 instance=ExtResource("5_u55if")]
-position = Vector2(2600, 0)
+position = Vector2(1821, -1250)
+siguiente_nivel = "uid://c3y1sg3cbb1go"
 
 [node name="Tunel_Impulso" parent="." unique_id=803496209 instance=ExtResource("7_xkti4")]
 position = Vector2(4164, 12)
@@ -271,22 +235,27 @@ autoplay = &"Movimiento"
 [node name="Tunel_Impulso5" parent="." unique_id=1453197947 instance=ExtResource("7_xkti4")]
 position = Vector2(1980, 369)
 scale = Vector2(2, 2)
-velocidad_impulso = 0.0
+velocidad_impulso = 10.0
 
 [node name="Tunel_Impulso6" parent="." unique_id=2062181975 instance=ExtResource("7_xkti4")]
-position = Vector2(2417, 376)
+position = Vector2(2376, 374)
 scale = Vector2(2, 2)
-velocidad_impulso = 0.0
+velocidad_impulso = 10.0
 
 [node name="Tunel_Impulso7" parent="." unique_id=55924274 instance=ExtResource("7_xkti4")]
-position = Vector2(2902, 370)
+position = Vector2(2732, 370)
 scale = Vector2(2, 2)
-velocidad_impulso = 0.0
+velocidad_impulso = 10.0
 
 [node name="Tunel_Impulso8" parent="." unique_id=17717405 instance=ExtResource("7_xkti4")]
-position = Vector2(3369, 375)
+position = Vector2(3080, 368)
 scale = Vector2(2, 2)
-velocidad_impulso = 0.0
+velocidad_impulso = 10.0
+
+[node name="Tunel_Impulso10" parent="." unique_id=836626188 instance=ExtResource("7_xkti4")]
+position = Vector2(3437, 364)
+scale = Vector2(2, 2)
+velocidad_impulso = 10.0
 
 [node name="Telarana" parent="." unique_id=1261314171 node_paths=PackedStringArray("siguiente") instance=ExtResource("7_308j0")]
 position = Vector2(3760, 317)
@@ -320,14 +289,8 @@ position = Vector2(4190, -1)
 [node name="Plataforma" parent="." unique_id=2092135741 instance=ExtResource("10_rgk7f")]
 position = Vector2(1194, -1681)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Plataforma" unique_id=1450002953]
-libraries/ = SubResource("AnimationLibrary_q085r")
-autoplay = &"Move"
-speed_scale = 0.3
-
-[node name="Telarana3" parent="." unique_id=455258284 node_paths=PackedStringArray("siguiente") instance=ExtResource("7_308j0")]
+[node name="Telarana3" parent="." unique_id=455258284 instance=ExtResource("7_308j0")]
 position = Vector2(1168, -2388)
-siguiente = NodePath("../Telarana4")
 
 [node name="Telarana4" parent="." unique_id=49271932 node_paths=PackedStringArray("siguiente", "sustitutos") instance=ExtResource("7_308j0")]
 position = Vector2(524, -2373)
@@ -352,4 +315,8 @@ tecla = "Z"
 
 [node name="Indicador2" parent="." unique_id=87560820 instance=ExtResource("12_xkti4")]
 position = Vector2(1161, -2601)
-tecla = "E"
+tecla = "q"
+
+[node name="Tunel_Impulso9" parent="." unique_id=838495514 instance=ExtResource("7_xkti4")]
+position = Vector2(1194, -1802)
+velocidad_impulso = 1300.0

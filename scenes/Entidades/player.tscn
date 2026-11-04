@@ -257,7 +257,7 @@ shape = SubResource("CapsuleShape2D_qlg0r")
 
 [node name="Dash" type="Node2D" parent="." unique_id=952097499]
 script = ExtResource("13_t4lbo")
-velocidad = 2000.0
+velocidad = 1700.0
 duracion = 0.18
 
 [node name="Armas" parent="." unique_id=759737048 instance=ExtResource("7_fjrip")]

@@ -73,7 +73,7 @@ position = Vector2(4576, -140)
 
 [node name="Meta" parent="." unique_id=2103477288 instance=ExtResource("meta")]
 position = Vector2(6560, 0)
-siguiente_nivel = "uid://crbijb3w8ffu5"
+siguiente_nivel = "uid://qrk1om3b67eu"
 
 [node name="ZonaMuerte" parent="." unique_id=418647562 instance=ExtResource("zona")]
 position = Vector2(0, 900)

@@ -3,19 +3,19 @@ extends CharacterBody2D
 
 #Constantes
 #Movimiento
-const SPEED = 500.0
+const SPEED = 450.0
 const JUMP_VELOCITY = -600.0
 const Maximo_Num_Saltos=2
 #Relacion con las paredes
-const VELOCIDAD_DESLIZAR = 120.0
-const EMPUJE_PARED = 600.0
+const VELOCIDAD_DESLIZAR = 110.0
+const EMPUJE_PARED = 500.0
 #Temporizadores
 #Salto
-const COYOTE_TIEMPO = 0.2
+const COYOTE_TIEMPO = 0.10
 #Deslizamiento
 const COYOTE_TIEMPO_desliz = 0.2
 #Salto de pared
-const BLOQUEO_PARED = 0.30
+const BLOQUEO_PARED = 0.2
 #Ataque
 const ANIM_ATAQUE = "atacando"
 const BUFFER_ATAQUE = 0.15
@@ -103,6 +103,7 @@ func impulso(delta):
 	if en_impulso:
 		tiempo_impulso-=delta
 		dash.recuperar()
+		print(dash.cantidad_de_dash)
 		num_saltos=1
 		move_and_slide()
 		if tiempo_impulso<=0:

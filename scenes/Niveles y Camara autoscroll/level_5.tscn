@@ -56,7 +56,7 @@ theme_override_font_sizes/font_size = 28
 
 [node name="Meta" parent="." unique_id=1080128607 instance=ExtResource("meta")]
 position = Vector2(1012, -1521)
-siguiente_nivel = "uid://c3y1sg3cbb1go"
+siguiente_nivel = "uid://crbijb3w8ffu5"
 
 [node name="Plataforma" parent="." unique_id=2092135741 instance=ExtResource("6_gf0i2")]
 position = Vector2(35, -982)

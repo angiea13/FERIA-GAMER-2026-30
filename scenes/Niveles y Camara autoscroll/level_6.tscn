@@ -97,7 +97,7 @@ script = ExtResource("4_nrvr4")
 
 [node name="Meta" parent="." unique_id=60765829 instance=ExtResource("6_qad23")]
 position = Vector2(-7639, -2114)
-siguiente_nivel = "uid://c3y1sg3cbb1go"
+siguiente_nivel = "uid://c40scd1ldowtj"
 
 [node name="Tunel_Impulso" parent="." unique_id=803496209 instance=ExtResource("8_0po42")]
 position = Vector2(-648, -1153)

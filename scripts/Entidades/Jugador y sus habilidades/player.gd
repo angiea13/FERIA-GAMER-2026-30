@@ -73,359 +73,355 @@ var muerto := false
 @onready var dash: Dash = $Dash
 
 func _ready():
-    colision_derecha.disabled = true
-    colision_izquierda.disabled = true
-    colision_ataque = colision_derecha
-    print(sprite.sprite_frames)
-    print(sprite.sprite_frames.get_animation_names())
-    print(sprite.sprite_frames.get_frame_count("entrar"))
-    sprite.play("entrar")
-    dash.configurar(1)
-    UtilsGlobal.load_game()
+	colision_derecha.disabled = true
+	colision_izquierda.disabled = true
+	colision_ataque = colision_derecha
+	dash.configurar(1)
+	#UtilsGlobal.load_game()
 func _telarana():
-    if en_telarana:
-        invulnerable=0.4
-        return true
-    return false
+	if en_telarana:
+		invulnerable=0.4
+		return true
+	return false
 func saltos(delta,suma,resta):
-    if (not is_on_floor() and not Jump_Slide())   and !ya_paso_salto:
-        num_saltos=1
-        ya_paso_salto=true
-    if suma!=0:
-        num_saltos+=suma
-        if num_saltos>Maximo_Num_Saltos:
-            num_saltos=Maximo_Num_Saltos
-        return
-    elif resta!=0:
-        num_saltos-=resta
-        if num_saltos<0:
-            num_saltos=0
-        return
-    
+	if (not is_on_floor() and not Jump_Slide())   and !ya_paso_salto:
+		num_saltos=1
+		ya_paso_salto=true
+	if suma!=0:
+		num_saltos+=suma
+		if num_saltos>Maximo_Num_Saltos:
+			num_saltos=Maximo_Num_Saltos
+		return
+	elif resta!=0:
+		num_saltos-=resta
+		if num_saltos<0:
+			num_saltos=0
+		return
+	
 func impulso(delta):
    #Impulso
-    if en_impulso:
-        tiempo_impulso-=delta
-        dash.recuperar()
-        num_saltos=1
-        move_and_slide()
-        if tiempo_impulso<=0:
-            en_impulso=false
-        return true
-    return false
+	if en_impulso:
+		tiempo_impulso-=delta
+		dash.recuperar()
+		num_saltos=1
+		move_and_slide()
+		if tiempo_impulso<=0:
+			en_impulso=false
+		return true
+	return false
 func procesar_dash(delta):
-    #Dash
-    if Input.is_action_just_pressed("hacer_dash"):
-        if Deslizarse():
-            dash_arriba=true
-        var dir := Input.get_axis("move_left", "move_right")
-        if dir != 0:
-            direccion_dash = sign(dir)
-        dash.intentar(direccion_dash)
-        if dash.activo:
-            terminar_ataque()
-            invulnerable+=0.2
-    if dash.activo:
-        if !Deslizarse():
-            if !dash_arriba:
-                velocity = Vector2(dash.direccion * dash.velocidad, 0)
-        else:
-            if !dash_arriba:
-                velocity = Vector2(dash.direccion * dash.velocidad, 0)
-            else:
-                velocity = Vector2(0,-dash.velocidad/3.5)
-                dash_arriba=true
-        if Time_Actual_Dupli >= Time_Dupli:
-            Time_Actual_Dupli = 0
-            crear_duplicado()
-        
-        move_and_slide()
-        _update_animation(0.0)
-        return true
-    return false
+	#Dash
+	if Input.is_action_just_pressed("hacer_dash"):
+		if Deslizarse():
+			dash_arriba=true
+		var dir := Input.get_axis("move_left", "move_right")
+		if dir != 0:
+			direccion_dash = sign(dir)
+		dash.intentar(direccion_dash)
+		if dash.activo:
+			terminar_ataque()
+			invulnerable+=0.2
+	if dash.activo:
+		if !Deslizarse():
+			if !dash_arriba:
+				velocity = Vector2(dash.direccion * dash.velocidad, 0)
+		else:
+			if !dash_arriba:
+				velocity = Vector2(dash.direccion * dash.velocidad, 0)
+			else:
+				velocity = Vector2(0,-dash.velocidad/3.5)
+				dash_arriba=true
+		if Time_Actual_Dupli >= Time_Dupli:
+			Time_Actual_Dupli = 0
+			crear_duplicado()
+		
+		move_and_slide()
+		_update_animation(0.0)
+		return true
+	return false
 func todo_relacionado_a_saltos(delta):
-     # Gravedad
-    if not is_on_floor():
-        coyote_restante -= delta
-        velocity += get_gravity() * delta
-        if (Deslizarse() and velocity.y > 0) or (coyote_restante_desliz<COYOTE_TIEMPO_desliz and coyote_restante_desliz>0):
-            velocity.y = min(velocity.y, VELOCIDAD_DESLIZAR)
-            coyote_restante_desliz-=delta
-            if !dash_arriba:
-                dash.recuperar()
-    else:
-        coyote_restante = COYOTE_TIEMPO
-        dash.recuperar()
-        dash_arriba=false
-        coyote_restante_desliz=COYOTE_TIEMPO
-        ya_paso_salto=false
-        saltos(delta,2,0)
-    # Jump buffer
-    if Input.is_action_just_pressed("jump"):
-        jump_buffer_restante = 0.15
-    else:
-        jump_buffer_restante = max(jump_buffer_restante - delta, 0)
+	 # Gravedad
+	if not is_on_floor():
+		coyote_restante -= delta
+		velocity += get_gravity() * delta
+		if (Deslizarse() and velocity.y > 0):
+			velocity.y = min(velocity.y, VELOCIDAD_DESLIZAR)
+			coyote_restante_desliz-=delta
+			if !dash_arriba:
+				dash.recuperar()
+	else:
+		coyote_restante = COYOTE_TIEMPO
+		dash.recuperar()
+		dash_arriba=false
+		coyote_restante_desliz=COYOTE_TIEMPO
+		ya_paso_salto=false
+		saltos(delta,2,0)
+	# Jump buffer
+	if Input.is_action_just_pressed("jump"):
+		jump_buffer_restante = 0.15
+	else:
+		jump_buffer_restante = max(jump_buffer_restante - delta, 0)
 
    # Salto de pared
-    if not is_on_floor() and Jump_Slide() and jump_buffer_restante > 0:
-        ya_paso_salto=false
-        saltos(delta,1,0)
-        velocity.y = JUMP_VELOCITY
-        velocity.x = -direccion_dash * EMPUJE_PARED
-        direccion_dash = -direccion_dash
-        bloqueo_control = BLOQUEO_PARED
-        dash.recuperar()
-        dash_arriba=false
-        jump_buffer_restante = 0
-    # Salto normal
-    elif not is_on_floor() and num_saltos>0 and Input.is_action_just_pressed("jump"):
-        velocity.y=1.2*JUMP_VELOCITY
-        saltos(delta,0,1)
-    elif jump_buffer_restante > 0 and coyote_restante > 0:
-        saltos(delta,0,1)
-        velocity.y = JUMP_VELOCITY
-        coyote_restante = 0
-        jump_buffer_restante = 0
-    # Salto corto
-    if Input.is_action_just_released("jump") and velocity.y < 0.0:
-        velocity.y *= 0.6
+	if not is_on_floor() and Jump_Slide() and jump_buffer_restante > 0:
+		ya_paso_salto=false
+		saltos(delta,1,0)
+		velocity.y = JUMP_VELOCITY
+		velocity.x = -direccion_dash * EMPUJE_PARED
+		direccion_dash = -direccion_dash
+		bloqueo_control = BLOQUEO_PARED
+		dash.recuperar()
+		dash_arriba=false
+		jump_buffer_restante = 0
+	# Salto normal
+	elif not is_on_floor() and num_saltos>0 and Input.is_action_just_pressed("jump"):
+		velocity.y=1.2*JUMP_VELOCITY
+		saltos(delta,0,1)
+	elif jump_buffer_restante > 0 and coyote_restante > 0:
+		saltos(delta,0,1)
+		velocity.y = JUMP_VELOCITY
+		coyote_restante = 0
+		jump_buffer_restante = 0
+	# Salto corto
+	if Input.is_action_just_released("jump") and velocity.y < 0.0:
+		velocity.y *= 0.6
 func teletransporte_en_phisycs(delta):
-    if telarana_actual:
-        
-        if Input.is_action_just_pressed("ir_siguiente") and tiempo_teletranporte>0.4:
-            teletransportar(telarana_actual.siguiente)
-            saltos(delta,1,0)
-            tiempo_teletranporte=0
-            tiempo_teletransporte_ant=0
-        elif Input.is_action_just_pressed("ir_anterior") and tiempo_teletransporte_ant>0.4:
-            teletransportar(telarana_actual.anterior)
-            saltos(delta,1,0)
-            tiempo_teletransporte_ant=0
+	if telarana_actual:
+		
+		if Input.is_action_just_pressed("ir_siguiente") and tiempo_teletranporte>0.4:
+			teletransportar(telarana_actual.siguiente)
+			saltos(delta,1,0)
+			tiempo_teletranporte=0
+			tiempo_teletransporte_ant=0
+		elif Input.is_action_just_pressed("ir_anterior") and tiempo_teletransporte_ant>0.4:
+			teletransportar(telarana_actual.anterior)
+			saltos(delta,1,0)
+			tiempo_teletransporte_ant=0
 func movimiento_horizontal(delta):
-    
-    var direction := Input.get_axis("move_left", "move_right")
-    if bloqueo_control <= 0:
-        if direction:
-            velocity.x = direction * SPEED
-            direccion_dash = sign(direction)
-        else:
-            velocity.x = move_toward(velocity.x, 0, SPEED)
+	
+	var direction := Input.get_axis("move_left", "move_right")
+	if bloqueo_control <= 0:
+		if direction:
+			velocity.x = direction * SPEED
+			direccion_dash = sign(direction)
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 func ataque_en_phisycs(delta):
-     # Ataque
-    if Input.is_action_just_pressed("atacar"):
-        buffer_ataque = BUFFER_ATAQUE
-    else:
-        buffer_ataque -= delta
-    if buffer_ataque > 0 and not atacando:
-        empezar_ataque()
+	 # Ataque
+	if Input.is_action_just_pressed("atacar"):
+		buffer_ataque = BUFFER_ATAQUE
+	else:
+		buffer_ataque -= delta
+	if buffer_ataque > 0 and not atacando:
+		empezar_ataque()
 func direccion_ray_casts(delta):
-    $Deslizarse.target_position.x = abs($Deslizarse.target_position.x) * direccion_dash
-    $Brincar.target_position.x = abs($Brincar.target_position.x) * direccion_dash
-    $Revisar_Esquinas.target_position.x = abs($Revisar_Esquinas.target_position.x) * direccion_dash
+	$Deslizarse.target_position.x = abs($Deslizarse.target_position.x) * direccion_dash
+	$Brincar.target_position.x = abs($Brincar.target_position.x) * direccion_dash
+	$Revisar_Esquinas.target_position.x = abs($Revisar_Esquinas.target_position.x) * direccion_dash
 func _physics_process(delta: float) -> void:
-    Time_Actual_Dupli += delta
-    tiempo_teletranporte+=delta
-    tiempo_teletransporte_ant+=delta
-    bloqueo_control-=delta
-    invulnerable = maxf(invulnerable - delta, 0.0)
-    if _telarana():
-        return
-    if Input.is_action_just_pressed("Guardar Partida"):
-        UtilsGlobal.save_game()
-    #Impulso
-    if  impulso(delta):
-        return
-    if procesar_dash(delta):
-        return
+	Time_Actual_Dupli += delta
+	tiempo_teletranporte+=delta
+	tiempo_teletransporte_ant+=delta
+	bloqueo_control-=delta
+	invulnerable = maxf(invulnerable - delta, 0.0)
+	if _telarana():
+		return
+	if Input.is_action_just_pressed("Guardar Partida"):
+		UtilsGlobal.save_game()
+	#Impulso
+	if  impulso(delta):
+		return
+	if procesar_dash(delta):
+		return
    # Gravedad
-    todo_relacionado_a_saltos(delta)
-    # Teletransporte Telarana
-    teletransporte_en_phisycs(delta)
-    # Movimiento horizontal
-    movimiento_horizontal(delta)
-    # Ataque
-    ataque_en_phisycs(delta)
-    direccion_ray_casts(delta)
-    move_and_slide()
-    procesar_ataque(delta)
-    _update_animation(direccion_dash)
+	todo_relacionado_a_saltos(delta)
+	# Teletransporte Telarana
+	teletransporte_en_phisycs(delta)
+	# Movimiento horizontal
+	movimiento_horizontal(delta)
+	# Ataque
+	ataque_en_phisycs(delta)
+	direccion_ray_casts(delta)
+	move_and_slide()
+	procesar_ataque(delta)
+	_update_animation(direccion_dash)
 
 func _update_animation(direction: float) -> void:
-    sprite.flip_h = direccion_dash < 0
-    if en_telarana:
-        return
-    if atacando and sprite.sprite_frames.has_animation(ANIM_ATAQUE):
-        sprite.play(ANIM_ATAQUE)
-    elif not is_on_floor():
-        if velocity.y < 0:
-            sprite.play("jump")
-        else:
-            sprite.play("falling")
-    elif direction:
-        sprite.play("moving")
-    else:
-        sprite.play("idle")
+	sprite.flip_h = direccion_dash < 0
+	if en_telarana:
+		return
+	if atacando and sprite.sprite_frames.has_animation(ANIM_ATAQUE):
+		sprite.play(ANIM_ATAQUE)
+	elif not is_on_floor():
+		if velocity.y < 0:
+			sprite.play("jump")
+		else:
+			sprite.play("falling")
+	elif direction:
+		sprite.play("moving")
+	else:
+		sprite.play("idle")
 func empezar_ataque() -> void:
-    atacando = true
-    buffer_ataque = 0
-    ya_golpeados.clear()
-    tiempo_ataque = duracion_animacion(ANIM_ATAQUE)
-    sprite.stop()
-    sprite.play(ANIM_ATAQUE)
+	atacando = true
+	buffer_ataque = 0
+	ya_golpeados.clear()
+	tiempo_ataque = duracion_animacion(ANIM_ATAQUE)
+	sprite.stop()
+	sprite.play(ANIM_ATAQUE)
 
-    actualizar_colision_ataque()
+	actualizar_colision_ataque()
 
 var delay: float = 0.0
 func procesar_ataque(delta: float) -> void:
-    if not atacando:
-        return
-    tiempo_ataque -= delta
-    actualizar_colision_ataque()
-    for cuerpo in slash_area.get_overlapping_bodies():
-        golpear(cuerpo)
-    for area in slash_area.get_overlapping_areas():
-        golpear(area)
-    var puntos := puntos_colision()
-    delay=max(delay-delta,0)
-    if delay==0:
-        for t in get_tree().get_nodes_in_group("telaranas"):
-            for p in puntos:
-                if t.toca_hilo(p, RADIO_CORTE):
-                    t.cortar()
-                    delay=1.5
-                    break
-            if delay>0:
-                break
+	if not atacando:
+		return
+	tiempo_ataque -= delta
+	actualizar_colision_ataque()
+	for cuerpo in slash_area.get_overlapping_bodies():
+		golpear(cuerpo)
+	for area in slash_area.get_overlapping_areas():
+		golpear(area)
+	var puntos := puntos_colision()
+	delay=max(delay-delta,0)
+	if delay==0:
+		for t in get_tree().get_nodes_in_group("telaranas"):
+			for p in puntos:
+				if t.toca_hilo(p, RADIO_CORTE):
+					t.cortar()
+					delay=1.5
+					break
+			if delay>0:
+				break
 
-    if tiempo_ataque <= 0:
-        terminar_ataque()
+	if tiempo_ataque <= 0:
+		terminar_ataque()
 func actualizar_colision_ataque() -> void:
-    var nueva := colision_derecha if direccion_dash == 1 else colision_izquierda
-    if nueva == colision_ataque and not nueva.disabled:
-        return
-    colision_ataque = nueva
-    colision_derecha.set_deferred("disabled", colision_ataque != colision_derecha)
-    colision_izquierda.set_deferred("disabled", colision_ataque != colision_izquierda)
-    
+	var nueva := colision_derecha if direccion_dash == 1 else colision_izquierda
+	if nueva == colision_ataque and not nueva.disabled:
+		return
+	colision_ataque = nueva
+	colision_derecha.set_deferred("disabled", colision_ataque != colision_derecha)
+	colision_izquierda.set_deferred("disabled", colision_ataque != colision_izquierda)
+	
 func golpear(objeto: Node) -> void:
-    if objeto == self or objeto in ya_golpeados:
-        return
-    if not objeto.is_in_group("golpeable"):
-        return
-    ya_golpeados.append(objeto)            # un golpe por ataque a cada cosa
-    if objeto.has_method("recibir_golpe"):
-        objeto.recibir_golpe(Vector2(direccion_dash, 0))
-        
+	if objeto == self or objeto in ya_golpeados:
+		return
+	if not objeto.is_in_group("golpeable"):
+		return
+	ya_golpeados.append(objeto)            # un golpe por ataque a cada cosa
+	if objeto.has_method("recibir_golpe"):
+		objeto.recibir_golpe(Vector2(direccion_dash, 0))
+		
 func terminar_ataque() -> void:
-    atacando = false
-    colision_derecha.set_deferred("disabled", true)
-    colision_izquierda.set_deferred("disabled", true)
+	atacando = false
+	colision_derecha.set_deferred("disabled", true)
+	colision_izquierda.set_deferred("disabled", true)
 
 
 func duracion_animacion(nombre: String) -> float:
-    var frames := sprite.sprite_frames
-    var total := 0.0
-    for i in frames.get_frame_count(nombre):
-        total += frames.get_frame_duration(nombre, i)
-    return total / frames.get_animation_speed(nombre)
+	var frames := sprite.sprite_frames
+	var total := 0.0
+	for i in frames.get_frame_count(nombre):
+		total += frames.get_frame_duration(nombre, i)
+	return total / frames.get_animation_speed(nombre)
 
 func puntos_colision() -> Array:
-    var resultado := []
-    var centro := Vector2.ZERO
-    for p in colision_ataque.polygon:
-        resultado.append(colision_ataque.global_transform * p)
-        centro += p
-    if colision_ataque.polygon.size() > 0:
-        resultado.append(colision_ataque.global_transform * (centro / colision_ataque.polygon.size()))
-    return resultado
+	var resultado := []
+	var centro := Vector2.ZERO
+	for p in colision_ataque.polygon:
+		resultado.append(colision_ataque.global_transform * p)
+		centro += p
+	if colision_ataque.polygon.size() > 0:
+		resultado.append(colision_ataque.global_transform * (centro / colision_ataque.polygon.size()))
+	return resultado
 
 
 func teletransportar(destino: Telarana) -> void:
-    if destino == null or en_telarana:
-        return
-    en_telarana = true
-    velocity = Vector2.ZERO
-    var inicio = global_position
-    var fin = destino.global_position + Vector2(0, -16)
-    sprite.play("entrar")
-    await sprite.animation_finished
-    sprite.play("viajar")
-    var tween = create_tween()
-    tween.tween_property(self, "global_position", fin, 0.8)
-    telarana_actual = destino
-    await tween.finished
-    sprite.play_backwards("entrar")
-    await sprite.animation_finished
-    telarana_actual = destino
-    dash.recuperar()
-    en_telarana = false
+	if destino == null or en_telarana:
+		return
+	en_telarana = true
+	velocity = Vector2.ZERO
+	var inicio = global_position
+	var fin = destino.global_position + Vector2(0, -16)
+	sprite.play("entrar")
+	await sprite.animation_finished
+	sprite.play("viajar")
+	var tween = create_tween()
+	tween.tween_property(self, "global_position", fin, 0.8)
+	telarana_actual = destino
+	await tween.finished
+	sprite.play_backwards("entrar")
+	await sprite.animation_finished
+	telarana_actual = destino
+	dash.recuperar()
+	en_telarana = false
 
 func crear_duplicado():
-    var duplicado: AnimatedSprite2D = sprite.duplicate()
-    duplicado.material = sprite.material.duplicate()
-    duplicado.material.set_shader_parameter("opacity", 0.3)
-    duplicado.material.set_shader_parameter("r", 0.0)
-    duplicado.material.set_shader_parameter("g", 0.0)
-    duplicado.material.set_shader_parameter("b", 0.8)
-    duplicado.material.set_shader_parameter("mix_color", 0.7)
-    get_parent().add_child(duplicado)
-    duplicado.global_position = sprite.global_position
-    duplicado.global_scale = sprite.global_scale
-    duplicado.pause()
-    await get_tree().create_timer(Time_Life_Dupli).timeout
-    duplicado.queue_free()
+	var duplicado: AnimatedSprite2D = sprite.duplicate()
+	duplicado.material = sprite.material.duplicate()
+	duplicado.material.set_shader_parameter("opacity", 0.3)
+	duplicado.material.set_shader_parameter("r", 0.0)
+	duplicado.material.set_shader_parameter("g", 0.0)
+	duplicado.material.set_shader_parameter("b", 0.8)
+	duplicado.material.set_shader_parameter("mix_color", 0.7)
+	get_parent().add_child(duplicado)
+	duplicado.global_position = sprite.global_position
+	duplicado.global_scale = sprite.global_scale
+	duplicado.pause()
+	await get_tree().create_timer(Time_Life_Dupli).timeout
+	duplicado.queue_free()
 func Deslizarse():
-    $Deslizarse.force_raycast_update()
+	$Deslizarse.force_raycast_update()
 
-    if $Deslizarse.is_colliding():
-        return true
+	if $Deslizarse.is_colliding():
+		return true
 
-    return false
+	return false
 
 
 func Jump_Slide():
-    return $Brincar.is_colliding()
+	return $Brincar.is_colliding()
 
 
 # ---------------- Daño y muerte ----------------
 func recibir_dano(cantidad: int, origen_x: float = 0.0) -> void:
-    if muerto or invulnerable > 0.0:
-        return
-    vida._recibir_dano(cantidad)
-    invulnerable = 1.0
-    bloqueo_control = 0.25
-    var dir := signf(global_position.x - origen_x)
-    if dir == 0.0:
-        dir = -float(direccion_dash)
-    velocity = Vector2(dir * 450.0, -350.0)
-    parpadear()
-    if vida.muerte:
-        morir()
+	if muerto or invulnerable > 0.0:
+		return
+	vida._recibir_dano(cantidad)
+	invulnerable = 1.0
+	bloqueo_control = 0.25
+	var dir := signf(global_position.x - origen_x)
+	if dir == 0.0:
+		dir = -float(direccion_dash)
+	velocity = Vector2(dir * 450.0, -350.0)
+	parpadear()
+	if vida.muerte:
+		morir()
 
 
 func parpadear() -> void:
-    # El shader del sprite sobreescribe COLOR, por eso se parpadea con su
-    # parámetro "opacity" (modulate no tendría efecto).
-    var t := create_tween().set_loops(5)
-    t.tween_callback(func(): sprite.material.set_shader_parameter("opacity", 0.35))
-    t.tween_interval(0.1)
-    t.tween_callback(func(): sprite.material.set_shader_parameter("opacity", 1.0))
-    t.tween_interval(0.1)
+	# El shader del sprite sobreescribe COLOR, por eso se parpadea con su
+	# parámetro "opacity" (modulate no tendría efecto).
+	var t := create_tween().set_loops(5)
+	t.tween_callback(func(): sprite.material.set_shader_parameter("opacity", 0.35))
+	t.tween_interval(0.1)
+	t.tween_callback(func(): sprite.material.set_shader_parameter("opacity", 1.0))
+	t.tween_interval(0.1)
 
 
 func matar() -> void:
-    # Muerte instantánea (caídas al vacío), ignora la invulnerabilidad.
-    if muerto:
-        return
-    vida._recibir_dano(vida.vida)
-    morir()
+	# Muerte instantánea (caídas al vacío), ignora la invulnerabilidad.
+	if muerto:
+		return
+	vida._recibir_dano(vida.vida)
+	morir()
 
 
 func morir() -> void:
-    if muerto:
-        return
-    muerto = true
-    velocity = Vector2.ZERO
-    set_physics_process(false)
-    await get_tree().create_timer(0.8).timeout
-    get_tree().reload_current_scene()
+	if muerto:
+		return
+	muerto = true
+	velocity = Vector2.ZERO
+	set_physics_process(false)
+	await get_tree().create_timer(0.8).timeout
+	get_tree().reload_current_scene()

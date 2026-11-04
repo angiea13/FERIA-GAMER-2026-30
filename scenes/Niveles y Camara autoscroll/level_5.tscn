@@ -140,3 +140,7 @@ scale = Vector2(2, 2)
 zoom = Vector2(0.8, 0.8)
 limit_left = -10000
 limit_bottom = 100000
+
+[node name="Indicador2" parent="." unique_id=201976894 instance=ExtResource("8_ojovs")]
+position = Vector2(1616, -598)
+tecla = "E"

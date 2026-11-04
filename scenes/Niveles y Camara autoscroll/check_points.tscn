@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cvxftovlx7tqd"]
 
-[ext_resource type="Script" uid="uid://b1tjird5mvtwk" path="res://check_points.gd" id="1_rgjjj"]
+[ext_resource type="Script" uid="uid://b1tjird5mvtwk" path="res://scripts/World Building/check_points.gd" id="1_rgjjj"]
 [ext_resource type="Texture2D" uid="uid://yogmkirmcm7t" path="res://assets/icon.svg" id="2_j2l1x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]

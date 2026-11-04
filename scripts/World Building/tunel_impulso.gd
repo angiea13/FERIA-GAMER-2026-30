@@ -19,6 +19,8 @@ func _al_entrar(cuerpo: Node2D) -> void:
 
         cuerpo.en_impulso = true
         cuerpo.tiempo_impulso = 0.5
+        if velocidad_impulso==0:
+            cuerpo.tiempo_impulso=0.00001
         cuerpo.velocity = direccion * velocidad_impulso
 
         explotar()

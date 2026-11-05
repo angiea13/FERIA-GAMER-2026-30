@@ -319,4 +319,4 @@ tecla = "q"
 
 [node name="Tunel_Impulso9" parent="." unique_id=838495514 instance=ExtResource("7_xkti4")]
 position = Vector2(1194, -1802)
-velocidad_impulso = 1300.0
+velocidad_impulso = 800.0

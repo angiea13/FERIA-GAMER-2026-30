@@ -25,6 +25,17 @@
 [ext_resource type="Texture2D" uid="uid://wkouk5hybuj4" path="res://assets/Jugador/Viajar/viajar_2.png" id="21_j6mbd"]
 [ext_resource type="Texture2D" uid="uid://1xhwscilhbkj" path="res://assets/Jugador/Viajar/viajar_3.png" id="22_64r8p"]
 [ext_resource type="Texture2D" uid="uid://cnacnxr70r8bg" path="res://assets/Jugador/Viajar/viajar_4.png" id="23_k72eh"]
+[ext_resource type="AudioStream" uid="uid://bkeuh2k1t7qas" path="res://assets/Sonidos/Jugador/hero_dash.wav" id="26_r6qhg"]
+[ext_resource type="AudioStream" uid="uid://chw7pv0v66bh5" path="res://assets/Sonidos/Jugador/hero_death_v2.wav" id="27_qqf25"]
+[ext_resource type="AudioStream" uid="uid://dil28xl1x2vls" path="res://assets/Sonidos/Jugador/hero_falling.ogg" id="28_di0y1"]
+[ext_resource type="AudioStream" uid="uid://gwcy8jchnc4n" path="res://assets/Sonidos/Jugador/hero_wall_jump.wav" id="29_3okh8"]
+[ext_resource type="AudioStream" uid="uid://gkt0sbj5rygc" path="res://assets/Sonidos/Jugador/hero_wall_slide.ogg" id="30_pvpa6"]
+[ext_resource type="AudioStream" uid="uid://c3d34susqpxu6" path="res://assets/Sonidos/Jugador/hero_wings.wav" id="31_kjsq0"]
+[ext_resource type="AudioStream" uid="uid://vd6d853emdm3" path="res://assets/Sonidos/Jugador/hornet_jump_ss.ogg" id="32_gh8iw"]
+[ext_resource type="AudioStream" uid="uid://htrr2fil7f7s" path="res://assets/Sonidos/Jugador/hornet_land_hard_surface.ogg" id="33_gvgda"]
+[ext_resource type="AudioStream" uid="uid://cvfsmeqs5aaqd" path="res://assets/Sonidos/Jugador/hornet_sword_1.ogg" id="34_2ibwh"]
+[ext_resource type="AudioStream" uid="uid://b6ri7lw7t33y7" path="res://assets/Sonidos/Jugador/hornet_run_start_1.ogg" id="35_jsxi4"]
+[ext_resource type="AudioStream" uid="uid://bfvu4fygu75eo" path="res://assets/Sonidos/Jugador/hero_slug_crawl.wav" id="36_bxotg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8mdrf"]
 shader = ExtResource("2_t4lbo")
@@ -121,7 +132,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"atacando",
-"speed": 12.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -178,7 +189,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"idle",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -192,7 +203,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"jump",
-"speed": 3.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -215,7 +226,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"moving",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -246,9 +257,9 @@ script = ExtResource("1_g2els")
 material = SubResource("ShaderMaterial_8mdrf")
 position = Vector2(1, 21)
 sprite_frames = SubResource("SpriteFrames_uii18")
-animation = &"jump"
+animation = &"atacando"
 autoplay = "idle"
-frame_progress = 0.6457553
+frame_progress = 0.34361577
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1919632315]
 position = Vector2(-5, 32)
@@ -294,3 +305,36 @@ position = Vector2(-48, -45)
 rotation = 3.1415927
 polygon = PackedVector2Array(0, -150, 119, -130, 186, -88, 194, -32, 142, -12, 12, -1)
 disabled = true
+
+[node name="sonido_dash" type="AudioStreamPlayer" parent="." unique_id=785682125]
+stream = ExtResource("26_r6qhg")
+
+[node name="sonido_muerte" type="AudioStreamPlayer" parent="." unique_id=2081009405]
+stream = ExtResource("27_qqf25")
+
+[node name="sonido_cayendo" type="AudioStreamPlayer" parent="." unique_id=831896848]
+stream = ExtResource("28_di0y1")
+
+[node name="sonido_saltar_muro" type="AudioStreamPlayer" parent="." unique_id=1470877340]
+stream = ExtResource("29_3okh8")
+
+[node name="sonido_deslizar" type="AudioStreamPlayer" parent="." unique_id=1036692214]
+stream = ExtResource("30_pvpa6")
+
+[node name="sonido_doble_salto" type="AudioStreamPlayer" parent="." unique_id=929171442]
+stream = ExtResource("31_kjsq0")
+
+[node name="sonido_salto" type="AudioStreamPlayer" parent="." unique_id=1457302873]
+stream = ExtResource("32_gh8iw")
+
+[node name="sonido_aterrizar" type="AudioStreamPlayer" parent="." unique_id=679309563]
+stream = ExtResource("33_gvgda")
+
+[node name="sonido_atacar" type="AudioStreamPlayer" parent="." unique_id=902036947]
+stream = ExtResource("34_2ibwh")
+
+[node name="sonido_correr" type="AudioStreamPlayer" parent="." unique_id=1530339526]
+stream = ExtResource("35_jsxi4")
+
+[node name="sonido_telarana" type="AudioStreamPlayer" parent="." unique_id=1096674403]
+stream = ExtResource("36_bxotg")

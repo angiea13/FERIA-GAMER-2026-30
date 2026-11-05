@@ -36,6 +36,7 @@
 [ext_resource type="AudioStream" uid="uid://cvfsmeqs5aaqd" path="res://assets/Sonidos/Jugador/hornet_sword_1.ogg" id="34_2ibwh"]
 [ext_resource type="AudioStream" uid="uid://b6ri7lw7t33y7" path="res://assets/Sonidos/Jugador/hornet_run_start_1.ogg" id="35_jsxi4"]
 [ext_resource type="AudioStream" uid="uid://bfvu4fygu75eo" path="res://assets/Sonidos/Jugador/hero_slug_crawl.wav" id="36_bxotg"]
+[ext_resource type="AudioStream" uid="uid://8v6eoxmw1ser" path="res://assets/Sonidos/Jugador/hero_void_scream_spell.wav" id="37_di0y1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8mdrf"]
 shader = ExtResource("2_t4lbo")
@@ -259,7 +260,7 @@ position = Vector2(1, 21)
 sprite_frames = SubResource("SpriteFrames_uii18")
 animation = &"atacando"
 autoplay = "idle"
-frame_progress = 0.34361577
+frame_progress = 0.6516607
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1919632315]
 position = Vector2(-5, 32)
@@ -338,3 +339,7 @@ stream = ExtResource("35_jsxi4")
 
 [node name="sonido_telarana" type="AudioStreamPlayer" parent="." unique_id=1096674403]
 stream = ExtResource("36_bxotg")
+
+[node name="sonido_burbuja" type="AudioStreamPlayer" parent="." unique_id=1132392448]
+stream = ExtResource("37_di0y1")
+volume_db = -16.138

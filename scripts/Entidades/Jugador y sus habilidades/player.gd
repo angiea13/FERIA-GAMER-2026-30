@@ -109,6 +109,8 @@ func saltos(delta,suma,resta):
 func impulso(delta):
    #Impulso
     if en_impulso:
+        if !$sonido_burbuja.playing:
+            reproducir_sonido($sonido_burbuja)
         tiempo_impulso-=delta
         dash.recuperar()
         print(dash.cantidad_de_dash)
@@ -165,7 +167,7 @@ func todo_relacionado_a_saltos(delta):
     else:
         if ya_paso_salto:
             if !$sonido_aterrizar.playing:
-              reproducir_sonido($sonido_aterrizar)
+                reproducir_sonido($sonido_aterrizar)
         coyote_restante = COYOTE_TIEMPO
         dash.recuperar()
         dash_arriba=false
@@ -181,7 +183,7 @@ func todo_relacionado_a_saltos(delta):
    # Salto de pared
     if not is_on_floor() and Jump_Slide() and jump_buffer_restante > 0:
         if !$sonido_saltar_muro.playing:
-         reproducir_sonido($sonido_saltar_muro)
+            reproducir_sonido($sonido_saltar_muro)
         ya_paso_salto=false
         saltos(delta,1,0)
         velocity.y = JUMP_VELOCITY
@@ -194,14 +196,14 @@ func todo_relacionado_a_saltos(delta):
     # Doble Salto
     elif not is_on_floor() and num_saltos>0 and Input.is_action_just_pressed("jump"):
         if !$sonido_doble_salto.playing:
-         reproducir_sonido($sonido_doble_salto)
+            reproducir_sonido($sonido_doble_salto)
         dash.recuperar()
         velocity.y=1.2*JUMP_VELOCITY
         saltos(delta,0,1)
     # Salto normal
     elif jump_buffer_restante > 0 and coyote_restante > 0:
         if !$sonido_salto.playing:
-         reproducir_sonido($sonido_salto)
+            reproducir_sonido($sonido_salto)
         saltos(delta,0,1)
         velocity.y = JUMP_VELOCITY
         coyote_restante = 0
@@ -214,14 +216,14 @@ func teletransporte_en_phisycs(delta):
         
         if Input.is_action_just_pressed("ir_siguiente") and tiempo_teletranporte>0.4:
             if !$sonido_telarana.playing:
-             reproducir_sonido($sonido_telarana)
+                reproducir_sonido($sonido_telarana)
             teletransportar(telarana_actual.siguiente)
             saltos(delta,1,0)
             tiempo_teletranporte=0
             tiempo_teletransporte_ant=0
         elif Input.is_action_just_pressed("ir_anterior") and tiempo_teletransporte_ant>0.4:
             if !$sonido_telarana.playing:
-             reproducir_sonido($sonido_telarana)
+                reproducir_sonido($sonido_telarana)
             teletransportar(telarana_actual.anterior)
             saltos(delta,1,0)
             tiempo_teletransporte_ant=0
@@ -287,12 +289,12 @@ func _update_animation(direction: float) -> void:
         else:
             sprite.play("falling")
     elif is_on_floor() and abs(velocity.x) > 10:
-      sprite.play("moving")
-      if !$sonido_correr.playing:
-        reproducir_sonido($sonido_correr)
+        sprite.play("moving")
+        if !$sonido_correr.playing:
+            reproducir_sonido($sonido_correr)
     else:
-      sprite.play("idle")
-      $sonido_correr.stop()
+        sprite.play("idle")
+        $sonido_correr.stop()
 func empezar_ataque() -> void:
     atacando = true
     buffer_ataque = 0
@@ -453,7 +455,7 @@ func morir() -> void:
     if muerto:
         return
     if !$sonido_muerte.playing:
-     reproducir_sonido($sonido_muerte)
+        reproducir_sonido($sonido_muerte)
     muerto = true
     velocity = Vector2.ZERO
     set_physics_process(false)

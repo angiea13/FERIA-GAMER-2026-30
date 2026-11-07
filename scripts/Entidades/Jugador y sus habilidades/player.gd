@@ -18,14 +18,16 @@ const COYOTE_TIEMPO_desliz = 0.2
 const BLOQUEO_PARED = 0.2
 #Ataque
 const ANIM_ATAQUE = "atacando"
+const TIEMP_ULTI_ATAC=1.0
 const BUFFER_ATAQUE = 0.15
 const RADIO_CORTE = 30.0
-
+const MAXIMO_ATAQUE=3
 #Variables
 #Atributos del personaje
 var vida = Vida.new(50)
 #Ataque
 var atacando := false
+var numero_ataque:=0
 #
 var en_telarana:=false
 #Funcion Ataque
@@ -60,7 +62,7 @@ var tiempo_impulso:float=0.0
 #Temporizadores Ataque
 var tiempo_ataque := 0.0
 var buffer_ataque := 0.0
-
+var ultimo_ataque:=0.0
 #Daño recibido
 var invulnerable := 0.0
 var muerto := false
@@ -236,6 +238,10 @@ func movimiento_horizontal(delta):
 			direccion_dash = sign(direction)
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
+func ataque_combo():
+	numero_ataque+=1
+	if numero_ataque>=MAXIMO_ATAQUE:
+		numero_ataque=0
 func ataque_en_phisycs(delta):
 	 # Ataque
 	if Input.is_action_just_pressed("atacar"):
@@ -245,6 +251,8 @@ func ataque_en_phisycs(delta):
 	if buffer_ataque > 0 and not atacando:
 		reproducir_sonido($sonido_atacar)
 		empezar_ataque()
+		ataque_combo()
+		
 func direccion_ray_casts(delta):
 	$Deslizarse.target_position.x = abs($Deslizarse.target_position.x) * direccion_dash
 	$Brincar.target_position.x = abs($Brincar.target_position.x) * direccion_dash
@@ -255,6 +263,10 @@ func _physics_process(delta: float) -> void:
 	tiempo_teletransporte_ant+=delta
 	bloqueo_control-=delta
 	invulnerable = maxf(invulnerable - delta, 0.0)
+	if not atacando:
+		ultimo_ataque += delta
+		if ultimo_ataque >= TIEMP_ULTI_ATAC:
+			numero_ataque = 0
 	if _telarana():
 		return
 	if Input.is_action_just_pressed("Guardar Partida"):
@@ -281,8 +293,13 @@ func _update_animation(direction: float) -> void:
 	sprite.flip_h = direccion_dash < 0
 	if en_telarana:
 		return
-	if atacando and sprite.sprite_frames.has_animation(ANIM_ATAQUE):
-		sprite.play(ANIM_ATAQUE)
+	if atacando:
+		if numero_ataque==1:
+			sprite.play("atacando")
+		elif numero_ataque==2:
+			sprite.play("atacando_2")
+		else:
+			sprite.play("atacando_3")
 	elif not is_on_floor():
 		if velocity.y < 0:
 			sprite.play("jump")
@@ -348,6 +365,7 @@ func golpear(objeto: Node) -> void:
 		
 func terminar_ataque() -> void:
 	atacando = false
+	ultimo_ataque=0.0
 	colision_derecha.set_deferred("disabled", true)
 	colision_izquierda.set_deferred("disabled", true)
 

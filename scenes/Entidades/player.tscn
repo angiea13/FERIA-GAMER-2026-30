@@ -260,7 +260,6 @@ position = Vector2(1, 21)
 sprite_frames = SubResource("SpriteFrames_uii18")
 animation = &"atacando"
 autoplay = "idle"
-frame_progress = 0.6516607
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1919632315]
 position = Vector2(-5, 32)

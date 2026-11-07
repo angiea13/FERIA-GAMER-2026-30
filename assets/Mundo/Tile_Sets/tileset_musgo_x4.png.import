@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lba5mnjwd51"
-path="res://.godot/imported/tileset_telaranas.png-2714077cf2484e654adafda9cd5466d1.ctex"
+uid="uid://syfmd2nqdfha"
+path="res://.godot/imported/tileset_musgo_x4.png-7d43822e2c5d08ef1d424aa07b61fc66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Mundo/tileset_telaranas.png"
-dest_files=["res://.godot/imported/tileset_telaranas.png-2714077cf2484e654adafda9cd5466d1.ctex"]
+source_file="res://assets/Mundo/Tile_Sets/tileset_musgo_x4.png"
+dest_files=["res://.godot/imported/tileset_musgo_x4.png-7d43822e2c5d08ef1d424aa07b61fc66.ctex"]
 
 [params]
 

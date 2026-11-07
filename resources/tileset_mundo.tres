@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" format=3 uid="uid://bnoc84ls8didp"]
 
-[ext_resource type="Texture2D" uid="uid://lba5mnjwd51" path="res://assets/Mundo/tileset_telaranas.png" id="1_tex"]
+[ext_resource type="Texture2D" uid="uid://lba5mnjwd51" path="res://assets/Mundo/Tile_Sets/tileset_telaranas.png" id="1_21pet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mundo"]
-texture = ExtResource("1_tex")
+texture = ExtResource("1_21pet")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)

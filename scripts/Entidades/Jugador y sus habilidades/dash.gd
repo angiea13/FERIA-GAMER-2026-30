@@ -17,6 +17,7 @@ func configurar(maximos:int):
 	cantidad_de_dash=maximo_dash
 func recuperar():
 	cantidad_de_dash=maximo_dash
+	disponible=true
 func menos_dash():
 	cantidad_de_dash-=1
 	if cantidad_de_dash<=0:

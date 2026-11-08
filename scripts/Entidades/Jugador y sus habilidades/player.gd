@@ -115,7 +115,6 @@ func impulso(delta):
 			reproducir_sonido($sonido_burbuja)
 		tiempo_impulso-=delta
 		dash.recuperar()
-		print(dash.cantidad_de_dash)
 		num_saltos=1
 		move_and_slide()
 		if tiempo_impulso<=0:
@@ -301,7 +300,9 @@ func _update_animation(direction: float) -> void:
 		else:
 			sprite.play("atacando_3")
 	elif not is_on_floor():
-		if velocity.y < 0:
+		if Deslizarse():
+			sprite.play("deslizarse")
+		elif velocity.y < 0:
 			sprite.play("jump")
 		else:
 			sprite.play("falling")

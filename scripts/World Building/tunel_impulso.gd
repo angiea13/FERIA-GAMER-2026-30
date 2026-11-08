@@ -19,10 +19,13 @@ func _al_entrar(cuerpo: Node2D) -> void:
 
 		cuerpo.en_impulso = true
 		if velocidad_impulso==0 or velocidad_impulso==10:
-			cuerpo.tiempo_impulso=0.3
+			cuerpo.tiempo_impulso=0
 		else:
 			cuerpo.tiempo_impulso = 0.5
-		cuerpo.velocity = direccion * velocidad_impulso
+		if velocidad_impulso==10 and cuerpo.dash.activo:
+			cuerpo.velocity = cuerpo.velocity.length() * 1.2
+		else:
+			cuerpo.velocity = direccion * velocidad_impulso
 
 		explotar()
 func explotar() -> void:

@@ -15,9 +15,13 @@
 [ext_resource type="Texture2D" uid="uid://b66fdybs7pugg" path="res://assets/Jugador/Ataques/tajo_6.png" id="8_4r5pv"]
 [ext_resource type="Texture2D" uid="uid://djhu3iw4us0dx" path="res://assets/Jugador/Ataques/combo_identico_hoja.png" id="9_3okh8"]
 [ext_resource type="Texture2D" uid="uid://bcobpj1x702q8" path="res://assets/Jugador/Entrar/entrar_1.png" id="9_8ipak"]
+[ext_resource type="Texture2D" uid="uid://demqp1oa56f8l" path="res://assets/Jugador/deslizarse/desliz1.png" id="10_gvgda"]
 [ext_resource type="Texture2D" uid="uid://yn1jddkgn5i4" path="res://assets/Jugador/Entrar/entrar_2.png" id="10_r6qhg"]
+[ext_resource type="Texture2D" uid="uid://cmg1em0uovk3t" path="res://assets/Jugador/deslizarse/desliz2.png" id="11_2ibwh"]
 [ext_resource type="Texture2D" uid="uid://dislxht6nl53y" path="res://assets/Jugador/Entrar/entrar_3.png" id="11_8adv2"]
 [ext_resource type="Texture2D" uid="uid://bpgn07s731ioj" path="res://assets/Jugador/Entrar/entrar_4.png" id="12_636yq"]
+[ext_resource type="Texture2D" uid="uid://b2tc6g4yguomi" path="res://assets/Jugador/deslizarse/desliz3.png" id="12_jsxi4"]
+[ext_resource type="Texture2D" uid="uid://bga6ctgopgeib" path="res://assets/Jugador/deslizarse/desliz4.png" id="13_bxotg"]
 [ext_resource type="Texture2D" uid="uid://ejsjcdh1k6km" path="res://assets/Jugador/Entrar/entrar_5.png" id="13_clify"]
 [ext_resource type="Script" uid="uid://bggawle7ioo35" path="res://scripts/Entidades/Jugador y sus habilidades/dash.gd" id="13_t4lbo"]
 [ext_resource type="Texture2D" uid="uid://b81v7hvojjdan" path="res://assets/Jugador/Entrar/entrar_6.png" id="14_kkgrq"]
@@ -225,6 +229,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("10_gvgda")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2ibwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_jsxi4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_bxotg")
+}],
+"loop": 1,
+"name": &"deslizarse",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("9_8ipak")
 }, {
 "duration": 1.0,
@@ -346,9 +367,9 @@ script = ExtResource("1_g2els")
 material = SubResource("ShaderMaterial_8mdrf")
 position = Vector2(1, 21)
 sprite_frames = SubResource("SpriteFrames_uii18")
-animation = &"atacando"
+animation = &"deslizarse"
 autoplay = "idle"
-frame_progress = 0.93488115
+frame_progress = 0.80465186
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1919632315]
 position = Vector2(-5, 32)

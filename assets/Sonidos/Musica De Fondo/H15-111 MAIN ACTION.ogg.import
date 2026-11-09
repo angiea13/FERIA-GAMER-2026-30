@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cy8t5ay4grvtv"
+path="res://.godot/imported/H15-111 MAIN ACTION.ogg-45dd0e42e682957a6e0a46e989208fdd.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Sonidos/Musica De Fondo/H15-111 MAIN ACTION.ogg"
+dest_files=["res://.godot/imported/H15-111 MAIN ACTION.ogg-45dd0e42e682957a6e0a46e989208fdd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://eg512rkjgtys" path="res://scripts/Menus/configuraciones.gd" id="1_kkjxx"]
 [ext_resource type="Texture2D" uid="uid://c8h2oihan7dhy" path="res://assets/UI Menus/Fondo Menu.png" id="2_d7r58"]
+[ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="3_lajrf"]
+[ext_resource type="AudioStream" uid="uid://dfspyunwpwxa4" path="res://assets/Sonidos/Musica De Fondo/H32 Moss Cave-60 SUB.ogg" id="4_wy4ir"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mk4g1"]
 bg_color = Color(0.5964891, 0.54367864, 0.8840868, 1)
@@ -83,6 +85,10 @@ text = "ATRAS
 "
 metadata/_edit_use_anchors_ = true
 
+[node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("3_lajrf")]
+stream = ExtResource("4_wy4ir")
+
+[connection signal="pressed" from="ButtonManager/Volumen" to="." method="_on_volumen_pressed"]
 [connection signal="pressed" from="ButtonManager/Volumen" to="." method="_on_inicio_pressed"]
 [connection signal="pressed" from="ButtonManager/Controles" to="." method="_on_configuracion_pressed"]
 [connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_regresar_pressed"]

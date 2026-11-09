@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://ctq14dgep25ts" path="res://scenes/World/plataforma.tscn" id="10_rgk7f"]
 [ext_resource type="PackedScene" uid="uid://c4j2fv3it820u" path="res://scenes/Entidades/Caballero_Enemy.tscn" id="10_u55if"]
 [ext_resource type="PackedScene" uid="uid://cxk4bfa3rrj0c" path="res://scenes/World/panel_container.tscn" id="12_xkti4"]
+[ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="16_lnj83"]
+[ext_resource type="AudioStream" uid="uid://cy8t5ay4grvtv" path="res://assets/Sonidos/Musica De Fondo/H15-111 MAIN ACTION.ogg" id="17_q085r"]
 
 [sub_resource type="Animation" id="Animation_ttldm"]
 resource_name = "Movimiento"
@@ -335,3 +337,7 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(372, 206)
 scale = Vector2(2, 2)
 limit_bottom = 1000000000
+
+[node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("16_lnj83")]
+stream = ExtResource("17_q085r")
+volume_db = -12.172

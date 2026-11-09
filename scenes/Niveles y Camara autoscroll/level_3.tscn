@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_p2elg"]
 [ext_resource type="PackedScene" uid="uid://cvxftovlx7tqd" path="res://scenes/Niveles y Camara autoscroll/check_points.tscn" id="8_b636m"]
+[ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="10_1bxfa"]
 [ext_resource type="PackedScene" uid="uid://c4j2fv3it820u" path="res://scenes/Entidades/Caballero_Enemy.tscn" id="enemigo"]
 [ext_resource type="PackedScene" path="res://scenes/World/meta.tscn" id="meta"]
 [ext_resource type="Script" uid="uid://dh4x8b2foxbk7" path="res://scripts/World Building/tilemap_peligros.gd" id="peligros"]
@@ -93,3 +94,5 @@ position = Vector2(-607, -105)
 [node name="CheckPoints2" parent="." unique_id=30513038 instance=ExtResource("8_b636m")]
 position = Vector2(4508, -930)
 scale = Vector2(3, 3)
+
+[node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("10_1bxfa")]

@@ -4,7 +4,7 @@ extends Node2D
 
 
 func _on_inicio_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/Niveles y Camara autoscroll/level_7.tscn")
+	get_tree().change_scene_to_file("res://scenes/Niveles y Camara autoscroll/level_4.tscn")
 
 
 func _on_configuracion_pressed() -> void:

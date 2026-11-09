@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://1o7bs4h0axiu"]
+
+[ext_resource type="AudioStream" uid="uid://nwcrwo4qxsn7" path="res://assets/Sonidos/Musica De Fondo/H149-88 Citadel Halls MAIN.ogg" id="1_xfr2b"]
+
+[node name="Sonido_del_Juego" type="AudioStreamPlayer" unique_id=686222535]
+stream = ExtResource("1_xfr2b")
+volume_db = -7.172
+autoplay = true
+bus = &"SFX"

@@ -367,9 +367,9 @@ script = ExtResource("1_g2els")
 material = SubResource("ShaderMaterial_8mdrf")
 position = Vector2(1, 21)
 sprite_frames = SubResource("SpriteFrames_uii18")
-animation = &"deslizarse"
+animation = &"atacando"
 autoplay = "idle"
-frame_progress = 0.80465186
+frame_progress = 0.33753744
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1919632315]
 position = Vector2(-5, 32)
@@ -418,37 +418,49 @@ disabled = true
 
 [node name="sonido_dash" type="AudioStreamPlayer" parent="." unique_id=785682125]
 stream = ExtResource("26_r6qhg")
+bus = &"EFECTOS"
 
 [node name="sonido_muerte" type="AudioStreamPlayer" parent="." unique_id=2081009405]
 stream = ExtResource("27_qqf25")
+bus = &"EFECTOS"
 
 [node name="sonido_cayendo" type="AudioStreamPlayer" parent="." unique_id=831896848]
 stream = ExtResource("28_di0y1")
+bus = &"EFECTOS"
 
 [node name="sonido_saltar_muro" type="AudioStreamPlayer" parent="." unique_id=1470877340]
 stream = ExtResource("29_3okh8")
+bus = &"EFECTOS"
 
 [node name="sonido_deslizar" type="AudioStreamPlayer" parent="." unique_id=1036692214]
 stream = ExtResource("30_pvpa6")
+bus = &"EFECTOS"
 
 [node name="sonido_doble_salto" type="AudioStreamPlayer" parent="." unique_id=929171442]
 stream = ExtResource("31_kjsq0")
+bus = &"EFECTOS"
 
 [node name="sonido_salto" type="AudioStreamPlayer" parent="." unique_id=1457302873]
 stream = ExtResource("32_gh8iw")
+bus = &"EFECTOS"
 
 [node name="sonido_aterrizar" type="AudioStreamPlayer" parent="." unique_id=679309563]
 stream = ExtResource("33_gvgda")
+bus = &"EFECTOS"
 
 [node name="sonido_atacar" type="AudioStreamPlayer" parent="." unique_id=902036947]
 stream = ExtResource("34_2ibwh")
+bus = &"EFECTOS"
 
 [node name="sonido_correr" type="AudioStreamPlayer" parent="." unique_id=1530339526]
 stream = ExtResource("35_jsxi4")
+bus = &"EFECTOS"
 
 [node name="sonido_telarana" type="AudioStreamPlayer" parent="." unique_id=1096674403]
 stream = ExtResource("36_bxotg")
+bus = &"EFECTOS"
 
 [node name="sonido_burbuja" type="AudioStreamPlayer" parent="." unique_id=1132392448]
 stream = ExtResource("37_di0y1")
 volume_db = -16.138
+bus = &"EFECTOS"

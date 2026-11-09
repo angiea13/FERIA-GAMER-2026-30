@@ -17,6 +17,10 @@ boot_splash/image="uid://cg3y5lrepr81q"
 config/icon="uid://cg3y5lrepr81q"
 boot_splash/minimum_display_time=5000
 
+[audio]
+
+buses/default_bus_layout="uid://7hly8f30llyg"
+
 [autoload]
 
 UtilsGlobal="*uid://bm3n1q2xqgsgs"

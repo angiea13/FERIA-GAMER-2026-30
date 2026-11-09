@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://w4nh7kf42v42"]
 
 [ext_resource type="Script" uid="uid://jtfyqa2khgmm" path="res://scripts/Menus/menu_pausa.gd" id="1_403vn"]
+[ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="2_vuqgi"]
+[ext_resource type="AudioStream" uid="uid://dfspyunwpwxa4" path="res://assets/Sonidos/Musica De Fondo/H32 Moss Cave-60 SUB.ogg" id="3_wj0je"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7as3h"]
 bg_color = Color(0.1882353, 0.1254902, 0.26666668, 1)
@@ -96,6 +98,9 @@ theme_override_font_sizes/font_size = 45
 theme_override_styles/normal = SubResource("StyleBoxFlat_2tu2c")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_yuyls")
 text = "SALIR"
+
+[node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("2_vuqgi")]
+stream = ExtResource("3_wj0je")
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Reinicio" to="." method="_on_reinicio_pressed"]

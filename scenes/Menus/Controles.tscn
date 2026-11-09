@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://cfd3vf0uu420i"]
+
+[ext_resource type="Script" uid="uid://eg512rkjgtys" path="res://scripts/Menus/configuraciones.gd" id="1_hnxpg"]
+[ext_resource type="Texture2D" uid="uid://c8h2oihan7dhy" path="res://assets/UI Menus/Fondo Menu.png" id="2_4cr8j"]
+[ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="3_rfkdw"]
+[ext_resource type="AudioStream" uid="uid://dfspyunwpwxa4" path="res://assets/Sonidos/Musica De Fondo/H32 Moss Cave-60 SUB.ogg" id="4_kyok6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mk4g1"]
+bg_color = Color(0.5964891, 0.54367864, 0.8840868, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iep14"]
+bg_color = Color(0.6049083, 0.5407192, 0.88259774, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_486ty"]
+bg_color = Color(0.5922095, 0.53921735, 0.90845287, 1)
+
+[node name="Configuraciones" type="Node2D" unique_id=1336107057]
+position = Vector2(700, 465)
+script = ExtResource("1_hnxpg")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2035447188]
+offset_left = -705.0
+offset_top = -467.0
+offset_right = 967.0
+offset_bottom = 474.0
+texture = ExtResource("2_4cr8j")
+stretch_mode = 6
+
+[node name="ButtonManager" type="Control" parent="." unique_id=1246316951]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 200.0
+offset_right = 240.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Volumen" type="Button" parent="ButtonManager" unique_id=146212594]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.45
+anchor_top = 0.425
+anchor_right = 0.675
+anchor_bottom = 0.425
+offset_left = -267.0
+offset_top = -246.0
+offset_right = 132.0
+offset_bottom = -150.0
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_mk4g1")
+text = "VOLUMEN
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Controles" type="Button" parent="ButtonManager" unique_id=2103633691]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_top = -0.65
+anchor_right = 0.85
+anchor_bottom = -0.65
+offset_left = -253.0
+offset_right = 126.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_iep14")
+text = "CONTROLES
+
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Regresar" type="Button" parent="ButtonManager" unique_id=215161311]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = -1.15
+anchor_right = 0.625
+anchor_bottom = -1.15
+offset_left = -267.0
+offset_top = 214.0
+offset_right = 132.0
+offset_bottom = 310.0
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_486ty")
+text = "ATRAS
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("3_rfkdw")]
+stream = ExtResource("4_kyok6")
+
+[connection signal="pressed" from="ButtonManager/Volumen" to="." method="_on_volumen_pressed"]
+[connection signal="pressed" from="ButtonManager/Volumen" to="." method="_on_inicio_pressed"]
+[connection signal="pressed" from="ButtonManager/Controles" to="." method="_on_configuracion_pressed"]
+[connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_regresar_pressed"]
+[connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_salir_pressed"]

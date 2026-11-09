@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://c31p0xb6q8v3f"]
 
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_5ni3f"]
+[ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Pausa_En_Lvls.tscn" id="1_o4rip"]
 [ext_resource type="PackedScene" uid="uid://cxk4bfa3rrj0c" path="res://scenes/World/panel_container.tscn" id="8_tnjhi"]
 [ext_resource type="PackedScene" uid="uid://cvxftovlx7tqd" path="res://scenes/Niveles y Camara autoscroll/check_points.tscn" id="9_kujvv"]
 [ext_resource type="AudioStream" uid="uid://nwcrwo4qxsn7" path="res://assets/Sonidos/Musica De Fondo/H149-88 Citadel Halls MAIN.ogg" id="11_1hjl5"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" path="res://scenes/World/zona_muerte.tscn" id="zona"]
 
 [sub_resource type="SystemFont" id="SystemFont_0es03"]
+subpixel_positioning = 0
 
 [node name="Level2" type="Node2D" unique_id=1179149509]
 
@@ -28,10 +30,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.05, 0.035, 0.09, 1)
 
-[node name="Ui" type="CanvasLayer" parent="." unique_id=647263202]
-layer = 5
+[node name="UI" parent="." unique_id=503610013 instance=ExtResource("1_o4rip")]
 
-[node name="Menu Pausa" parent="Ui" unique_id=47701127 instance=ExtResource("1_5ni3f")]
+[node name="Menu Pausa2" parent="UI" unique_id=47701127 instance=ExtResource("1_5ni3f")]
 
 [node name="Terreno" type="TileMapLayer" parent="." unique_id=858322452]
 texture_filter = 1
@@ -116,4 +117,5 @@ scale = Vector2(4, 4)
 stream = ExtResource("11_1hjl5")
 volume_db = -7.172
 autoplay = true
+bus = &"SFX"
 parameters/looping = false

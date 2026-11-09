@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c2upkxsoeask3" path="res://assets/Mundo/fondo_niebla.png" id="1_4rgqc"]
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_o3nvj"]
+[ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Pausa_En_Lvls.tscn" id="2_eu0hj"]
 [ext_resource type="PackedScene" uid="uid://bivgotvup4047" path="res://scenes/Niveles y Camara autoscroll/level.tscn" id="2_srp1y"]
 [ext_resource type="Texture2D" uid="uid://b6q13yb1kdnnf" path="res://assets/Mundo/floor.png" id="3_o3nvj"]
 [ext_resource type="PackedScene" uid="uid://ctq14dgep25ts" path="res://scenes/World/plataforma.tscn" id="4_3e6gy"]
@@ -28,8 +29,6 @@ scroll_scale = Vector2(0.2, 0)
 repeat_size = Vector2(3344, 0)
 repeat_times = 2
 
-[node name="Menu Pausa" parent="Parallax2D" unique_id=47701127 instance=ExtResource("1_o3nvj")]
-
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=674349019]
 modulate = Color(0.47843137, 0.43137255, 0.61960787, 1)
 texture_filter = 1
@@ -37,6 +36,11 @@ position = Vector2(0, -150)
 scale = Vector2(1.34, 1.34)
 texture = ExtResource("1_4rgqc")
 centered = false
+
+[node name="Ui" parent="." unique_id=503610013 instance=ExtResource("2_eu0hj")]
+layer = 15
+
+[node name="Menu Pausa2" parent="Ui" unique_id=47701127 instance=ExtResource("1_o3nvj")]
 
 [node name="Meta" parent="." unique_id=1962765729 instance=ExtResource("12_es4sw")]
 position = Vector2(5505, -884)
@@ -134,4 +138,3 @@ position = Vector2(4451, -454)
 [node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("18_mt61m")]
 stream = ExtResource("19_eu0hj")
 volume_db = -12.172
-stream_paused = true

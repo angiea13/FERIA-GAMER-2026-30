@@ -3,6 +3,7 @@ extends Control
 func pause():
 	get_tree().paused=!get_tree().paused
 	visible=get_tree().paused
+	$Sonido.stream_paused = get_tree().paused
 func _input(event):
 	if event.is_action_pressed("Pausar"):
 		pause()

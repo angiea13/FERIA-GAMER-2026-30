@@ -58,6 +58,60 @@ El `TileMapLayer` de los niveles tiene `texture_filter = Nearest` para que no se
 Medidas con las que diseñé (según tus constantes): salto ≈ 215 px (6.7 tiles), alcance horizontal ≈ 660 px. Máx. 5 tiles de subida y 14 de hueco.
 
 Escenas nuevas: `World/meta.tscn`, `World/zona_muerte.tscn`.
+## 4. Lo que hice después de "los niveles 2 y 3 y los tiles" (2–9 nov)
 
+### Niveles
+| Dónde | Qué hice |
+|---|---|
+| `level_1` (es el nivel 3) | Lo rehíce y le puse fondo con niebla (`fondo_niebla.png`, `fondo_loop_atenuado.png`) |
+| `level_2` | Ahora aparece la tecla que hay que pulsar (`World/panel_container.tscn` + `panel_container.gd`) |
+| `level_3` | Ajustes de diseño |
+| `level_4` | Nivel nuevo |
+| `level_5` | Nivel nuevo; después lo rediseñé con los tilesets nuevos y capas de detalle (`detalles.tres`, `detalles2.tres`, `detalles3.tres`, `Dano-q-mata.tres`) |
+| `level_6` | Nivel nuevo, completo (con `level_6.gd`) |
+| `level_7` | Nivel nuevo |
+| `level_plantilla` | Actualizada |
+| Checkpoints | `check_points.tscn` + `check_points.gd`: guardan la partida al pasar |
+| Zona de muerte | Nueva `zona_muerte_chiquita` para huecos pequeños |
+
+### Jugador
+| Qué | Detalle |
+|---|---|
+| Doble salto | Agregado |
+| Movimiento | Cambié cómo se mueve el jugador |
+| Telaraña | Animación al entrar y al viajar (`Jugador/Entrar`, `Jugador/Viajar`) |
+| Sonidos | Dash, saltos, aterrizar, deslizarse, salto de pared, correr, ataque, burbuja, telaraña y muerte |
+| Combo | Ataque de 3 golpes (`atacando_2`, `atacando_3`, `combo_identico_hoja.png`) |
+| Pared | Animación de deslizarse por la pared (`Jugador/deslizarse`) |
+| Pinchos | Daño con tiles: `tile_maps_que_matan.gd` (mata) y `tilemap_peligros.gd` (quita vida) |
+
+### Burbujas y telarañas
+- Las burbujas tienen animación de explosión, desaparecen y reaparecen, y tienen sonido.
+- Arreglé un bug de las burbujas con el dash (`tunel_impulso.gd`, `dash.gd`).
+- Reescribí `telarana.gd`: el jugador viaja por el hilo.
+
+### Menús y sonido
+- Menú de pausa (`Menus/MenuPausa.tscn` + `menu_pausa.gd`). Funciona, pero se ve feo.
+- Pantalla de carga nueva (`pantalla_carga_final.png` y versión morada).
+- Configuraciones con **Volumen** (`Volumen.tscn` + `volumen.gd`, buses en `default_bus_layout.tres`) y **Controles** (`Controles.tscn` + `controles.gd`).
+- Slider de volumen con estilo propio (`UI Menus/H_silider`).
+- Música de fondo en los niveles (2 pistas en `Sonidos/Musica De Fondo`, `sonido_del_juego.tscn`).
+
+### Arte
+- Tilesets nuevos en `assets/Mundo/Tile_Sets/` (complementario, musgo, spritecook y telarañas). Moví ahí `tileset_telaranas.png`.
+
+### Pendiente / a revisar sigue apuntando a la ruta vieja: el botón de Inicio no encuentra el nivel.
+- El menú de pausa está dentro de `Fondo` (layer -10), así que en los niveles queda detrás de todo.
+- `Detalles3` del nivel 5 tiene 41 355 tiles de 16 px; si algún día va lento en otra PC, hay que aligerarla.
+- Hay que decidir el orden final de los niveles: `level_1` es en realidad el nivel 3.
 ⚠️ Los niveles **no** usan `level.tscn` (el piso infinito) porque con él no pueden existir huecos.
 ⚠️ Si cortan con la espada el hilo de la telaraña del cruce, hay que reintentar (caen y reaparecen).
+###Bugs que se encontro y no se han revisado
+tunel_impulso.gd: con velocidad_impulso = 10 y el dash activo, el juego da error al tocar la burbuja. Asignas un número a velocity en lugar de un vector. Debería ser direccion * cuerpo.velocity.length() * 1.2.
+Mismo caso: el dash vuelve a poner su velocidad al frame siguiente y se pierde el cambio de dirección. Hay que terminar el dash al tocar la burbuja.
+volumen.gd: el segundo slider usa el bus "EFECTOS", que no existe. Tus buses son Master, SFX y New Bus.
+Volumen.tscn: HSlider2 está conectado a los dos métodos, así que también cambia SFX.
+Volumen: al volver al menú, los sliders no muestran el volumen actual.
+level_plantilla.tscn: se instancia a sí misma y no se puede abrir.
+dash.gd: un dash viejo puede cortar al nuevo si encadenas dashes, por ejemplo con una burbuja.
+player.gd: los golpes 2 y 3 del combo usan la duración del primero.

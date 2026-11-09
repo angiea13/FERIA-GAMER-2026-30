@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://c40scd1ldowtj"]
 
+[ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Pausa_En_Lvls.tscn" id="1_q085r"]
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_wy3yu"]
 [ext_resource type="TileSet" uid="uid://bnoc84ls8didp" path="res://resources/tileset_mundo.tres" id="2_308j0"]
 [ext_resource type="Script" uid="uid://dh4x8b2foxbk7" path="res://scripts/World Building/tilemap_peligros.gd" id="3_4tomn"]
@@ -183,7 +184,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.05, 0.035, 0.09, 1)
 
-[node name="Menu Pausa" parent="Fondo" unique_id=47701127 instance=ExtResource("1_wy3yu")]
+[node name="Ui" parent="." unique_id=503610013 instance=ExtResource("1_q085r")]
+
+[node name="Menu Pausa2" parent="Ui" unique_id=47701127 instance=ExtResource("1_wy3yu")]
 
 [node name="Meta" parent="." unique_id=60765829 instance=ExtResource("5_u55if")]
 position = Vector2(2583, -3894)

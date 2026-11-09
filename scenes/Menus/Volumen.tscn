@@ -148,5 +148,4 @@ stream = ExtResource("8_23xtf")
 [connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_regresar_pressed"]
 [connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_salir_pressed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
-[connection signal="value_changed" from="HSlider2" to="." method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="HSlider2" to="." method="_on_h_slider_2_value_changed"]

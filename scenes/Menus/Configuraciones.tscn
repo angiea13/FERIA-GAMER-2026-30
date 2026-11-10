@@ -90,6 +90,6 @@ stream = ExtResource("4_wy4ir")
 
 [connection signal="pressed" from="ButtonManager/Volumen" to="." method="_on_volumen_pressed"]
 [connection signal="pressed" from="ButtonManager/Volumen" to="." method="_on_inicio_pressed"]
-[connection signal="pressed" from="ButtonManager/Controles" to="." method="_on_configuracion_pressed"]
+[connection signal="pressed" from="ButtonManager/Controles" to="." method="_on_controles_pressed"]
 [connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_regresar_pressed"]
 [connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_salir_pressed"]

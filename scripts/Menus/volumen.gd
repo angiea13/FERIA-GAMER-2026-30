@@ -6,7 +6,9 @@ func _on_regresar_pressed() -> void:
 
 
 func _on_h_slider_value_changed(value: float) -> void:
+	
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),linear_to_db(value))
+	
 
 
 func _on_h_slider_2_value_changed(value: float) -> void:

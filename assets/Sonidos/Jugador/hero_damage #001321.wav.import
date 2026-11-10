@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://btd56pj0tcwna"
+path="res://.godot/imported/hero_damage #001321.wav-b6402b2855fe070ff23730ecb18bbc7e.sample"
+
+[deps]
+
+source_file="res://assets/Sonidos/Jugador/hero_damage #001321.wav"
+dest_files=["res://.godot/imported/hero_damage #001321.wav-b6402b2855fe070ff23730ecb18bbc7e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

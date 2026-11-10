@@ -12,13 +12,18 @@ bg_color = Color(0.5922095, 0.53921735, 0.90845287, 1)
 position = Vector2(700, 465)
 script = ExtResource("1_hnxpg")
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=361854201]
+offset = Vector2(96, 0)
+limit_top = 0
+limit_bottom = 2607
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=2035447188]
 offset_left = -705.0
 offset_top = -467.0
-offset_right = 967.0
-offset_bottom = 474.0
+offset_right = 1688.0
+offset_bottom = 2142.0
 texture = ExtResource("2_4cr8j")
-stretch_mode = 6
+expand_mode = 1
 
 [node name="ButtonManager" type="Control" parent="." unique_id=1246316951]
 layout_mode = 3
@@ -31,10 +36,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Regresar" type="Button" parent="ButtonManager" unique_id=215161311]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.35
-anchor_top = -1.15
-anchor_right = 0.625
-anchor_bottom = -1.15
+anchor_left = -1.05
+anchor_top = 21.5
+anchor_right = -0.775
+anchor_bottom = 21.5
 offset_left = -267.0
 offset_top = 214.0
 offset_right = 132.0
@@ -47,6 +52,13 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("3_rfkdw")]
 stream = ExtResource("4_kyok6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1258381031]
+offset_left = -41.0
+offset_top = -349.0
+offset_right = 135.0
+offset_bottom = -302.0
+text = "MOVE UP"
 
 [connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_regresar_pressed"]
 [connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_salir_pressed"]

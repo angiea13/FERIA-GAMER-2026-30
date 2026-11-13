@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://1can08s4fxkp"]
 
 [ext_resource type="Script" uid="uid://doiifpb0pl1w6" path="res://scripts/Entidades/Jugador y sus habilidades/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://c7lvpawbgdx3f" path="res://assets/Jugador/Ataques/Telarana.webp" id="2_b0au2"]
 [ext_resource type="Texture2D" uid="uid://ddkm4n6254xc7" path="res://assets/Jugador/falling.png" id="2_qlg0r"]
 [ext_resource type="Shader" uid="uid://66ayld6ot84e" path="res://scripts/Entidades/Jugador y sus habilidades/Alucard.gdshader" id="2_t4lbo"]
 [ext_resource type="Texture2D" uid="uid://dnedkinfphmxl" path="res://assets/Jugador/Ataques/tajo_1.png" id="3_f1ej7"]
@@ -49,6 +50,9 @@
 [ext_resource type="AudioStream" uid="uid://bfvu4fygu75eo" path="res://assets/Sonidos/Jugador/hero_slug_crawl.wav" id="36_bxotg"]
 [ext_resource type="AudioStream" uid="uid://8v6eoxmw1ser" path="res://assets/Sonidos/Jugador/hero_void_scream_spell.wav" id="37_di0y1"]
 [ext_resource type="AudioStream" uid="uid://btd56pj0tcwna" path="res://assets/Sonidos/Jugador/hero_damage #001321.wav" id="49_0bigb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qnpof"]
+radius = 660.06213
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8mdrf"]
 shader = ExtResource("2_t4lbo")
@@ -393,6 +397,18 @@ height = 913.7231
 [node name="Player" type="CharacterBody2D" unique_id=1446005476 groups=["jugador"]]
 script = ExtResource("1_g2els")
 
+[node name="Telaranas_Area" type="Area2D" parent="." unique_id=1097358770]
+collision_mask = 2
+
+[node name="Colision_Telarana" type="CollisionShape2D" parent="Telaranas_Area" unique_id=1692445498]
+visible = false
+shape = SubResource("CircleShape2D_qnpof")
+disabled = true
+
+[node name="Sprite_Telarana" type="Sprite2D" parent="Telaranas_Area" unique_id=715160296]
+visible = false
+texture = ExtResource("2_b0au2")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1069817929]
 material = SubResource("ShaderMaterial_8mdrf")
 position = Vector2(1, 21)
@@ -437,7 +453,7 @@ collision_mask = 2
 [node name="Colision_Derecha" type="CollisionPolygon2D" parent="Slash_Area" unique_id=676649413]
 light_mask = 3
 position = Vector2(50, 93)
-polygon = PackedVector2Array(0, -150, 119, -130, 186, -88, 194, -32, 142, -12, 12, -1)
+polygon = PackedVector2Array(0, -150, 119, -130, 186, -88, 194, -32, 142, -12, 64.214935, -5.418213, 12, -1)
 disabled = true
 
 [node name="Colision_Izquierda" type="CollisionPolygon2D" parent="Slash_Area" unique_id=672941814]

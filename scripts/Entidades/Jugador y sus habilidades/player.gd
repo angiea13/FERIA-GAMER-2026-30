@@ -22,13 +22,17 @@ const TIEMP_ULTI_ATAC=1.0
 const BUFFER_ATAQUE = 0.15
 const RADIO_CORTE = 30.0
 const MAXIMO_ATAQUE=3
+const COOLDOWN_ATAQUE_TELARANA=0.2
 #Variables
 #Atributos del personaje
 var vida = Vida.new(50)
 #Ataque
 var atacando := false
 var numero_ataque:=0
-#
+var dano:= 1
+#Ataque telarana
+var telarana_todas_direcciones:=false
+var cooldown_telarana:=COOLDOWN_ATAQUE_TELARANA
 var en_telarana:=false
 #Funcion Ataque
 var colision_ataque: CollisionPolygon2D
@@ -91,7 +95,29 @@ func _ready():
     dash.configurar(1)
     UtilsGlobal.load_game()
     sprite.animation_finished.connect(termino_doble_salto)
+func Ataque_Telarana(delta):
+    if telarana_todas_direcciones:
+        return
+    if cooldown_telarana< COOLDOWN_ATAQUE_TELARANA:
+     cooldown_telarana+=delta
+    if Input.is_action_just_pressed("Ataque_Telarana") and cooldown_telarana>=COOLDOWN_ATAQUE_TELARANA:
+        telarana_todas_direcciones=true
+        $Telaranas_Area/Colision_Telarana.disabled=false
+        $Telaranas_Area/Sprite_Telarana.visible=true
+        velocity=Vector2(0,0)
+        sprite.play("idle")
+        await  get_tree().physics_frame
+        var cuerpos = $Telaranas_Area.get_overlapping_bodies()
 
+        print("Cuerpos detectados: ", cuerpos.size())
+        for cuerpo in cuerpos:
+         print("Detectado: ", cuerpo.name)
+         golpear(cuerpo, dano * 2)
+        await get_tree().create_timer(0.8).timeout
+        telarana_todas_direcciones=false
+        $Telaranas_Area/Colision_Telarana.disabled=true
+        $Telaranas_Area/Sprite_Telarana.visible=false
+        cooldown_telarana=0
 func _telarana():
     if en_telarana:
         invulnerable=0.4
@@ -113,7 +139,7 @@ func saltos(delta,suma,resta):
         return
 func termino_doble_salto():
     if sprite.animation=="double_jump":
-     en_doble_salto=false
+      en_doble_salto=false
 func impulso(delta):
    #Impulso
     if en_impulso:
@@ -273,6 +299,9 @@ func _physics_process(delta: float) -> void:
         ultimo_ataque += delta
         if ultimo_ataque >= TIEMP_ULTI_ATAC:
             numero_ataque = 0
+    Ataque_Telarana(delta)
+    if telarana_todas_direcciones==true:
+        return
     if _telarana():
         return
     if Input.is_action_just_pressed("Guardar Partida"):
@@ -292,7 +321,7 @@ func _physics_process(delta: float) -> void:
     ataque_en_phisycs(delta)
     direccion_ray_casts(delta)
     move_and_slide()
-    procesar_ataque(delta)
+    procesar_ataque(delta,dano)
     _update_animation(direccion_dash)
 
 func _update_animation(direction: float) -> void:
@@ -334,15 +363,15 @@ func empezar_ataque() -> void:
     actualizar_colision_ataque()
 
 var delay: float = 0.0
-func procesar_ataque(delta: float) -> void:
+func procesar_ataque(delta: float,dano:int) -> void:
     if not atacando:
         return
     tiempo_ataque -= delta
     actualizar_colision_ataque()
     for cuerpo in slash_area.get_overlapping_bodies():
-        golpear(cuerpo)
+        golpear(cuerpo,dano)
     for area in slash_area.get_overlapping_areas():
-        golpear(area)
+        golpear(area,dano)
     var puntos := puntos_colision()
     delay=max(delay-delta,0)
     if delay==0:
@@ -365,14 +394,14 @@ func actualizar_colision_ataque() -> void:
     colision_derecha.set_deferred("disabled", colision_ataque != colision_derecha)
     colision_izquierda.set_deferred("disabled", colision_ataque != colision_izquierda)
     
-func golpear(objeto: Node) -> void:
+func golpear(objeto: Node, dano: int) -> void:
     if objeto == self or objeto in ya_golpeados:
         return
     if not objeto.is_in_group("golpeable"):
         return
     ya_golpeados.append(objeto)            # un golpe por ataque a cada cosa
     if objeto.has_method("recibir_golpe"):
-        objeto.recibir_golpe(Vector2(direccion_dash, 0))
+        objeto.recibir_golpe(Vector2(direccion_dash, 0),dano)
         
 func terminar_ataque() -> void:
     atacando = false

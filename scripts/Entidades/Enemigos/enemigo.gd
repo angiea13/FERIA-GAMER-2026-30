@@ -151,10 +151,10 @@ func _al_terminar_animacion() -> void:
 
 
 # Lo llama el jugador (player.gd -> golpear()) cuando la espada lo toca.
-func recibir_golpe(dir: Vector2) -> void:
+func recibir_golpe(dir: Vector2, dano:int) -> void:
 	if muerto:
 		return
-	vida._recibir_dano(1)
+	vida._recibir_dano(dano)
 	atacando = false
 	golpeado = true
 	tiempo_golpeado = 0.4

@@ -73,6 +73,9 @@ var ultimo_ataque:=0.0
 var invulnerable := 0.0
 var muerto := false
 
+var aturdido := 0.0
+var posicion_sprite_base := Vector2.ZERO
+
 #Variables externas
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var slash_area: Area2D = $Slash_Area
@@ -93,6 +96,7 @@ func _ready():
     colision_izquierda.disabled = true
     colision_ataque = colision_derecha
     dash.configurar(1)
+    posicion_sprite_base = sprite.position
     UtilsGlobal.load_game()
     sprite.animation_finished.connect(termino_doble_salto)
 func Ataque_Telarana(delta):
@@ -295,6 +299,10 @@ func _physics_process(delta: float) -> void:
     tiempo_teletransporte_ant+=delta
     bloqueo_control-=delta
     invulnerable = maxf(invulnerable - delta, 0.0)
+
+    if aturdido > 0.0:
+        procesar_aturdimiento(delta)
+
     if not atacando:
         ultimo_ataque += delta
         if ultimo_ataque >= TIEMP_ULTI_ATAC:
@@ -475,7 +483,6 @@ func Jump_Slide():
     return $Brincar.is_colliding()
 
 
-# ---------------- Daño y muerte ----------------
 func recibir_dano(cantidad: int, origen_x: float = 0.0) -> void:
     if muerto or invulnerable > 0.0:
         return
@@ -501,6 +508,46 @@ func parpadear() -> void:
     t.tween_interval(0.1)
     t.tween_callback(func(): sprite.material.set_shader_parameter("opacity", 1.0))
     t.tween_interval(0.1)
+
+
+
+# Devuelve true si el aturdimiento se aplicó (no si ya estaba invulnerable).
+func aturdir(duracion: float) -> bool:
+    if muerto or invulnerable > 0.0 or aturdido > 0.0:
+        return false
+    aturdido = duracion
+    invulnerable = duracion + 0.8          # margen para escapar, sin encadenar aturdimientos
+    en_impulso = false
+    terminar_ataque()
+    velocity.x *= 0.2
+    return true
+
+
+func procesar_aturdimiento(delta: float) -> void:
+    aturdido -= delta
+    if not is_on_floor():
+        velocity += get_gravity() * delta
+    velocity.x = move_toward(velocity.x, 0.0, 1500.0 * delta)
+    move_and_slide()
+    _update_animation(0.0)
+    var m := sprite.material as ShaderMaterial
+    if aturdido > 0.0:
+        # vibra y se tiñe de ámbar (colores del Notificador)
+        sprite.position = posicion_sprite_base + Vector2(randf_range(-4.0, 4.0), randf_range(-2.0, 2.0))
+        m.set_shader_parameter("r", 1.0)
+        m.set_shader_parameter("g", 0.84)
+        m.set_shader_parameter("b", 0.42)
+        m.set_shader_parameter("mix_color", 0.25 + 0.2 * sin(Time.get_ticks_msec() * 0.05))
+    else:
+        sprite.position = posicion_sprite_base
+        m.set_shader_parameter("r", 0.0)
+        m.set_shader_parameter("g", 0.0)
+        m.set_shader_parameter("b", 0.0)
+        m.set_shader_parameter("mix_color", 0.0)
+
+
+func alterar_hud(duracion: float, fuerza: float = 1.0) -> void:
+    InterferenciaHUD.activar(get_tree(), duracion, fuerza)
 
 
 func matar() -> void:

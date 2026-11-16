@@ -14,8 +14,6 @@ var anterior: Telarana = null
 	set(valor):
 		sustitutos=valor
 		queue_redraw()
-		
-
 
 func _ready():
 	# Si yo apunto a "siguiente", entonces yo soy su "anterior"

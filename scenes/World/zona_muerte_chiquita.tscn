@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b5wh6w66s2toq"]
+
+[ext_resource type="Script" uid="uid://cj0pufb4nrtiy" path="res://scripts/World Building/zona_muerte_chiquita.gd" id="1_6i2kk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjlqh"]
+size = Vector2(496, 210)
+
+[node name="zona_muerte_chuquita" type="Area2D" unique_id=661878649]
+script = ExtResource("1_6i2kk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=505819975]
+position = Vector2(9, -31)
+shape = SubResource("RectangleShape2D_wjlqh")

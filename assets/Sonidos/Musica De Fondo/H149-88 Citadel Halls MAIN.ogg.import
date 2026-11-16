@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://nwcrwo4qxsn7"
+path="res://.godot/imported/H149-88 Citadel Halls MAIN.ogg-658c4b73ed060d21b30e807c55bcf552.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Sonidos/Musica De Fondo/H149-88 Citadel Halls MAIN.ogg"
+dest_files=["res://.godot/imported/H149-88 Citadel Halls MAIN.ogg-658c4b73ed060d21b30e807c55bcf552.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -3,28 +3,37 @@ extends CharacterBody2D
 
 #Constantes
 #Movimiento
-const SPEED = 500.0
-const JUMP_VELOCITY = -650.0
+const SPEED = 450.0
+const JUMP_VELOCITY = -600.0
+const Maximo_Num_Saltos=2
 #Relacion con las paredes
-const VELOCIDAD_DESLIZAR = 120.0
-const EMPUJE_PARED = 600.0
+const VELOCIDAD_DESLIZAR = 110.0
+const EMPUJE_PARED = 500.0
 #Temporizadores
 #Salto
-const COYOTE_TIEMPO = 0.2
+const COYOTE_TIEMPO = 0.10
 #Deslizamiento
 const COYOTE_TIEMPO_desliz = 0.2
 #Salto de pared
-const BLOQUEO_PARED = 0.30
+const BLOQUEO_PARED = 0.2
 #Ataque
 const ANIM_ATAQUE = "atacando"
+const TIEMP_ULTI_ATAC=1.0
 const BUFFER_ATAQUE = 0.15
 const RADIO_CORTE = 30.0
-
+const MAXIMO_ATAQUE=3
+const COOLDOWN_ATAQUE_TELARANA=0.2
 #Variables
 #Atributos del personaje
-var vida = Vida.new(100)
+var vida = Vida.new(50)
 #Ataque
 var atacando := false
+var numero_ataque:=0
+var dano:= 1
+#Ataque telarana
+var telarana_todas_direcciones:=false
+var cooldown_telarana:=COOLDOWN_ATAQUE_TELARANA
+var en_telarana:=false
 #Funcion Ataque
 var colision_ataque: CollisionPolygon2D
 var ya_golpeados: Array = []
@@ -33,6 +42,11 @@ var telarana_actual: Telarana = null
 #Dash
 var direccion_dash = 1
 var dash_arriba=false
+#Salto
+var num_saltos=Maximo_Num_Saltos
+var ya_paso_salto=false
+#Double salto
+var en_doble_salto=false
 ##Efectos
 var Time_Actual_Dupli: float = 0
 var Time_Dupli: float = 0.05
@@ -54,7 +68,7 @@ var tiempo_impulso:float=0.0
 #Temporizadores Ataque
 var tiempo_ataque := 0.0
 var buffer_ataque := 0.0
-
+var ultimo_ataque:=0.0
 #Daño recibido
 var invulnerable := 0.0
 var muerto := false
@@ -68,21 +82,76 @@ var posicion_sprite_base := Vector2.ZERO
 @onready var colision_derecha: CollisionPolygon2D = $Slash_Area/Colision_Derecha
 @onready var colision_izquierda: CollisionPolygon2D = $Slash_Area/Colision_Izquierda
 @onready var dash: Dash = $Dash
-
+func detener_sonidos():
+    for nodo in get_children():
+        if nodo is AudioStreamPlayer:
+            nodo.stop()
+func reproducir_sonido(sonido:AudioStreamPlayer):
+    if sonido.playing:
+        return
+    detener_sonidos()
+    sonido.play()
 func _ready():
     colision_derecha.disabled = true
     colision_izquierda.disabled = true
     colision_ataque = colision_derecha
-    
     dash.configurar(1)
     posicion_sprite_base = sprite.position
     UtilsGlobal.load_game()
+    sprite.animation_finished.connect(termino_doble_salto)
+func Ataque_Telarana(delta):
+    if telarana_todas_direcciones:
+        return
+    if cooldown_telarana< COOLDOWN_ATAQUE_TELARANA:
+     cooldown_telarana+=delta
+    if Input.is_action_just_pressed("Ataque_Telarana") and cooldown_telarana>=COOLDOWN_ATAQUE_TELARANA:
+        telarana_todas_direcciones=true
+        $Telaranas_Area/Colision_Telarana.disabled=false
+        $Telaranas_Area/Sprite_Telarana.visible=true
+        velocity=Vector2(0,0)
+        sprite.play("idle")
+        await  get_tree().physics_frame
+        var cuerpos = $Telaranas_Area.get_overlapping_bodies()
 
+        print("Cuerpos detectados: ", cuerpos.size())
+        for cuerpo in cuerpos:
+         print("Detectado: ", cuerpo.name)
+         golpear(cuerpo, dano * 2)
+        await get_tree().create_timer(0.8).timeout
+        telarana_todas_direcciones=false
+        $Telaranas_Area/Colision_Telarana.disabled=true
+        $Telaranas_Area/Sprite_Telarana.visible=false
+        cooldown_telarana=0
+func _telarana():
+    if en_telarana:
+        invulnerable=0.4
+        return true
+    return false
+func saltos(delta,suma,resta):
+    if (not is_on_floor() and not Jump_Slide())   and !ya_paso_salto:
+        num_saltos=1
+        ya_paso_salto=true
+    if suma!=0:
+        num_saltos+=suma
+        if num_saltos>Maximo_Num_Saltos:
+            num_saltos=Maximo_Num_Saltos
+        return
+    elif resta!=0:
+        num_saltos-=resta
+        if num_saltos<0:
+            num_saltos=0
+        return
+func termino_doble_salto():
+    if sprite.animation=="double_jump":
+      en_doble_salto=false
 func impulso(delta):
    #Impulso
     if en_impulso:
+        if !$sonido_burbuja.playing:
+            reproducir_sonido($sonido_burbuja)
         tiempo_impulso-=delta
         dash.recuperar()
+        num_saltos=1
         move_and_slide()
         if tiempo_impulso<=0:
             en_impulso=false
@@ -91,19 +160,27 @@ func impulso(delta):
 func procesar_dash(delta):
     #Dash
     if Input.is_action_just_pressed("hacer_dash"):
+        
+        if Deslizarse():
+            dash_arriba=true
         var dir := Input.get_axis("move_left", "move_right")
         if dir != 0:
             direccion_dash = sign(dir)
         dash.intentar(direccion_dash)
         if dash.activo:
+            reproducir_sonido($sonido_dash)
             terminar_ataque()
+            invulnerable+=0.2
     if dash.activo:
         if !Deslizarse():
             if !dash_arriba:
                 velocity = Vector2(dash.direccion * dash.velocidad, 0)
         else:
-            velocity = Vector2(0,-dash.velocidad/3.5)
-            dash_arriba=true
+            if !dash_arriba:
+                velocity = Vector2(dash.direccion * dash.velocidad, 0)
+            else:
+                velocity = Vector2(0,-dash.velocidad/3.5)
+                dash_arriba=true
         if Time_Actual_Dupli >= Time_Dupli:
             Time_Actual_Dupli = 0
             crear_duplicado()
@@ -117,16 +194,23 @@ func todo_relacionado_a_saltos(delta):
     if not is_on_floor():
         coyote_restante -= delta
         velocity += get_gravity() * delta
-        if (Deslizarse() and velocity.y > 0) or (coyote_restante<COYOTE_TIEMPO and coyote_restante>0):
+        if (Deslizarse() and velocity.y > 0):
+            if !$sonido_deslizar.playing:
+                reproducir_sonido($sonido_deslizar)
             velocity.y = min(velocity.y, VELOCIDAD_DESLIZAR)
             coyote_restante_desliz-=delta
             if !dash_arriba:
                 dash.recuperar()
     else:
+        if ya_paso_salto:
+            if !$sonido_aterrizar.playing:
+                reproducir_sonido($sonido_aterrizar)
         coyote_restante = COYOTE_TIEMPO
         dash.recuperar()
         dash_arriba=false
         coyote_restante_desliz=COYOTE_TIEMPO
+        ya_paso_salto=false
+        saltos(delta,2,0)
     # Jump buffer
     if Input.is_action_just_pressed("jump"):
         jump_buffer_restante = 0.15
@@ -135,6 +219,10 @@ func todo_relacionado_a_saltos(delta):
 
    # Salto de pared
     if not is_on_floor() and Jump_Slide() and jump_buffer_restante > 0:
+        if !$sonido_saltar_muro.playing:
+            reproducir_sonido($sonido_saltar_muro)
+        ya_paso_salto=false
+        saltos(delta,1,0)
         velocity.y = JUMP_VELOCITY
         velocity.x = -direccion_dash * EMPUJE_PARED
         direccion_dash = -direccion_dash
@@ -142,8 +230,19 @@ func todo_relacionado_a_saltos(delta):
         dash.recuperar()
         dash_arriba=false
         jump_buffer_restante = 0
+    # Doble Salto
+    elif not is_on_floor() and num_saltos>0 and Input.is_action_just_pressed("jump"):
+        if !$sonido_doble_salto.playing:
+            reproducir_sonido($sonido_doble_salto)
+        en_doble_salto=true
+        dash.recuperar()
+        velocity.y=1.2*JUMP_VELOCITY
+        saltos(delta,0,1)
     # Salto normal
     elif jump_buffer_restante > 0 and coyote_restante > 0:
+        if !$sonido_salto.playing:
+            reproducir_sonido($sonido_salto)
+        saltos(delta,0,1)
         velocity.y = JUMP_VELOCITY
         coyote_restante = 0
         jump_buffer_restante = 0
@@ -151,24 +250,34 @@ func todo_relacionado_a_saltos(delta):
     if Input.is_action_just_released("jump") and velocity.y < 0.0:
         velocity.y *= 0.6
 func teletransporte_en_phisycs(delta):
-     if telarana_actual:
+    if telarana_actual:
         
         if Input.is_action_just_pressed("ir_siguiente") and tiempo_teletranporte>0.4:
+            if !$sonido_telarana.playing:
+                reproducir_sonido($sonido_telarana)
             teletransportar(telarana_actual.siguiente)
+            saltos(delta,1,0)
             tiempo_teletranporte=0
             tiempo_teletransporte_ant=0
         elif Input.is_action_just_pressed("ir_anterior") and tiempo_teletransporte_ant>0.4:
+            if !$sonido_telarana.playing:
+                reproducir_sonido($sonido_telarana)
             teletransportar(telarana_actual.anterior)
+            saltos(delta,1,0)
             tiempo_teletransporte_ant=0
 func movimiento_horizontal(delta):
     
-     var direction := Input.get_axis("move_left", "move_right")
-     if bloqueo_control <= 0:
+    var direction := Input.get_axis("move_left", "move_right")
+    if bloqueo_control <= 0:
         if direction:
             velocity.x = direction * SPEED
             direccion_dash = sign(direction)
         else:
             velocity.x = move_toward(velocity.x, 0, SPEED)
+func ataque_combo():
+    numero_ataque+=1
+    if numero_ataque>=MAXIMO_ATAQUE:
+        numero_ataque=0
 func ataque_en_phisycs(delta):
      # Ataque
     if Input.is_action_just_pressed("atacar"):
@@ -176,7 +285,10 @@ func ataque_en_phisycs(delta):
     else:
         buffer_ataque -= delta
     if buffer_ataque > 0 and not atacando:
+        reproducir_sonido($sonido_atacar)
         empezar_ataque()
+        ataque_combo()
+        
 func direccion_ray_casts(delta):
     $Deslizarse.target_position.x = abs($Deslizarse.target_position.x) * direccion_dash
     $Brincar.target_position.x = abs($Brincar.target_position.x) * direccion_dash
@@ -187,8 +299,18 @@ func _physics_process(delta: float) -> void:
     tiempo_teletransporte_ant+=delta
     bloqueo_control-=delta
     invulnerable = maxf(invulnerable - delta, 0.0)
+
     if aturdido > 0.0:
         procesar_aturdimiento(delta)
+
+    if not atacando:
+        ultimo_ataque += delta
+        if ultimo_ataque >= TIEMP_ULTI_ATAC:
+            numero_ataque = 0
+    Ataque_Telarana(delta)
+    if telarana_todas_direcciones==true:
+        return
+    if _telarana():
         return
     if Input.is_action_just_pressed("Guardar Partida"):
         UtilsGlobal.save_game()
@@ -207,22 +329,37 @@ func _physics_process(delta: float) -> void:
     ataque_en_phisycs(delta)
     direccion_ray_casts(delta)
     move_and_slide()
-    procesar_ataque(delta)
+    procesar_ataque(delta,dano)
     _update_animation(direccion_dash)
 
 func _update_animation(direction: float) -> void:
     sprite.flip_h = direccion_dash < 0
-    if atacando and sprite.sprite_frames.has_animation(ANIM_ATAQUE):
-        sprite.play(ANIM_ATAQUE)
+    if en_telarana:
+        return
+    if atacando:
+        if numero_ataque==1:
+            sprite.play("atacando")
+        elif numero_ataque==2:
+            sprite.play("atacando_2")
+        else:
+            sprite.play("atacando_3")
     elif not is_on_floor():
-        if velocity.y < 0:
+        if en_doble_salto:
+            sprite.play("double_jump")
+            return
+        if Deslizarse():
+            sprite.play("deslizarse")
+        elif velocity.y < 0:
             sprite.play("jump")
         else:
             sprite.play("falling")
-    elif direction:
+    elif is_on_floor() and abs(velocity.x) > 10:
         sprite.play("moving")
+        if !$sonido_correr.playing and !dash.activo:
+            reproducir_sonido($sonido_correr)
     else:
         sprite.play("idle")
+        $sonido_correr.stop()
 func empezar_ataque() -> void:
     atacando = true
     buffer_ataque = 0
@@ -234,15 +371,15 @@ func empezar_ataque() -> void:
     actualizar_colision_ataque()
 
 var delay: float = 0.0
-func procesar_ataque(delta: float) -> void:
+func procesar_ataque(delta: float,dano:int) -> void:
     if not atacando:
         return
     tiempo_ataque -= delta
     actualizar_colision_ataque()
     for cuerpo in slash_area.get_overlapping_bodies():
-        golpear(cuerpo)
+        golpear(cuerpo,dano)
     for area in slash_area.get_overlapping_areas():
-        golpear(area)
+        golpear(area,dano)
     var puntos := puntos_colision()
     delay=max(delay-delta,0)
     if delay==0:
@@ -250,7 +387,7 @@ func procesar_ataque(delta: float) -> void:
             for p in puntos:
                 if t.toca_hilo(p, RADIO_CORTE):
                     t.cortar()
-                    delay=4
+                    delay=1.5
                     break
             if delay>0:
                 break
@@ -265,17 +402,18 @@ func actualizar_colision_ataque() -> void:
     colision_derecha.set_deferred("disabled", colision_ataque != colision_derecha)
     colision_izquierda.set_deferred("disabled", colision_ataque != colision_izquierda)
     
-func golpear(objeto: Node) -> void:
+func golpear(objeto: Node, dano: int) -> void:
     if objeto == self or objeto in ya_golpeados:
         return
     if not objeto.is_in_group("golpeable"):
         return
     ya_golpeados.append(objeto)            # un golpe por ataque a cada cosa
     if objeto.has_method("recibir_golpe"):
-        objeto.recibir_golpe(Vector2(direccion_dash, 0))
+        objeto.recibir_golpe(Vector2(direccion_dash, 0),dano)
         
 func terminar_ataque() -> void:
     atacando = false
+    ultimo_ataque=0.0
     colision_derecha.set_deferred("disabled", true)
     colision_izquierda.set_deferred("disabled", true)
 
@@ -299,13 +437,24 @@ func puntos_colision() -> Array:
 
 
 func teletransportar(destino: Telarana) -> void:
-    if destino == null:
+    if destino == null or en_telarana:
         return
-    global_position = destino.global_position + Vector2(0, -16)
+    en_telarana = true
     velocity = Vector2.ZERO
+    var inicio = global_position
+    var fin = destino.global_position + Vector2(0, -16)
+    sprite.play("entrar")
+    await sprite.animation_finished
+    sprite.play("viajar")
+    var tween = create_tween()
+    tween.tween_property(self, "global_position", fin, 0.8)
+    telarana_actual = destino
+    await tween.finished
+    sprite.play_backwards("entrar")
+    await sprite.animation_finished
     telarana_actual = destino
     dash.recuperar()
-
+    en_telarana = false
 
 func crear_duplicado():
     var duplicado: AnimatedSprite2D = sprite.duplicate()
@@ -337,6 +486,8 @@ func Jump_Slide():
 func recibir_dano(cantidad: int, origen_x: float = 0.0) -> void:
     if muerto or invulnerable > 0.0:
         return
+    if !$sonido_dano.playing:
+        reproducir_sonido($sonido_dano)
     vida._recibir_dano(cantidad)
     invulnerable = 1.0
     bloqueo_control = 0.25
@@ -410,6 +561,8 @@ func matar() -> void:
 func morir() -> void:
     if muerto:
         return
+    if !$sonido_muerte.playing:
+        reproducir_sonido($sonido_muerte)
     muerto = true
     velocity = Vector2.ZERO
     set_physics_process(false)

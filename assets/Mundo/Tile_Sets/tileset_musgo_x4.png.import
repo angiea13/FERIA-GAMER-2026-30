@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db4kekl3354ob"
-path="res://.godot/imported/burbuja_morada_3.png-db82a3b97723dab1ced3390900af1e7c.ctex"
+uid="uid://syfmd2nqdfha"
+path="res://.godot/imported/tileset_musgo_x4.png-7d43822e2c5d08ef1d424aa07b61fc66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Mundo/burbuja_morada_3.png"
-dest_files=["res://.godot/imported/burbuja_morada_3.png-db82a3b97723dab1ced3390900af1e7c.ctex"]
+source_file="res://assets/Mundo/Tile_Sets/tileset_musgo_x4.png"
+dest_files=["res://.godot/imported/tileset_musgo_x4.png-7d43822e2c5d08ef1d424aa07b61fc66.ctex"]
 
 [params]
 

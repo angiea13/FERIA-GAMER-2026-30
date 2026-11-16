@@ -115,3 +115,4 @@ Volumen: al volver al menú, los sliders no muestran el volumen actual.
 level_plantilla.tscn: se instancia a sí misma y no se puede abrir.
 dash.gd: un dash viejo puede cortar al nuevo si encadenas dashes, por ejemplo con una burbuja.
 player.gd: los golpes 2 y 3 del combo usan la duración del primero.
+hola

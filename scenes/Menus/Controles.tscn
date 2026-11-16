@@ -54,11 +54,18 @@ metadata/_edit_use_anchors_ = true
 stream = ExtResource("4_kyok6")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1258381031]
-offset_left = -41.0
+offset_left = -128.0
 offset_top = -349.0
-offset_right = 135.0
-offset_bottom = -302.0
-text = "MOVE UP"
+offset_right = 472.0
+offset_bottom = 51.0
+text = "CONTROLES DEL JUEGO:
 
-[connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_regresar_pressed"]
+- Moverse a la izquierda / derecha: Teclas A / D o Flechas Izquierda / Derecha
+- Saltar: Barra Espaciadora
+- Disparar / Atacar: Tecla J o Clic Izquierdo
+- Pausa: Tecla Escape (ESC)
+
+Usa la rueda del ratón hacia arriba o abajo para desplazarte por este manual si es necesario."
+
 [connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_salir_pressed"]
+[connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_regresar_pressed"]

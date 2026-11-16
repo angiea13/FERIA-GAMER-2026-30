@@ -6,7 +6,6 @@ var velocidad: float=100
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -17,7 +16,5 @@ func _input(event: InputEvent) -> void:
 		elif event.button_index==MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			camara.position.y+=velocidad
 
-
-
 func _on_regresar_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/Menus/Configuraciones.tscn") # Replace with function body.
+	get_tree().change_scene_to_file("res://scenes/Menus/menu_principal.tscn") # Replace with function body.

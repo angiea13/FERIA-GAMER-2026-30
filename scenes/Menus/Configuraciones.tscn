@@ -85,6 +85,15 @@ text = "ATRAS
 "
 metadata/_edit_use_anchors_ = true
 
+[node name="Accesibilidad" type="Button" parent="ButtonManager" unique_id=1671183924]
+layout_mode = 0
+offset_left = -792.0
+offset_top = -402.0
+offset_right = -592.0
+offset_bottom = -352.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_mk4g1")
+text = "ACCS"
+
 [node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("3_lajrf")]
 stream = ExtResource("4_wy4ir")
 
@@ -92,4 +101,4 @@ stream = ExtResource("4_wy4ir")
 [connection signal="pressed" from="ButtonManager/Volumen" to="." method="_on_inicio_pressed"]
 [connection signal="pressed" from="ButtonManager/Controles" to="." method="_on_controles_pressed"]
 [connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_regresar_pressed"]
-[connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_salir_pressed"]
+[connection signal="pressed" from="ButtonManager/Accesibilidad" to="." method="_on_accesibilidad_pressed"]

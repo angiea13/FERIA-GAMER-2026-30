@@ -275,10 +275,10 @@ func _tocar_jugador(j: Jugador) -> void:
 
 
 # ---------------- Daño recibido ----------------
-func recibir_golpe(dir: Vector2) -> void:
+func recibir_golpe(dir: Vector2, dano: int = 1) -> void:
 	if estado == Estado.MUERTO:
 		return
-	vida._recibir_dano(1)
+	vida._recibir_dano(dano)
 	onda_t = -1.0
 	queue_redraw()
 	if vida.muerte:

@@ -70,6 +70,7 @@ class PanelVida extends Control:
 	var tiempo := 0.0
 
 	func _init() -> void:
+		add_to_group("hud")   # InterferenciaHUD (Notificador) hace vibrar los nodos de este grupo
 		custom_minimum_size = Vector2(ANCHO, ALTO + 26.0)
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 

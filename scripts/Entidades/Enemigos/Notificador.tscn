@@ -1,7 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/Entidades/Enemigos/notificador.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/Enemigo/Notificador/notificador_spritesheet.png" id="2_tex"]
+[ext_resource type="Texture2D" path="res://assets/Enemigo/notificador_spritesheet.png" id="2_tex"]
 
 [sub_resource type="AtlasTexture" id="Atlas_vuelo_0"]
 atlas = ExtResource("2_tex")
@@ -152,4 +152,4 @@ collision_layer = 0
 collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaContacto"]
-shape = SubResource("Circle_contacto")
+shape = SubResource("Circle_contacto") 

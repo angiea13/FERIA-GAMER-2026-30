@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://cjfthqjiv4v0x"]
+
+[ext_resource type="Script" uid="uid://hjpc6hxcejcl" path="res://scripts/Entidades/Enemigos/notificador.gd" id="1_d6ey5"]
+[ext_resource type="Texture2D" uid="uid://cpiu7weyc4ase" path="res://assets/Enemigo/notificador_spritesheet.png" id="2_eeujd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmit5"]
+atlas = ExtResource("2_eeujd")
+region = Rect2(0, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1cc3"]
+atlas = ExtResource("2_eeujd")
+region = Rect2(288, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrh6u"]
+atlas = ExtResource("2_eeujd")
+region = Rect2(432, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwcu2"]
+atlas = ExtResource("2_eeujd")
+region = Rect2(144, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdhnl"]
+atlas = ExtResource("2_eeujd")
+region = Rect2(288, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yopjs"]
+atlas = ExtResource("2_eeujd")
+region = Rect2(288, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qu07v"]
+atlas = ExtResource("2_eeujd")
+region = Rect2(432, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_putvc"]
+atlas = ExtResource("2_eeujd")
+region = Rect2(0, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukhvh"]
+atlas = ExtResource("2_eeujd")
+region = Rect2(0, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30ixc"]
+atlas = ExtResource("2_eeujd")
+region = Rect2(144, 0, 144, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_notif"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmit5")
+}],
+"loop": 0,
+"name": &"golpeado",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1cc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrh6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwcu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdhnl")
+}],
+"loop": 0,
+"name": &"muerte",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yopjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qu07v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_putvc")
+}],
+"loop": 0,
+"name": &"pulso",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukhvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30ixc")
+}],
+"loop": 1,
+"name": &"vuelo",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="Circle_hit"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="Circle_contacto"]
+radius = 30.0
+
+[node name="Notificador" type="CharacterBody2D" unique_id=1328097470]
+texture_filter = 1
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_d6ey5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1841676127]
+texture_filter = 1
+scale = Vector2(0.98090285, 0.98090285)
+sprite_frames = SubResource("SpriteFrames_notif")
+animation = &"vuelo"
+autoplay = "vuelo"
+frame_progress = 0.32944915
+
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1060479092]
+shape = SubResource("Circle_hit")
+
+[node name="ZonaContacto" type="Area2D" parent="." unique_id=1231565720]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaContacto" unique_id=2100610286]
+shape = SubResource("Circle_contacto")

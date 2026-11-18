@@ -73,6 +73,10 @@ var ultimo_ataque:=0.0
 var invulnerable := 0.0
 var muerto := false
 
+signal vida_cambiada(actual: int, maxima: int)
+signal curado(cantidad: int)
+signal murio
+
 #Variables externas
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var slash_area: Area2D = $Slash_Area
@@ -95,6 +99,10 @@ func _ready():
 	dash.configurar(1)
 	UtilsGlobal.load_game()
 	sprite.animation_finished.connect(termino_doble_salto)
+	
+	var barra := BarraVida.new()
+	barra.jugador = self    # debe asignarse antes de add_child
+	add_child(barra)
 	
 func Ataque_Telarana(delta):
 	if telarana_todas_direcciones:
@@ -232,7 +240,6 @@ func todo_relacionado_a_saltos(delta):
 		if !$sonido_doble_salto.playing:
 			reproducir_sonido($sonido_doble_salto)
 		en_doble_salto=true
-		dash.recuperar()
 		velocity.y=1.2*JUMP_VELOCITY
 		saltos(delta,0,1)
 	# Salto normal
@@ -483,6 +490,7 @@ func recibir_dano(cantidad: int, origen_x: float = 0.0) -> void:
 	if !$sonido_dano.playing:
 		reproducir_sonido($sonido_dano)
 	vida._recibir_dano(cantidad)
+	vida_cambiada.emit(vida.vida, vida.vida_max)
 	invulnerable = 1.0
 	bloqueo_control = 0.25
 	var dir := signf(global_position.x - origen_x)
@@ -493,6 +501,17 @@ func recibir_dano(cantidad: int, origen_x: float = 0.0) -> void:
 	if vida.muerte:
 		morir()
 
+func aturdir(duracion: float) -> bool:
+	# Devuelve false si no se pudo aturdir (muerto o invulnerable)
+	if muerto or invulnerable > 0.0:
+		return false
+	bloqueo_control = maxf(bloqueo_control, duracion)
+	velocity.x = 0.0
+	return true
+
+
+func alterar_hud(duracion: float, fuerza: float = 1.0) -> void:
+	InterferenciaHUD.activar(get_tree(), duracion, fuerza)
 
 func parpadear() -> void:
 	# El shader del sprite sobreescribe COLOR, por eso se parpadea con su
@@ -509,6 +528,7 @@ func matar() -> void:
 	if muerto:
 		return
 	vida._recibir_dano(vida.vida)
+	vida_cambiada.emit(vida.vida, vida.vida_max)
 	morir()
 
 
@@ -518,7 +538,17 @@ func morir() -> void:
 	if !$sonido_muerte.playing:
 		reproducir_sonido($sonido_muerte)
 	muerto = true
+	murio.emit()
 	velocity = Vector2.ZERO
 	set_physics_process(false)
 	await get_tree().create_timer(0.8).timeout
 	get_tree().reload_current_scene()
+	
+func curar(cantidad: int) -> bool:
+	# false si ya tiene la vida llena (el orbe no se gasta)
+	if muerto or vida.vida >= vida.vida_max:
+		return false
+	vida._curarse(cantidad)
+	vida_cambiada.emit(vida.vida, vida.vida_max)
+	curado.emit(cantidad)
+	return true

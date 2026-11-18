@@ -6,6 +6,9 @@ const SAVE_PATH: String = "user://savegame.bin"
 
 
 func _escena_actual() -> String:
+	var player = get_tree().get_first_node_in_group("jugador")
+	if player != null and player.owner != null:
+		return player.owner.scene_file_path
 	var escena := get_tree().current_scene
 	return escena.scene_file_path if escena else ""
 

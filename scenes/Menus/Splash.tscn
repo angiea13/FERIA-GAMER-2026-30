@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://s0kovda365u8"]
+
+[ext_resource type="Script" uid="uid://djlglbw8qruyp" path="res://scripts/UI/splash.gd" id="1_h3uba"]
+[ext_resource type="Texture2D" uid="uid://c4tg3gvft68m4" path="res://assets/UI Menus/pantalla_carga_final_final.png" id="2_ol6vw"]
+
+[node name="Splash" type="Control" unique_id=841206065]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_h3uba")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2075352841]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=183801724]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_ol6vw")

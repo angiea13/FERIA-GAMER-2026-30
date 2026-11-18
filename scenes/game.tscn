@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://c3y1sg3cbb1go"]
 
-[ext_resource type="PackedScene" uid="uid://cb4a0yijfe7b7" path="res://scenes/Menus/menu_principal.tscn" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://s0kovda365u8" path="res://scenes/Menus/Splash.tscn" id="1_uwrxv"]
 
 [node name="Game" type="Node2D" unique_id=1657811310]
 
-[node name="MenuPrincipal" parent="." unique_id=1336107057 instance=ExtResource("1_lbhrr")]
-position = Vector2(677, 456)
+[node name="Splash" parent="." unique_id=841206065 instance=ExtResource("1_uwrxv")]

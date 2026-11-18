@@ -25,15 +25,14 @@
 metadata/_edit_horizontal_guides_ = [-1784.0]
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=86770229]
-scroll_scale = Vector2(0.2, 0)
-repeat_size = Vector2(3344, 0)
+scroll_scale = Vector2(0.75, 0.85)
 repeat_times = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=674349019]
 modulate = Color(0.47843137, 0.43137255, 0.61960787, 1)
 texture_filter = 1
-position = Vector2(0, -150)
-scale = Vector2(1.34, 1.34)
+position = Vector2(-108, -1235)
+scale = Vector2(1.2870369, 1.287037)
 texture = ExtResource("1_4rgqc")
 centered = false
 

@@ -23,6 +23,7 @@ const BUFFER_ATAQUE = 0.15
 const RADIO_CORTE = 30.0
 const MAXIMO_ATAQUE=3
 const COOLDOWN_ATAQUE_TELARANA=0.2
+const COOLDOWN_ATAQUE=0.6
 #Variables
 #Atributos del personaje
 var vida = Vida.new(50)
@@ -69,6 +70,7 @@ var tiempo_impulso:float=0.0
 var tiempo_ataque := 0.0
 var buffer_ataque := 0.0
 var ultimo_ataque:=0.0
+var tiempo_cooldown_ataque=0.0
 #Daño recibido
 var invulnerable := 0.0
 var muerto := false
@@ -284,15 +286,19 @@ func ataque_combo():
 		numero_ataque=0
 func ataque_en_phisycs(delta):
 	 # Ataque
-	if Input.is_action_just_pressed("atacar"):
+	if tiempo_cooldown_ataque>0:
+		tiempo_cooldown_ataque-=delta
+	else:
+		tiempo_cooldown_ataque=0
+	if Input.is_action_just_pressed("atacar") :
 		buffer_ataque = BUFFER_ATAQUE
 	else:
 		buffer_ataque -= delta
-	if buffer_ataque > 0 and not atacando:
+	if buffer_ataque > 0 and not atacando and tiempo_cooldown_ataque<=0:
+		tiempo_cooldown_ataque=COOLDOWN_ATAQUE
 		reproducir_sonido($sonido_atacar)
 		empezar_ataque()
 		ataque_combo()
-		
 func direccion_ray_casts(delta):
 	$Deslizarse.target_position.x = abs($Deslizarse.target_position.x) * direccion_dash
 	$Brincar.target_position.x = abs($Brincar.target_position.x) * direccion_dash

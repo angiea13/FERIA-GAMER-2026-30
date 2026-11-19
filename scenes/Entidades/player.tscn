@@ -193,7 +193,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"atacando",
-"speed": 9.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -213,7 +213,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"atacando_2",
-"speed": 9.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -222,10 +222,10 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bxotg")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_ns045")
 }, {
-"duration": 2.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_l8a3k")
 }, {
 "duration": 1.0,
@@ -236,7 +236,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"atacando_3",
-"speed": 9.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -413,10 +413,9 @@ texture = ExtResource("2_b0au2")
 material = SubResource("ShaderMaterial_8mdrf")
 position = Vector2(1, 21)
 sprite_frames = SubResource("SpriteFrames_uii18")
-animation = &"double_jump"
+animation = &"atacando_3"
 autoplay = "idle"
-frame = 5
-frame_progress = 1.0
+frame_progress = 0.07680474
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1919632315]
 position = Vector2(-5, 32)

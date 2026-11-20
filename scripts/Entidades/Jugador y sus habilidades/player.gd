@@ -356,7 +356,12 @@ func _update_animation(direction: float) -> void:
 		if Deslizarse():
 			sprite.play("deslizarse")
 		elif velocity.y < 0:
-			sprite.play("jump")
+			if sprite.animation != "jump":
+				sprite.animation = "jump"
+			sprite.pause()
+			# 0.0 al despegar, 1.0 en el punto más alto
+			var t := 1.0 - (velocity.y / JUMP_VELOCITY)
+			sprite.frame = clampi(int(t * 5), 0, 4)
 		else:
 			sprite.play("falling")
 	elif is_on_floor() and abs(velocity.x) > 10:

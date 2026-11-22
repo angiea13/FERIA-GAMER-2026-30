@@ -61,8 +61,7 @@ visible = false
 shape = SubResource("CapsuleShape2D_uii18")
 
 [node name="BurbujaDialogo" parent="." unique_id=1283445994 instance=ExtResource("3_b73eh")]
-position = Vector2(-180, -360)
-scale = Vector2(4.5, 4.5)
+position = Vector2(-242, -437)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=362419980]
 

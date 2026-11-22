@@ -47,6 +47,7 @@ var temporizador_estado := 0.0
 var enfriamiento_contacto := 0.0
 var onda_t := -1.0
 var onda_ya_golpeo := false
+var congelado = false
 
 var glow: Sprite2D
 var sonido_pulso: AudioStreamPlayer2D
@@ -110,6 +111,8 @@ func _nuevo_sonido(ruta: String, db: float) -> AudioStreamPlayer2D:
 
 
 func _physics_process(delta: float) -> void:
+	if congelado:
+		return
 	if estado == Estado.MUERTO:
 		return
 	tiempo += delta

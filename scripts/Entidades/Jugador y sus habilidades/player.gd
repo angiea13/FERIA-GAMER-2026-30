@@ -77,6 +77,33 @@ var muerto := false
 
 var in_dialog = false
 
+var escalas_por_animacion = {
+	"idle": 0.354,
+	"moving": 0.354,
+	"jump": 0.354,
+	"falling": 0.354,
+	"double_jump": 0.354,
+	"atacando": 0.4,   
+	"atacando_2": 0.4,
+	"atacando_3": 0.4,    
+	"deslizarse": 0.249,
+	"entrar": 0.3,
+	"viajar": 0.3
+}
+
+var offsets_por_animacion = {
+	"atacando_2": Vector2(0, 55),
+	"atacando_3": Vector2(0, 115),
+	"deslizarse": Vector2(-18, 38),
+	"idle": Vector2(0, -80),
+	"moving": Vector2(0, -80),
+	"jump": Vector2(0, -80),
+	"falling": Vector2(0, -80),
+	"double_jump": Vector2(0, -80),
+	"entrar": Vector2(0, -80),
+	"viajar": Vector2(0, -80)
+}
+
 signal vida_cambiada(actual: int, maxima: int)
 signal curado(cantidad: int)
 signal murio
@@ -87,6 +114,7 @@ signal murio
 @onready var colision_derecha: CollisionPolygon2D = $Slash_Area/Colision_Derecha
 @onready var colision_izquierda: CollisionPolygon2D = $Slash_Area/Colision_Izquierda
 @onready var dash: Dash = $Dash
+
 func detener_sonidos():
 	for nodo in get_children():
 		if nodo is AudioStreamPlayer:
@@ -103,6 +131,7 @@ func _ready():
 	dash.configurar(1)
 	UtilsGlobal.load_game()
 	sprite.animation_finished.connect(termino_doble_salto)
+	sprite.animation_changed.connect(_on_animation_changed)
 	
 	var barra := BarraVida.new()
 	barra.jugador = self    # debe asignarse antes de add_child
@@ -307,8 +336,12 @@ func direccion_ray_casts(delta):
 	$Revisar_Esquinas.target_position.x = abs($Revisar_Esquinas.target_position.x) * direccion_dash
 func _physics_process(delta: float) -> void:
 	if in_dialog:
-		velocity = Vector2.ZERO
+		if not is_on_floor():
+			velocity.y += get_gravity().y * delta
+		velocity.x = 0
 		move_and_slide()
+		if is_on_floor():
+			sprite.play("idle")
 		return
 	Time_Actual_Dupli += delta
 	tiempo_teletranporte+=delta
@@ -569,3 +602,9 @@ func curar(cantidad: int) -> bool:
 	vida_cambiada.emit(vida.vida, vida.vida_max)
 	curado.emit(cantidad)
 	return true
+
+func _on_animation_changed() -> void:
+	var anim = sprite.animation
+	var factor = escalas_por_animacion.get(anim, 1.0)
+	sprite.scale = Vector2(factor, factor)
+	sprite.offset = offsets_por_animacion.get(anim, Vector2.ZERO)

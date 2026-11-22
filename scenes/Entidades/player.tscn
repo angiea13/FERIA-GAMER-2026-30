@@ -419,8 +419,10 @@ material = SubResource("ShaderMaterial_8mdrf")
 position = Vector2(0, -14)
 scale = Vector2(0.35404035, 0.35404038)
 sprite_frames = SubResource("SpriteFrames_uii18")
-animation = &"viajar"
+animation = &"double_jump"
 autoplay = "idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1919632315]
 position = Vector2(-5, 32)
@@ -456,7 +458,8 @@ collision_mask = 2
 
 [node name="Colision_Derecha" type="CollisionPolygon2D" parent="Slash_Area" unique_id=676649413]
 light_mask = 3
-position = Vector2(50, 93)
+position = Vector2(37, 101)
+scale = Vector2(1.4, 1)
 polygon = PackedVector2Array(0, -150, 119, -130, 186, -88, 194, -32, 142, -12, 64.214935, -5.418213, 12, -1)
 disabled = true
 
@@ -464,6 +467,7 @@ disabled = true
 light_mask = 3
 position = Vector2(-48, -45)
 rotation = 3.1415927
+scale = Vector2(1.4, 1)
 polygon = PackedVector2Array(0, -150, 119, -130, 186, -88, 194, -32, 142, -12, 12, -1)
 disabled = true
 

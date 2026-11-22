@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cwo3m2mm53kof"]
+
+[ext_resource type="Script" uid="uid://bsqmjbd03wv3y" path="res://scenes/World/parallax_background.gd" id="1_qna1g"]
+[ext_resource type="Texture2D" uid="uid://dgvyaxs8yg3ns" path="res://assets/Mundo/Fondo_Parllax_Morado/01_cielo.png" id="2_bwk3u"]
+[ext_resource type="Texture2D" uid="uid://d36seksp35va0" path="res://assets/Mundo/Fondo_Parllax_Morado/02_luna.png" id="3_1u8nc"]
+[ext_resource type="Texture2D" uid="uid://bqttc1b2g3bhh" path="res://assets/Mundo/Fondo_Parllax_Morado/03_nubes.png" id="4_qf3xf"]
+[ext_resource type="Texture2D" uid="uid://clbmxbvl0cac0" path="res://assets/Mundo/Fondo_Parllax_Morado/04_ruinas_lejanas.png" id="5_e5cbl"]
+[ext_resource type="Texture2D" uid="uid://cqpcfgpwn6uc4" path="res://assets/Mundo/Fondo_Parllax_Morado/05_telaranas.png" id="6_lbkkm"]
+[ext_resource type="Texture2D" uid="uid://dpg0uj0h5x7y2" path="res://assets/Mundo/Fondo_Parllax_Morado/06_ruinas_medias_lejanas.png" id="7_q4yp4"]
+[ext_resource type="Texture2D" uid="uid://cmldw05uik1ov" path="res://assets/Mundo/Fondo_Parllax_Morado/07_ruinas_medias_cercanas.png" id="8_rw8b4"]
+[ext_resource type="Texture2D" uid="uid://bo1uvt4wjg4xd" path="res://assets/Mundo/Fondo_Parllax_Morado/08_primer_plano.png" id="9_oe0ao"]
+
+[node name="Fondo_Parallax" type="Node2D" unique_id=894798477]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=393960575]
+script = ExtResource("1_qna1g")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=505313163]
+motion_scale = Vector2(0, 0)
+
+[node name="01Cielo" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=1304783839]
+position = Vector2(807, 455)
+texture = ExtResource("2_bwk3u")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1680830397]
+motion_scale = Vector2(0.1, 0)
+
+[node name="02Luna" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2" unique_id=1392097539]
+position = Vector2(816, 451)
+texture = ExtResource("3_1u8nc")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1270856307]
+motion_scale = Vector2(0.2, 0)
+
+[node name="03Nubes" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3" unique_id=1503196329]
+position = Vector2(812, 447)
+texture = ExtResource("4_qf3xf")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1043813424]
+motion_scale = Vector2(0.4, 0)
+
+[node name="04RuinasLejanas" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4" unique_id=802843311]
+position = Vector2(808, 451)
+texture = ExtResource("5_e5cbl")
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1727245420]
+
+[node name="05Telaranas" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5" unique_id=70049945]
+position = Vector2(808, 429)
+texture = ExtResource("6_lbkkm")
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground" unique_id=100392859]
+
+[node name="06RuinasMediasLejanas" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6" unique_id=1854336297]
+position = Vector2(804, 455)
+texture = ExtResource("7_q4yp4")
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground" unique_id=834074487]
+
+[node name="07RuinasMediasCercanas" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7" unique_id=1531482586]
+position = Vector2(800, 459)
+texture = ExtResource("8_rw8b4")
+
+[node name="ParallaxLayer8" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1290831678]
+
+[node name="08PrimerPlano" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer8" unique_id=1252995213]
+position = Vector2(809, 464)
+texture = ExtResource("9_oe0ao")

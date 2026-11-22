@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" path="res://scenes/World/orbe_vida.tscn" id="12_orbe"]
 [ext_resource type="PackedScene" uid="uid://cvxftovlx7tqd" path="res://scenes/Niveles y Camara autoscroll/check_points.tscn" id="13_check"]
 [ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="14_snd"]
-[ext_resource type="PackedScene" path="res://scenes/Entidades/Notificador.tscn" id="16_notif"]
+[ext_resource type="PackedScene" uid="uid://cjfthqjiv4v0x" path="res://scenes/Entidades/Notificador.tscn" id="16_notif"]
 [ext_resource type="Texture2D" uid="uid://c2upkxsoeask3" path="res://assets/Mundo/fondo_niebla.png" id="17_niebla"]
 
 [node name="level 8" type="Node2D" unique_id=1901930955]
@@ -31,6 +31,7 @@ grow_vertical = 2
 color = Color(0.05, 0.035, 0.09, 1)
 
 [node name="Ui" parent="." unique_id=103952446 instance=ExtResource("1_ui")]
+visible = false
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1400450829]
 scroll_scale = Vector2(0.8, 0.8)

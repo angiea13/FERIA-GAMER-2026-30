@@ -1,11 +1,12 @@
 [gd_scene format=4 uid="uid://c31p0xb6q8v3f"]
 
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_5ni3f"]
-[ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Pausa_En_Lvls.tscn" id="1_o4rip"]
+[ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Utilidades/Pausa_En_Lvls.tscn" id="1_o4rip"]
 [ext_resource type="PackedScene" uid="uid://cxk4bfa3rrj0c" path="res://scenes/World/panel_container.tscn" id="8_tnjhi"]
 [ext_resource type="PackedScene" uid="uid://cvxftovlx7tqd" path="res://scenes/Niveles y Camara autoscroll/check_points.tscn" id="9_kujvv"]
 [ext_resource type="AudioStream" uid="uid://nwcrwo4qxsn7" path="res://assets/Sonidos/Musica De Fondo/H149-88 Citadel Halls MAIN.ogg" id="11_1hjl5"]
 [ext_resource type="TileSet" uid="uid://b1wpksggl72nr" path="res://resources/detalles.tres" id="12_o4rip"]
+[ext_resource type="PackedScene" uid="uid://ckiof2qmg7fu7" path="res://scenes/Entidades/Rarana.tscn" id="12_vuylb"]
 [ext_resource type="PackedScene" uid="uid://c4j2fv3it820u" path="res://scenes/Entidades/Caballero_Enemy.tscn" id="enemigo"]
 [ext_resource type="PackedScene" path="res://scenes/World/meta.tscn" id="meta"]
 [ext_resource type="Script" uid="uid://dh4x8b2foxbk7" path="res://scripts/World Building/tilemap_peligros.gd" id="peligros"]
@@ -108,6 +109,11 @@ tecla = "E"
 [node name="Indicador3" parent="." unique_id=2056695795 instance=ExtResource("8_tnjhi")]
 position = Vector2(4578, -323)
 tecla = "Q"
+
+[node name="CharacterBody2D" parent="." unique_id=1900945835 instance=ExtResource("12_vuylb")]
+position = Vector2(2486, -117)
+scale = Vector2(0.6, 0.6)
+lines = Array[String](["Hola", "Que", "Tal"])
 
 [node name="CheckPoints" parent="." unique_id=761614622 instance=ExtResource("9_kujvv")]
 position = Vector2(2798, -166)

@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://53fgenh8gyks"]
 
-[ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Pausa_En_Lvls.tscn" id="1_ui"]
+[ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Utilidades/Pausa_En_Lvls.tscn" id="1_ui"]
 [ext_resource type="TileSet" uid="uid://bnoc84ls8didp" path="res://resources/tileset_mundo.tres" id="2_ts"]
 [ext_resource type="Script" uid="uid://dh4x8b2foxbk7" path="res://scripts/World Building/tilemap_peligros.gd" id="3_peligros"]
 [ext_resource type="Script" uid="uid://dk8v8qryw7ssf" path="res://scripts/World Building/tile_maps_que_matan.gd" id="4_mata"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" path="res://scenes/World/orbe_vida.tscn" id="12_orbe"]
 [ext_resource type="PackedScene" uid="uid://cvxftovlx7tqd" path="res://scenes/Niveles y Camara autoscroll/check_points.tscn" id="13_check"]
 [ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="14_snd"]
-[ext_resource type="PackedScene" path="res://scenes/Entidades/Notificador.tscn" id="16_notif"]
+[ext_resource type="PackedScene" uid="uid://cjfthqjiv4v0x" path="res://scenes/Entidades/Notificador.tscn" id="16_notif"]
 [ext_resource type="Texture2D" uid="uid://c2upkxsoeask3" path="res://assets/Mundo/fondo_niebla.png" id="17_niebla"]
 
 [node name="level 8" type="Node2D" unique_id=1901930955]

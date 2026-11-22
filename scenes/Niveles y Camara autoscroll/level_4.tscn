@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c2upkxsoeask3" path="res://assets/Mundo/fondo_niebla.png" id="1_4rgqc"]
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_o3nvj"]
-[ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Pausa_En_Lvls.tscn" id="2_eu0hj"]
+[ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Utilidades/Pausa_En_Lvls.tscn" id="2_eu0hj"]
 [ext_resource type="PackedScene" uid="uid://bivgotvup4047" path="res://scenes/Niveles y Camara autoscroll/level.tscn" id="2_srp1y"]
 [ext_resource type="Texture2D" uid="uid://b6q13yb1kdnnf" path="res://assets/Mundo/floor.png" id="3_o3nvj"]
 [ext_resource type="PackedScene" uid="uid://ctq14dgep25ts" path="res://scenes/World/plataforma.tscn" id="4_3e6gy"]

@@ -75,6 +75,8 @@ var tiempo_cooldown_ataque=0.0
 var invulnerable := 0.0
 var muerto := false
 
+var in_dialog = false
+
 signal vida_cambiada(actual: int, maxima: int)
 signal curado(cantidad: int)
 signal murio
@@ -304,6 +306,10 @@ func direccion_ray_casts(delta):
 	$Brincar.target_position.x = abs($Brincar.target_position.x) * direccion_dash
 	$Revisar_Esquinas.target_position.x = abs($Revisar_Esquinas.target_position.x) * direccion_dash
 func _physics_process(delta: float) -> void:
+	if in_dialog:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
 	Time_Actual_Dupli += delta
 	tiempo_teletranporte+=delta
 	tiempo_teletransporte_ant+=delta

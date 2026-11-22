@@ -47,10 +47,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Regresar" type="Button" parent="ButtonManager" unique_id=215161311]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -1.05
-anchor_top = 21.5
-anchor_right = -0.775
-anchor_bottom = 21.5
+anchor_left = -1.475
+anchor_top = 7.4
+anchor_right = -1.2
+anchor_bottom = 7.4
 offset_left = -267.0
 offset_top = 214.0
 offset_right = 132.0
@@ -64,36 +64,36 @@ metadata/_edit_use_anchors_ = true
 [node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("3_rfkdw")]
 stream = ExtResource("4_kyok6")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=1159033104]
 offset_left = -420.0
 offset_top = -400.0
 offset_right = 620.0
 offset_bottom = 420.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBox" type="VBoxContainer" parent="Panel"]
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=848190710]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Titulo" type="Label" parent="Panel/VBox"]
+[node name="Titulo" type="Label" parent="Panel/VBox" unique_id=98837947]
 layout_mode = 2
 theme_override_font_sizes/font_size = 44
 text = "CONTROLES DEL JUEGO"
 horizontal_alignment = 1
 
-[node name="Ayuda" type="Label" parent="Panel/VBox"]
+[node name="Ayuda" type="Label" parent="Panel/VBox" unique_id=1847134720]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Haz clic en una tecla y pulsa la nueva. Esc cancela."
 horizontal_alignment = 1
 
-[node name="Lista" type="GridContainer" parent="Panel/VBox"]
+[node name="Lista" type="GridContainer" parent="Panel/VBox" unique_id=220715536]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 8
 columns = 3
 
-[node name="Restaurar" type="Button" parent="Panel/VBox"]
+[node name="Restaurar" type="Button" parent="Panel/VBox" unique_id=839868739]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 28

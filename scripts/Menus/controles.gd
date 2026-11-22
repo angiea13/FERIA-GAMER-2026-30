@@ -55,7 +55,7 @@ func _on_restaurar_pressed() -> void:
 	construir_lista()
 
 
-# ---------------------------------------------------------------- lista
+#Lista controles
 
 func construir_lista() -> void:
 	for hijo in lista.get_children():
@@ -104,7 +104,7 @@ func _estilo(color: Color) -> StyleBoxFlat:
 	return estilo
 
 
-# ---------------------------------------------------------- reasignación
+#Reasignar
 
 func _empezar_espera(accion: String, ranura: int) -> void:
 	accion_esperando = accion
@@ -197,7 +197,7 @@ func _codigo_tecla(e: InputEventKey) -> int:
 	return e.physical_keycode if e.physical_keycode != 0 else e.keycode
 
 
-# ------------------------------------------------------------- textos
+#Texto
 
 static func nombre_evento(e: InputEvent) -> String:
 	if e is InputEventKey:

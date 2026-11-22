@@ -123,6 +123,10 @@ tecla = "Q"
 position = Vector2(2798, -166)
 scale = Vector2(4, 4)
 
+[node name="CheckPoints2" parent="." unique_id=1909454677 instance=ExtResource("9_kujvv")]
+position = Vector2(6689, -177)
+scale = Vector2(4, 4)
+
 [node name="Musica_Del_Juego" type="AudioStreamPlayer" parent="." unique_id=512230694]
 stream = ExtResource("11_1hjl5")
 volume_db = -7.172

@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cvxftovlx7tqd" path="res://scenes/Niveles y Camara autoscroll/check_points.tscn" id="14_srp1y"]
 [ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="18_mt61m"]
 [ext_resource type="AudioStream" uid="uid://cy8t5ay4grvtv" path="res://assets/Sonidos/Musica De Fondo/H15-111 MAIN ACTION.ogg" id="19_eu0hj"]
+[ext_resource type="PackedScene" uid="uid://cjfthqjiv4v0x" path="res://scenes/Entidades/Notificador.tscn" id="20_q752j"]
 
 [node name="Level4" type="Node2D" unique_id=49675082]
 metadata/_edit_horizontal_guides_ = [-1784.0]
@@ -132,9 +133,27 @@ position = Vector2(376, -309)
 scale = Vector2(0.5, 0.5)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=892470718]
-position = Vector2(372, 206)
+position = Vector2(372, -180)
 scale = Vector2(2, 2)
 offset = Vector2(0, -50)
+
+[node name="Notificador" parent="Player" unique_id=1328097470 instance=ExtResource("20_q752j")]
+position = Vector2(1118, -1014)
+
+[node name="Notificador2" parent="Player" unique_id=343954927 instance=ExtResource("20_q752j")]
+position = Vector2(2698, -1128)
+
+[node name="Notificador3" parent="Player" unique_id=1954563321 instance=ExtResource("20_q752j")]
+position = Vector2(1946, -422)
+
+[node name="Notificador4" parent="Player" unique_id=762306623 instance=ExtResource("20_q752j")]
+position = Vector2(3572, -558)
+
+[node name="Notificador5" parent="Player" unique_id=2130384596 instance=ExtResource("20_q752j")]
+position = Vector2(8164, -1136)
+
+[node name="Notificador6" parent="Player" unique_id=328219676 instance=ExtResource("20_q752j")]
+position = Vector2(7116, -330)
 
 [node name="Indicador2" parent="." unique_id=1964485739 instance=ExtResource("9_euuk0")]
 position = Vector2(4451, -454)

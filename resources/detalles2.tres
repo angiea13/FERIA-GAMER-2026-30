@@ -1866,6 +1866,7 @@ texture = ExtResource("1_jnsl7")
 13:55/0 = 0
 14:55/0 = 0
 25:23/0 = 0
+37:17/0 = 0
 
 [resource]
 sources/0 = SubResource("TileSetAtlasSource_5i82f")

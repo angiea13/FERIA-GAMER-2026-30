@@ -150,11 +150,9 @@ func Ataque_Telarana(delta):
 		sprite.play("idle")
 		await  get_tree().physics_frame
 		var cuerpos = $Telaranas_Area.get_overlapping_bodies()
-
-		print("Cuerpos detectados: ", cuerpos.size())
 		for cuerpo in cuerpos:
-			print("Detectado: ", cuerpo.name)
-			golpear(cuerpo, dano * 2)
+			golpear(cuerpo, 15)
+		invulnerable+=0.9
 		await get_tree().create_timer(0.8).timeout
 		telarana_todas_direcciones=false
 		$Telaranas_Area/Colision_Telarana.disabled=true

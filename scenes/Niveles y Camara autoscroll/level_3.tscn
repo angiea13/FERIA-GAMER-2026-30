@@ -107,14 +107,6 @@ scale = Vector2(3, 3)
 
 [node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("10_bc5ji")]
 
-[node name="Telarana" parent="." unique_id=1261314171 node_paths=PackedStringArray("siguiente", "trampas") instance=ExtResource("5_6rjf0")]
-position = Vector2(117, -181)
-siguiente = NodePath("../Telarana2")
-trampas = [NodePath("../Arana_1")]
-
-[node name="Telarana2" parent="." unique_id=2029777224 instance=ExtResource("5_6rjf0")]
-position = Vector2(1204, -209)
-
 [node name="Arana_1" parent="." unique_id=1723259553 instance=ExtResource("4_4q82l")]
 position = Vector2(465, -133)
 

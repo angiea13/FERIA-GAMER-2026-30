@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="16_fo4tb"]
 [ext_resource type="AudioStream" uid="uid://cy8t5ay4grvtv" path="res://assets/Sonidos/Musica De Fondo/H15-111 MAIN ACTION.ogg" id="17_br753"]
 [ext_resource type="PackedScene" uid="uid://1can08s4fxkp" path="res://scenes/Entidades/player.tscn" id="18_1fpk4"]
+[ext_resource type="PackedScene" uid="uid://cjfthqjiv4v0x" path="res://scenes/Entidades/Notificador.tscn" id="20_k8818"]
 
 [node name="level_5" type="Node2D" unique_id=1051553276]
 script = ExtResource("1_g1eei")
@@ -169,3 +170,15 @@ scale = Vector2(2, 2)
 zoom = Vector2(0.8, 0.8)
 limit_left = -10000
 limit_bottom = 100000
+
+[node name="Notificador" parent="." unique_id=1328097470 instance=ExtResource("20_k8818")]
+position = Vector2(-1116, -1138)
+
+[node name="Notificador2" parent="." unique_id=53531923 instance=ExtResource("20_k8818")]
+position = Vector2(-347, -1234)
+
+[node name="Notificador3" parent="." unique_id=975707833 instance=ExtResource("20_k8818")]
+position = Vector2(9, -309)
+
+[node name="Notificador4" parent="." unique_id=1257794830 instance=ExtResource("20_k8818")]
+position = Vector2(1200, -1071)

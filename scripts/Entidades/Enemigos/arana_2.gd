@@ -121,7 +121,7 @@ func _physics_process(delta: float) -> void:
 		_imprimir_estado()
 
 
-# ================================================================ ESTADOS
+#Estados Posibles
 func _estado_patrulla(delta: float) -> void:
 	_animar("Movimiento")
 	if _ve_al_jugador(rango_vision):
@@ -225,7 +225,7 @@ func _estado_golpeado(delta: float) -> void:
 		_cambiar(Estado.PERSEGUIR)          # tras recibir un golpe va a por ti
 
 
-# ================================================================ DECISIONES
+#Que puede decidir
 func _elegir_ataque() -> bool:
 	# Devuelve true si empezó un ataque
 	if jugador == null:
@@ -286,8 +286,7 @@ func _empezar_recuperar(tiempo: float) -> void:
 	sprite.play("Movimiento")
 	sprite.pause()
 
-
-# ================================================================ UTILIDADES
+#Que cosas puede hacer
 func _cambiar(nuevo: Estado) -> void:
 	estado = nuevo
 	if not sprite.is_playing():
@@ -395,7 +394,7 @@ func _al_terminar_animacion() -> void:
 	if estado == Estado.MORDIDA and sprite.animation == "Ataque":
 		_empezar_recuperar(recuperacion_mordida)
 
-
+#Para revisar bugs
 func _imprimir_estado() -> void:
 	var txt := "[%s] %s" % [name, Estado.keys()[estado]]
 	if jugador == null:
@@ -404,10 +403,9 @@ func _imprimir_estado() -> void:
 		var d := jugador.global_position - global_position
 		txt += " | dist X=%d Y=%d | cerca=%s en_zona=%s | dash_listo=%s cd=%.1f | suelo=%s" % [
 			int(d.x), int(d.y), _jugador_cerca(), _jugador_en_zona(), _dash_listo(), cd_dash, is_on_floor()]
-	print(txt)
+	#print(txt)
 
-
-# ================================================================ DAÑO
+#Dano
 # Lo llama el jugador (player.gd -> golpear()) cuando la espada lo toca.
 func recibir_golpe(dir: Vector2, cantidad: int) -> void:
 	if estado == Estado.MUERTO:
@@ -423,10 +421,16 @@ func recibir_golpe(dir: Vector2, cantidad: int) -> void:
 	velocity = Vector2(dir.x * retroceso_golpe, -200.0)
 	sprite.play("Golpeado")
 
+signal murio
+
+func morir() -> void:
+	murio.emit()
+	queue_free()
 
 func _morir() -> void:
 	estado = Estado.MUERTO
 	muerto = true
+	morir()
 	remove_from_group("golpeable")
 	hitbox.set_deferred("disabled", true)
 	zona_dano.set_deferred("monitoring", false)

@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_5ni3f"]
 [ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Utilidades/Pausa_En_Lvls.tscn" id="1_o4rip"]
+[ext_resource type="PackedScene" uid="uid://cwo3m2mm53kof" path="res://scenes/World/fondo_parallax.tscn" id="1_vuylb"]
 [ext_resource type="PackedScene" uid="uid://cxk4bfa3rrj0c" path="res://scenes/World/panel_container.tscn" id="8_tnjhi"]
 [ext_resource type="PackedScene" uid="uid://cvxftovlx7tqd" path="res://scenes/Niveles y Camara autoscroll/check_points.tscn" id="9_kujvv"]
 [ext_resource type="AudioStream" uid="uid://nwcrwo4qxsn7" path="res://assets/Sonidos/Musica De Fondo/H149-88 Citadel Halls MAIN.ogg" id="11_1hjl5"]
@@ -19,8 +20,12 @@ subpixel_positioning = 0
 
 [node name="Level2" type="Node2D" unique_id=1179149509]
 
+[node name="Fondo_Parallax" parent="." unique_id=894798477 instance=ExtResource("1_vuylb")]
+position = Vector2(117.1653, -125.77789)
+
 [node name="Fondo" type="CanvasLayer" parent="." unique_id=318781655]
 layer = -10
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Fondo" unique_id=504591217]
 anchors_preset = 15
@@ -93,7 +98,7 @@ position = Vector2(-499, -102)
 scale = Vector2(0.5, 0.5)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=198693583]
-position = Vector2(372, 206)
+position = Vector2(372, -220)
 scale = Vector2(2, 2)
 limit_left = -1100
 limit_bottom = 450

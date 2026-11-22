@@ -264,8 +264,22 @@ material = SubResource("ShaderMaterial_sk4q6")
 collision_layer = 6
 collision_mask = 6
 script = ExtResource("1_2gfgy")
-vida_maxima = 3
-dano = 25
+vida_maxima = 70
+dano = 15
+dano_dash = 20
+velocidad_patrulla = 150.0
+velocidad_persecucion = 300.0
+aceleracion = 1800.0
+friccion = 1000.0
+rango_vision = 1500.0
+rango_perder = 1500.0
+altura_max = 600.0
+rango_mordida = 80.0
+frame_golpe = 4
+dash_distancia_max = 1400.0
+salto_dash = 500.0
+velocidad_dash_max = 1600.0
+enfriamiento_dash = 1.2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1257274974]
 light_mask = 2

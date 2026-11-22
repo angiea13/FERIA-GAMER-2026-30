@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cxk4bfa3rrj0c" path="res://scenes/World/panel_container.tscn" id="12_xkti4"]
 [ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="16_lnj83"]
 [ext_resource type="AudioStream" uid="uid://cy8t5ay4grvtv" path="res://assets/Sonidos/Musica De Fondo/H15-111 MAIN ACTION.ogg" id="17_q085r"]
+[ext_resource type="PackedScene" uid="uid://cjfthqjiv4v0x" path="res://scenes/Entidades/Notificador.tscn" id="19_8n210"]
 
 [sub_resource type="Animation" id="Animation_ttldm"]
 resource_name = "Movimiento"
@@ -191,7 +192,7 @@ color = Color(0.05, 0.035, 0.09, 1)
 [node name="Meta" parent="." unique_id=60765829 instance=ExtResource("5_u55if")]
 visible = false
 position = Vector2(2583, -3894)
-siguiente_nivel = "uid://c3y1sg3cbb1go"
+siguiente_nivel = "uid://53fgenh8gyks"
 
 [node name="Terreno" type="TileMapLayer" parent="." unique_id=281411704]
 texture_filter = 1
@@ -345,3 +346,24 @@ limit_bottom = 1000000000
 [node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("16_lnj83")]
 stream = ExtResource("17_q085r")
 volume_db = -12.172
+
+[node name="Notificador" parent="." unique_id=1328097470 instance=ExtResource("19_8n210")]
+position = Vector2(1949, -1545)
+
+[node name="Notificador2" parent="." unique_id=1953401939 instance=ExtResource("19_8n210")]
+position = Vector2(2957, -1588)
+
+[node name="Notificador3" parent="." unique_id=1543544816 instance=ExtResource("19_8n210")]
+position = Vector2(3715, -1740)
+
+[node name="Notificador4" parent="." unique_id=366052941 instance=ExtResource("19_8n210")]
+position = Vector2(2231, -1458)
+
+[node name="Notificador5" parent="." unique_id=1448195736 instance=ExtResource("19_8n210")]
+position = Vector2(64, -2466)
+
+[node name="Notificador6" parent="." unique_id=2136871213 instance=ExtResource("19_8n210")]
+position = Vector2(-2092, -3495)
+
+[node name="Notificador7" parent="." unique_id=507795553 instance=ExtResource("19_8n210")]
+position = Vector2(-781, -3907)

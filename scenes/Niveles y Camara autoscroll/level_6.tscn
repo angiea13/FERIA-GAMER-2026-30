@@ -20,6 +20,7 @@
 [ext_resource type="TileSet" uid="uid://cxe7kerpormxy" path="res://resources/detalles3.tres" id="17_4fmjv"]
 [ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="18_l8fry"]
 [ext_resource type="AudioStream" uid="uid://cy8t5ay4grvtv" path="res://assets/Sonidos/Musica De Fondo/H15-111 MAIN ACTION.ogg" id="19_dndmb"]
+[ext_resource type="PackedScene" uid="uid://cjfthqjiv4v0x" path="res://scenes/Entidades/Notificador.tscn" id="21_ax8na"]
 
 [sub_resource type="Animation" id="Animation_kwk0u"]
 resource_name = "Movimiento"
@@ -321,3 +322,33 @@ tile_set = ExtResource("17_4fmjv")
 [node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("18_l8fry")]
 stream = ExtResource("19_dndmb")
 volume_db = -12.172
+
+[node name="Notificador" parent="." unique_id=1328097470 instance=ExtResource("21_ax8na")]
+position = Vector2(-5562, -2159)
+
+[node name="Notificador2" parent="." unique_id=129378283 instance=ExtResource("21_ax8na")]
+position = Vector2(-663, -146)
+
+[node name="Notificador3" parent="." unique_id=2143635905 instance=ExtResource("21_ax8na")]
+position = Vector2(-1995, -220)
+
+[node name="Notificador4" parent="." unique_id=1389215919 instance=ExtResource("21_ax8na")]
+position = Vector2(-2439, -864)
+
+[node name="Notificador5" parent="." unique_id=2096202070 instance=ExtResource("21_ax8na")]
+position = Vector2(-1936, -1116)
+
+[node name="Notificador6" parent="." unique_id=1411854503 instance=ExtResource("21_ax8na")]
+position = Vector2(-2528, -1486)
+
+[node name="Notificador7" parent="." unique_id=1172425581 instance=ExtResource("21_ax8na")]
+position = Vector2(-6531, -1389)
+
+[node name="Notificador8" parent="." unique_id=1835003890 instance=ExtResource("21_ax8na")]
+position = Vector2(-7205, -1241)
+
+[node name="Notificador9" parent="." unique_id=605843248 instance=ExtResource("21_ax8na")]
+position = Vector2(-8967, -2165)
+
+[node name="Notificador10" parent="." unique_id=913423359 instance=ExtResource("21_ax8na")]
+position = Vector2(-8439, -2156)

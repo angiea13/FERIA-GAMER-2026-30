@@ -197,7 +197,7 @@ size = Vector2(56, 121)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]
 size = Vector2(23.5, 121.25)
 
-[node name="Caballero_Enemy" type="CharacterBody2D" unique_id=1723259553]
+[node name="Arana_1" type="CharacterBody2D" unique_id=1723259553]
 texture_filter = 1
 material = SubResource("ShaderMaterial_sk4q6")
 collision_layer = 6

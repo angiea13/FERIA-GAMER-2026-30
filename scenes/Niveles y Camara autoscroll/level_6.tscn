@@ -64,9 +64,9 @@ _data = {
 position = Vector2(4, 8)
 
 [node name="Fondo_Parallax" parent="." unique_id=894798477 instance=ExtResource("1_lqevt")]
+visible = false
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1612960156]
-visible = false
 scroll_scale = Vector2(0.75, 0.75)
 repeat_size = Vector2(5145, 0)
 repeat_times = 2

@@ -6,4 +6,3 @@
 layer = 5
 
 [node name="Menu Pausa" parent="." unique_id=47701127 instance=ExtResource("1_01o7r")]
-visible = true

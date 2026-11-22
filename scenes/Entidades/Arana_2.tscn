@@ -31,6 +31,34 @@ region = Rect2(2028, 350, 507, 350)
 atlas = ExtResource("2_k77eo")
 region = Rect2(2535, 350, 507, 350)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6sig"]
+atlas = ExtResource("2_k77eo")
+region = Rect2(0, 1050, 507, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6gjm"]
+atlas = ExtResource("2_k77eo")
+region = Rect2(507, 1050, 507, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhdwc"]
+atlas = ExtResource("2_k77eo")
+region = Rect2(1014, 1050, 507, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sl4kq"]
+atlas = ExtResource("2_k77eo")
+region = Rect2(1521, 1050, 507, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knm0l"]
+atlas = ExtResource("2_k77eo")
+region = Rect2(2028, 1050, 507, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecmod"]
+atlas = ExtResource("2_k77eo")
+region = Rect2(2535, 1050, 507, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2car"]
+atlas = ExtResource("2_k77eo")
+region = Rect2(3042, 1050, 507, 350)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rdc48"]
 atlas = ExtResource("2_k77eo")
 region = Rect2(0, 700, 507, 350)
@@ -103,34 +131,6 @@ region = Rect2(3042, 1400, 507, 350)
 atlas = ExtResource("2_k77eo")
 region = Rect2(3549, 1400, 507, 350)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f6sig"]
-atlas = ExtResource("2_k77eo")
-region = Rect2(0, 1050, 507, 350)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v6gjm"]
-atlas = ExtResource("2_k77eo")
-region = Rect2(507, 1050, 507, 350)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uhdwc"]
-atlas = ExtResource("2_k77eo")
-region = Rect2(1014, 1050, 507, 350)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sl4kq"]
-atlas = ExtResource("2_k77eo")
-region = Rect2(1521, 1050, 507, 350)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_knm0l"]
-atlas = ExtResource("2_k77eo")
-region = Rect2(2028, 1050, 507, 350)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ecmod"]
-atlas = ExtResource("2_k77eo")
-region = Rect2(2535, 1050, 507, 350)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c2car"]
-atlas = ExtResource("2_k77eo")
-region = Rect2(3042, 1050, 507, 350)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_qnpof"]
 animations = [{
 "frames": [{
@@ -154,7 +154,33 @@ animations = [{
 }],
 "loop": 0,
 "name": &"Ataque",
-"speed": 12.0
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6sig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6gjm")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_uhdwc")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_sl4kq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knm0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecmod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2car")
+}],
+"loop": 1,
+"name": &"Dash",
+"speed": 11.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -224,39 +250,13 @@ animations = [{
 "loop": 0,
 "name": &"Muerte",
 "speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f6sig")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v6gjm")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_uhdwc")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_sl4kq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_knm0l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ecmod")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c2car")
-}],
-"loop": 1,
-"name": &"dash",
-"speed": 11.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yuyls"]
-size = Vector2(145, 121)
+size = Vector2(400, 186)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]
-size = Vector2(58.25, 121.25)
+size = Vector2(161.28125, 183.8125)
 
 [node name="Arana_2" type="CharacterBody2D" unique_id=1723259553]
 texture_filter = 1
@@ -264,30 +264,30 @@ material = SubResource("ShaderMaterial_sk4q6")
 collision_layer = 6
 collision_mask = 6
 script = ExtResource("1_2gfgy")
+vida_maxima = 3
+dano = 25
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1257274974]
 light_mask = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_naha6")
 position = Vector2(37.000008, 42.500004)
-scale = Vector2(0.41025642, 0.34571427)
+scale = Vector2(1, 0.844)
 sprite_frames = SubResource("SpriteFrames_qnpof")
-animation = &"Ataque"
-frame = 5
-frame_progress = 1.0
+animation = &"Dash"
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1777075416]
 light_mask = 2
-position = Vector2(22.5, 52.5)
+position = Vector2(-3, 96)
 shape = SubResource("RectangleShape2D_yuyls")
 
 [node name="Ataque_Derecha" type="CollisionShape2D" parent="." unique_id=1970560452]
-position = Vector2(61, 49)
+position = Vector2(112.640625, 96)
 shape = SubResource("RectangleShape2D_qnpof")
 disabled = true
 
 [node name="Ataque_Izquierda" type="CollisionShape2D" parent="." unique_id=2099686288]
-position = Vector2(-12, 51)
+position = Vector2(-110, 97)
 shape = SubResource("RectangleShape2D_qnpof")
 disabled = true
 

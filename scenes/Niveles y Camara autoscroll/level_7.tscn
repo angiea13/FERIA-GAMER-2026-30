@@ -189,6 +189,7 @@ color = Color(0.05, 0.035, 0.09, 1)
 [node name="Menu Pausa2" parent="Ui" unique_id=47701127 instance=ExtResource("1_wy3yu")]
 
 [node name="Meta" parent="." unique_id=60765829 instance=ExtResource("5_u55if")]
+visible = false
 position = Vector2(2583, -3894)
 siguiente_nivel = "uid://c3y1sg3cbb1go"
 

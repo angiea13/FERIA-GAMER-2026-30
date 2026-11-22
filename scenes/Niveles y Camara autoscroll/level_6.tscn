@@ -253,6 +253,9 @@ position = Vector2(-2787, -1226)
 [node name="CheckPoints3" parent="." unique_id=1345173754 instance=ExtResource("14_gdsvh")]
 position = Vector2(-4457, -1158)
 
+[node name="CheckPoints6" parent="." unique_id=481439463 instance=ExtResource("14_gdsvh")]
+position = Vector2(-7651, -2164)
+
 [node name="CheckPoints4" parent="." unique_id=1683522839 instance=ExtResource("14_gdsvh")]
 position = Vector2(-5222, -1917)
 

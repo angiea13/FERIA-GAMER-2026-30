@@ -16,6 +16,5 @@ func _physics_process(_delta: float) -> void:
 			continue
 		var dano: int = datos.get_custom_data("dano")*100
 		if dano > 0:
-			print(name, " hace daño: ", dano)
 			j.recibir_dano(dano, map_to_local(celda).x)
 			return

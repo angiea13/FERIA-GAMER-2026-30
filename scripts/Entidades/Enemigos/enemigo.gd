@@ -89,7 +89,7 @@ func _ia() -> void:
 		return
 	if jugador != null and _jugador_en_rango():
 		_mirar_al_jugador()
-		velocity.x = 5.0
+		velocity.x = 0.0
 		if tiempo_en_recuperacion <= 0.0:
 			iniciar_ataque()
 		return
@@ -123,7 +123,7 @@ func iniciar_ataque() -> void:
 		return
 	atacando = true
 	ya_pego = false
-	velocity.x = 5.0
+	velocity.x = 0.0
 	sprite.play("Ataque")
 	sprite.frame = 0
 
@@ -174,8 +174,6 @@ func _morir() -> void:
 	hitbox.set_deferred("disabled", true)
 	zona_dano.set_deferred("monitoring", false)
 	velocity = Vector2.ZERO
-	sprite.play("Muerte")
-	await sprite.animation_finished 
 	var t := create_tween()
 	t.tween_property(sprite, "modulate:a", 0.0, 0.5)
 	t.tween_callback(queue_free)

@@ -31,7 +31,6 @@ grow_vertical = 2
 color = Color(0.05, 0.035, 0.09, 1)
 
 [node name="Ui" parent="." unique_id=103952446 instance=ExtResource("1_ui")]
-visible = false
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1400450829]
 scroll_scale = Vector2(0.8, 0.8)
@@ -59,7 +58,7 @@ position = Vector2(0, 900)
 
 [node name="Meta" parent="." unique_id=2086874213 instance=ExtResource("5_meta")]
 position = Vector2(10000, -896)
-siguiente_nivel = "res://scenes/Niveles y Camara autoscroll/level_boss.tscn"
+siguiente_nivel = "uid://ckwj6i18r4myq"
 
 [node name="CheckPoint1" parent="." unique_id=1803396343 instance=ExtResource("13_check")]
 position = Vector2(112, -42)

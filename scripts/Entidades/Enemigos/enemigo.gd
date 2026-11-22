@@ -12,6 +12,7 @@ extends CharacterBody2D
 @export var tiempo_recuperacion := 1.0      # pausa entre ataques
 @export var retroceso_golpe := 350.0
 @export var empieza_mirando_derecha := true
+@export var tiempo_entrar_telarana := 2.0 
 
 var congelado = false
 var vida: Vida
@@ -25,7 +26,9 @@ var tiempo_en_recuperacion := 0.0
 var enfriamiento_giro := 0.0
 var zona_dano: Area2D
 var jugador: Jugador
-
+var dentro_telarana := false
+var telarana_actual: Telarana = null
+var tween_telarana: Tween
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: CollisionShape2D = $Hitbox
 @onready var ray_derecha: RayCast2D = $Derecha
@@ -60,7 +63,7 @@ func _crear_zona_dano() -> void:
 func _physics_process(delta: float) -> void:
 	if congelado:
 		return
-	if muerto:
+	if muerto or dentro_telarana:
 		return
 	if not is_instance_valid(jugador):
 		jugador = get_tree().get_first_node_in_group("jugador") as Jugador
@@ -177,3 +180,30 @@ func _morir() -> void:
 	var t := create_tween()
 	t.tween_property(sprite, "modulate:a", 0.0, 0.5)
 	t.tween_callback(queue_free)
+func entrar_en_telarana(tela: Telarana) -> void:
+	if muerto or dentro_telarana:
+		return
+	dentro_telarana = true
+	telarana_actual = tela
+	tela.dentro.append(self)                   # se apunta ya: si cortan mientras entra, también muere
+	atacando = false
+	golpeado = false
+	velocity = Vector2.ZERO
+	remove_from_group("golpeable")             # la espada no le da: hay que cortar la telaraña
+	zona_dano.set_deferred("monitoring", false)
+	sprite.play("Dentro")
+	# Se mete en la telaraña en 2 segundos, con movimiento suave
+	if tween_telarana:
+		tween_telarana.kill()
+	tween_telarana = create_tween()
+	tween_telarana.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween_telarana.tween_property(self, "global_position",
+		tela.global_position + Telarana.SALIDA_HILO, tiempo_entrar_telarana)
+
+
+func morir_por_telarana() -> void:
+	if tween_telarana:
+		tween_telarana.kill()                  # si estaba entrando, se queda donde está
+	dentro_telarana = false
+	telarana_actual = null
+	_morir()

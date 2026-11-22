@@ -43,7 +43,6 @@ centered = false
 
 [node name="Ui" parent="." unique_id=503610013 instance=ExtResource("2_eu0hj")]
 layer = 15
-visible = false
 
 [node name="Menu Pausa2" parent="Ui" unique_id=47701127 instance=ExtResource("1_o3nvj")]
 

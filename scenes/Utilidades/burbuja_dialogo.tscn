@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://csxy11t01wylw"]
+
+[ext_resource type="Script" uid="uid://cgr4dhu1qoq0u" path="res://scripts/World Building/burbuja_dialogo.gd" id="1_54oq7"]
+[ext_resource type="Texture2D" uid="uid://1wmli3fpcxtk" path="res://assets/Rarana/bubble.png" id="1_pclop"]
+[ext_resource type="FontFile" uid="uid://cygwxomp8pjhl" path="res://resources/Rotulo-Normal-Regular.otf" id="2_54oq7"]
+
+[node name="BurbujaDialogo" type="Node2D" unique_id=1283445994]
+script = ExtResource("1_54oq7")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1858101838]
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_pclop")
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect" unique_id=1816440006]
+layout_mode = 0
+offset_left = 466.0
+offset_top = 356.0
+offset_right = 1433.0
+offset_bottom = 676.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureRect/MarginContainer" unique_id=1734699521]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.89679736, 0.8336471, 0.60605204, 1)
+theme_override_fonts/normal_font = ExtResource("2_54oq7")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

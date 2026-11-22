@@ -13,6 +13,7 @@ extends CharacterBody2D
 @export var retroceso_golpe := 350.0
 @export var empieza_mirando_derecha := true
 
+var congelado = false
 var vida: Vida
 var direccion := 1
 var atacando := false
@@ -57,6 +58,8 @@ func _crear_zona_dano() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if congelado:
+		return
 	if muerto:
 		return
 	if not is_instance_valid(jugador):

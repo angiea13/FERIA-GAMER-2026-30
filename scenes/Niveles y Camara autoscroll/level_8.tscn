@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://53fgenh8gyks"]
 
-[ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Pausa_En_Lvls.tscn" id="1_ui"]
+[ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Utilidades/Pausa_En_Lvls.tscn" id="1_ui"]
 [ext_resource type="TileSet" uid="uid://bnoc84ls8didp" path="res://resources/tileset_mundo.tres" id="2_ts"]
 [ext_resource type="Script" uid="uid://dh4x8b2foxbk7" path="res://scripts/World Building/tilemap_peligros.gd" id="3_peligros"]
 [ext_resource type="Script" uid="uid://dk8v8qryw7ssf" path="res://scripts/World Building/tile_maps_que_matan.gd" id="4_mata"]

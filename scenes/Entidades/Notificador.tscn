@@ -102,7 +102,7 @@ radius = 24.0
 [sub_resource type="CircleShape2D" id="Circle_contacto"]
 radius = 30.0
 
-[node name="Notificador" type="CharacterBody2D" unique_id=1328097470]
+[node name="Notificador" type="CharacterBody2D" unique_id=1328097470 groups=["enemigos"]]
 texture_filter = 1
 collision_layer = 2
 motion_mode = 1

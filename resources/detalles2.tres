@@ -1868,5 +1868,8 @@ texture = ExtResource("1_jnsl7")
 25:23/0 = 0
 37:17/0 = 0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_n5rrq"]
+
 [resource]
 sources/0 = SubResource("TileSetAtlasSource_5i82f")
+sources/1 = SubResource("TileSetScenesCollectionSource_n5rrq")

@@ -1,12 +1,19 @@
 [gd_scene format=3 uid="uid://cfd3vf0uu420i"]
 
 [ext_resource type="Script" uid="uid://bmpogw67msm3c" path="res://scripts/Menus/controles.gd" id="1_hnxpg"]
-[ext_resource type="Texture2D" uid="uid://c8h2oihan7dhy" path="res://assets/UI Menus/Fondo Menu.png" id="2_4cr8j"]
+[ext_resource type="Texture2D" uid="uid://bwbn0sqvrr2" path="res://assets/UI Menus/menu_controles.png" id="2_4cr8j"]
+[ext_resource type="FontFile" uid="uid://cygwxomp8pjhl" path="res://resources/Rotulo-Normal-Regular.otf" id="3_kyok6"]
 [ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="3_rfkdw"]
 [ext_resource type="AudioStream" uid="uid://dfspyunwpwxa4" path="res://assets/Sonidos/Musica De Fondo/H32 Moss Cave-60 SUB.ogg" id="4_kyok6"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_486ty"]
-bg_color = Color(0.5922095, 0.53921735, 0.90845287, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mk4g1"]
+bg_color = Color(0.56078434, 0.5254902, 0.57254905, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yowha"]
+bg_color = Color(0.26666668, 0.18039216, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iyve1"]
+bg_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 content_margin_left = 30.0
@@ -55,8 +62,15 @@ offset_left = -267.0
 offset_top = 214.0
 offset_right = 132.0
 offset_bottom = 310.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.56078434, 0.5254902, 0.57254905, 1)
+theme_override_colors/icon_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/icon_hover_color = Color(0.26666668, 0.18039216, 0.19607843, 1)
+theme_override_fonts/font = ExtResource("3_kyok6")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/normal = SubResource("StyleBoxFlat_486ty")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mk4g1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yowha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_iyve1")
 text = "ATRAS
 "
 metadata/_edit_use_anchors_ = true
@@ -77,12 +91,14 @@ theme_override_constants/separation = 16
 
 [node name="Titulo" type="Label" parent="Panel/VBox" unique_id=98837947]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kyok6")
 theme_override_font_sizes/font_size = 44
 text = "CONTROLES DEL JUEGO"
 horizontal_alignment = 1
 
 [node name="Ayuda" type="Label" parent="Panel/VBox" unique_id=1847134720]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kyok6")
 theme_override_font_sizes/font_size = 22
 text = "Haz clic en una tecla y pulsa la nueva. Esc cancela."
 horizontal_alignment = 1
@@ -96,8 +112,15 @@ columns = 3
 [node name="Restaurar" type="Button" parent="Panel/VBox" unique_id=839868739]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.56078434, 0.5254902, 0.57254905, 1)
+theme_override_colors/icon_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/icon_hover_color = Color(0.26666668, 0.18039216, 0.19607843, 1)
+theme_override_fonts/font = ExtResource("3_kyok6")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxFlat_486ty")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mk4g1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yowha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_iyve1")
 text = "  RESTAURAR POR DEFECTO  "
 
 [connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_regresar_pressed"]

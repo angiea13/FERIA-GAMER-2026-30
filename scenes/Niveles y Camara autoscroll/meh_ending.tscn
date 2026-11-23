@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bn35axfuai2tn"]
+
+[ext_resource type="PackedScene" uid="uid://txhneti6dn1l" path="res://scenes/Niveles y Camara autoscroll/ending.tscn" id="1_ktybt"]
+[ext_resource type="Texture2D" uid="uid://ci3u8qaqwdx6y" path="res://assets/Mundo/meh_ending.jpg" id="2_o6uuh"]
+
+[node name="MehEnding" type="Node2D" unique_id=1174931831]
+
+[node name="Ending" parent="." unique_id=1014624387 instance=ExtResource("1_ktybt")]
+imagen_fondo = ExtResource("2_o6uuh")
+texto = "[center][b]EL AISLAMIENTO[/b][/center]
+
+Decides acabar con Rarana, por lo que sea que te haya hecho.
+
+Tu cabeza, que fue una vez —aquella vez— un gran lío, ya no produce más. Solo consume, y se consume a sí misma. Y el mundo real sigue girando, indiferente.
+
+Una pradera y conexiones. El pasto que se mece con el viento y comentarios. El sol tibio sobre la piel y la actividad de eliminar seguidores.
+
+Nada mejor que ver el teléfono en un día soleado.
+
+No sigue a nadie y nadie lo sigue. Ninguna conversación, y ningún \"me gusta\" que valga la pena devolver.
+
+Consume. Y consume. Y consume.
+
+La naturaleza está ahí. Resultó una pena que esta no supiera que la suya propia era de esta índole.
+
+[i]Desconectarse del mundo digital no sirve de nada si uno también se desconecta de todo lo demás.[/i]
+
+[center]FIN[/center]"

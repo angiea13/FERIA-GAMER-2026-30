@@ -1,6 +1,6 @@
 extends Control
 
-const DESIGN_SIZE := Vector2(1920, 1080)  # tamaño original de la imagen del splash
+const DESIGN_SIZE := Vector2(1920, 1080)
 
 @onready var logo: TextureRect = $TextureRect
 
@@ -10,19 +10,24 @@ func _ready() -> void:
 
 	get_viewport().size_changed.connect(_ajustar_logo)
 	_ajustar_logo()
+	
+	print("Viewport size en _ready: ", get_viewport_rect().size)
+	print("Logo size calculado: ", logo.size)
+	print("Logo position calculado: ", logo.position)
+	print("Logo texture: ", logo.texture)
 
 	logo.modulate.a = 0.0
 	var tween := create_tween()
-	tween.tween_property(logo, "modulate:a", 1.0, 1.5)  # fade-in
-	tween.tween_interval(2.0)                           # visible
-	tween.tween_property(logo, "modulate:a", 0.0, 1.0)  # fade-out (opcional)
+	tween.tween_property(logo, "modulate:a", 1.0, 1.5)
+	tween.tween_interval(2.0)
+	tween.tween_property(logo, "modulate:a", 0.0, 1.0)
 	tween.tween_callback(_ir_al_menu)
 
 func _ajustar_logo() -> void:
 	var vp := get_viewport_rect().size
-	var escala := vp.x / DESIGN_SIZE.x        # escala según el ANCHO
+	var escala := vp.x / DESIGN_SIZE.x
 	logo.size = DESIGN_SIZE * escala
-	logo.position = (vp - logo.size) / 2.0    # centrado en ambos ejes
+	logo.position = (vp - logo.size) / 2.0
 
 func _ir_al_menu() -> void:
 	get_tree().change_scene_to_file("res://scenes/Menus/menu_principal.tscn")

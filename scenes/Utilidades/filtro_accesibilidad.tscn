@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://umoluk7ni1hx"]
+
+[ext_resource type="Script" uid="uid://dhtvjk8yqioc2" path="res://scripts/UI/filtro_accesibilidad.gd" id="1_huo84"]
+[ext_resource type="Shader" uid="uid://jef3a1fhduns" path="res://accesibilidad.gdshader" id="2_111ex"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uii18"]
+shader = ExtResource("2_111ex")
+shader_parameter/colorblind_mode = 0
+shader_parameter/intensity = 1.0
+shader_parameter/high_contrast = false
+shader_parameter/contrast = 1.8
+shader_parameter/saturation = 1.4
+
+[node name="FiltroAccesibilidad" type="CanvasLayer" unique_id=249654301]
+layer = 100
+script = ExtResource("1_huo84")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=713496002]
+material = SubResource("ShaderMaterial_uii18")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2

@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://b2ndpfvuwfyqc"]
+
+[ext_resource type="Script" uid="uid://cglxwawfiyuvg" path="res://scenes/Menus/accesibilidad.gd" id="1_lsmkl"]
+[ext_resource type="Texture2D" uid="uid://c564mxy4q3hvk" path="res://assets/UI Menus/menu_accesibilidad.png" id="2_iyve1"]
+[ext_resource type="FontFile" uid="uid://cygwxomp8pjhl" path="res://resources/Rotulo-Normal-Regular.otf" id="3_7yl5u"]
+[ext_resource type="Script" uid="uid://chab1xo2kkid" path="res://scripts/UI/button_manager_accesibilidad.gd" id="3_lsmkl"]
+[ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="3_yowha"]
+[ext_resource type="AudioStream" uid="uid://dfspyunwpwxa4" path="res://assets/Sonidos/Musica De Fondo/H32 Moss Cave-60 SUB.ogg" id="4_iyve1"]
+[ext_resource type="Texture2D" uid="uid://c0sroab64mc5g" path="res://assets/UI Menus/checked.png" id="4_rm8ys"]
+[ext_resource type="Texture2D" uid="uid://vffwv4tlkwue" path="res://assets/UI Menus/unchecked.png" id="5_mujnb"]
+[ext_resource type="Texture2D" uid="uid://bvb26462iyncy" path="res://assets/UI Menus/toggle.png" id="6_mujnb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mk4g1"]
+bg_color = Color(0.56078434, 0.5254902, 0.57254905, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yowha"]
+bg_color = Color(0.26666668, 0.18039216, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iyve1"]
+bg_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+
+[node name="Accesibilidad" type="Node2D" unique_id=485154317]
+script = ExtResource("1_lsmkl")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1268539657]
+offset_right = 1672.0
+offset_bottom = 941.0
+scale = Vector2(0.84, 0.84)
+texture = ExtResource("2_iyve1")
+stretch_mode = 3
+
+[node name="ButtonManager" type="Control" parent="." unique_id=66728140]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_lsmkl")
+
+[node name="Regresar" type="Button" parent="ButtonManager" unique_id=412594960]
+layout_mode = 0
+offset_left = 595.0
+offset_top = 683.0
+offset_right = 1005.0
+offset_bottom = 779.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.56078434, 0.5254902, 0.57254905, 1)
+theme_override_colors/icon_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/icon_hover_color = Color(0.26666668, 0.18039216, 0.19607843, 1)
+theme_override_fonts/font = ExtResource("3_7yl5u")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_mk4g1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yowha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_iyve1")
+text = "REGRESAR"
+
+[node name="AltoContraste" type="CheckBox" parent="ButtonManager" unique_id=595148642]
+layout_mode = 0
+offset_left = 608.0
+offset_top = 304.0
+offset_right = 993.0
+offset_bottom = 385.0
+theme_override_constants/h_separation = 18
+theme_override_fonts/font = ExtResource("3_7yl5u")
+theme_override_font_sizes/font_size = 50
+theme_override_icons/checked = ExtResource("4_rm8ys")
+theme_override_icons/unchecked = ExtResource("5_mujnb")
+text = "Alto Contraste"
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="ButtonManager" unique_id=1762132724]
+layout_mode = 0
+offset_left = 583.0
+offset_top = 432.0
+offset_right = 1018.0
+offset_bottom = 498.0
+theme_override_fonts/font = ExtResource("3_7yl5u")
+theme_override_font_sizes/font_size = 50
+text = "Filtro de daltonismo"
+
+[node name="OptionButton" type="OptionButton" parent="ButtonManager" unique_id=1621393678]
+layout_mode = 0
+offset_left = 627.0
+offset_top = 502.0
+offset_right = 965.0
+offset_bottom = 563.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.56078434, 0.5254902, 0.57254905, 1)
+theme_override_colors/icon_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/icon_hover_color = Color(0.26666668, 0.18039216, 0.19607843, 1)
+theme_override_constants/h_separation = 60
+theme_override_fonts/font = ExtResource("3_7yl5u")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_mk4g1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yowha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_iyve1")
+theme_override_icons/arrow = ExtResource("6_mujnb")
+alignment = 2
+icon_alignment = 1
+selected = 0
+allow_reselect = true
+item_count = 4
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Protanopia"
+popup/item_1/id = 1
+popup/item_2/text = "Deuteranopia"
+popup/item_2/id = 2
+popup/item_3/text = "Tritanopia"
+popup/item_3/id = 3
+
+[node name="Sonido_del_Juego" parent="." unique_id=686222535 instance=ExtResource("3_yowha")]
+stream = ExtResource("4_iyve1")
+
+[node name="Sonido_del_Juego2" parent="." unique_id=1980063361 instance=ExtResource("3_yowha")]
+stream = ExtResource("4_iyve1")
+
+[connection signal="pressed" from="ButtonManager/Regresar" to="." method="_on_regresar_pressed"]
+[connection signal="pressed" from="ButtonManager/Regresar" to="ButtonManager" method="_on_regresar_pressed"]
+[connection signal="toggled" from="ButtonManager/AltoContraste" to="." method="_on_alto_contraste_toggled"]
+[connection signal="item_selected" from="ButtonManager/OptionButton" to="." method="_on_option_button_item_selected"]

@@ -38,6 +38,13 @@ func _input(event: InputEvent) -> void:
 	if accion_esperando != "":
 		_capturar_tecla(event)
 		return
+	
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.physical_keycode == KEY_ESCAPE:
+			get_viewport().set_input_as_handled()
+			_on_regresar_pressed()
+			return
+	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			camara.position.y -= velocidad

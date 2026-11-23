@@ -3,6 +3,9 @@ extends CanvasLayer
 @onready var fondo = $Fondo
 @onready var titulo = $Titulo
 
+func _ready():
+	visible = false
+
 func mostrar(texto: String, duracion_visible: float = 1.5, duracion_fade: float = 1.0):
 	titulo.text = texto
 	fondo.modulate.a = 1.0

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b6488ic5257h1"]
+
+[ext_resource type="PackedScene" uid="uid://txhneti6dn1l" path="res://scenes/Niveles y Camara autoscroll/ending.tscn" id="1_p52cn"]
+[ext_resource type="Texture2D" uid="uid://cfrflth0e440s" path="res://assets/Mundo/good_ending.jpg" id="2_b2i3k"]
+
+[node name="GoodEnding" type="Node2D" unique_id=829004606]
+
+[node name="Ending" parent="." unique_id=1014624387 instance=ExtResource("1_p52cn")]
+imagen_fondo = ExtResource("2_b2i3k")
+texto = "[center][b]LA REGULACIÓN[/b][/center]
+
+Después de un buen tiempo sintiendo que no estabas descansando, despiertas.
+
+Tiras el bendito teléfono por la ventana. No quieres volver a ver una notificación en tu vida. Después viene el alivio.
+
+Consigues uno nuevo. Las mismas redes, las mismas alertas esperando. La cosa es que esta vez decides.
+
+Tocan a la puerta.
+
+Son tus amigos. Vienen a invitarlo a comer, a salir, a estar ahí, en persona, como antes.
+
+Dudas un segundo, pero aceptas, porque, ¿por qué no lo harías?
+
+En medio de la comida en el piso, entre risas que no esperaba, alguien te toma una foto. Sales horrible y sonriente.
+
+Es dificil que el problema desaparezca para siempre, pero no por eso es conveniente enfrentarlo todo solo.
+
+[i]El uso saludable no es dejar de conectarse. Es no dejar que lo digital reemplace lo demás.[/i]
+
+[center]FIN[/center]"

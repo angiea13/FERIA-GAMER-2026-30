@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="17_dp0n0"]
 [ext_resource type="PackedScene" uid="uid://cvxftovlx7tqd" path="res://scenes/Niveles y Camara autoscroll/check_points.tscn" id="17_oxjjv"]
 [ext_resource type="AudioStream" uid="uid://cy8t5ay4grvtv" path="res://assets/Sonidos/Musica De Fondo/H15-111 MAIN ACTION.ogg" id="18_4df1h"]
+[ext_resource type="PackedScene" uid="uid://ckiof2qmg7fu7" path="res://scenes/Entidades/Rarana.tscn" id="18_atq14"]
 
 [node name="Level_9" type="Node2D" unique_id=1081598659]
 script = ExtResource("1_b257p")
@@ -38,7 +39,7 @@ color = Color(0.05, 0.035, 0.09, 1)
 
 [node name="Meta" parent="." unique_id=149725542 instance=ExtResource("3_nhy32")]
 position = Vector2(2554, -2984)
-siguiente_nivel = "uid://c3y1sg3cbb1go"
+siguiente_nivel = "uid://b6488ic5257h1"
 
 [node name="Terreno" type="TileMapLayer" parent="." unique_id=488227694]
 texture_filter = 1
@@ -172,7 +173,8 @@ stream = ExtResource("18_4df1h")
 volume_db = -12.172
 
 [node name="Arana_2" parent="." unique_id=1255558415 instance=ExtResource("13_2hyww")]
-position = Vector2(590, -3157)
+position = Vector2(1850, -3138)
+vida_maxima = 150
 
 [node name="Telarana15" parent="." unique_id=2129950484 instance=ExtResource("11_4ci5n")]
 position = Vector2(2757, -3108)
@@ -190,3 +192,25 @@ scale = Vector2(1.5, 1.5)
 [node name="CheckPoints2" parent="." unique_id=526566705 instance=ExtResource("17_oxjjv")]
 position = Vector2(-374, -2302)
 scale = Vector2(1.5, 1.5)
+
+[node name="Rarana" parent="." unique_id=1819800081 instance=ExtResource("18_atq14")]
+position = Vector2(468, -2333)
+scale = Vector2(0.7, 0.7)
+lines = Array[String](["Prepárate.", "Le eché un vistazo, y lo que viene podría ser quizás lo más complicado de toda nuestra aventura.", "Solo recuerda que...", "... Confío en ti."])
+
+[node name="Rarana2" parent="." unique_id=1900945835 instance=ExtResource("18_atq14")]
+position = Vector2(1865.0001, -3055.0002)
+scale = Vector2(0.6, 0.6)
+lines = Array[String](["...", "...", "Vaya.", "Lo has logrado.", "…", "Hay algo de lo que me he dado cuenta.", "¿Te gustaría saberlo?", "Lo que descubrí es que…", "Este escenario no es real.", "Pero tú ya lo sabías...", "¿Cuánto tiempo más vas a estar atrapado aquí?", "De esa forma…", "Esto es nuestro propio mundo.", "Un mundo solo tuyo, y solo mío.", "Solo [b]tú[/b] lo entiendes...", "Vas a estar aquí por siempre.", "Conmigo.", "No vas a salir y no vas a—", "Pero— pero tienes que irte de a—", "Tienes que irt—", "Tienes que quedarte conmi—", "Tienes que—", "No tienes que hacer nada.", "Solo tienes que—", "Tienes que escapar. Salir.", "…", "Es...", "Escapa...", "No... no sé qué me pasa...", "No sé qué me— No me—", "Oh, oh no. No, no, no.", "No, no vas a salir de aquí.", "No vas a salir aquí porque [i]no te lo voy a permitir.[/i]", "Détenme si puedes."])
+glitchy = true
+glitch_duration = 45.0
+arana_2_path = NodePath("../Arana_2")
+
+[node name="Rarana3" parent="." unique_id=2110925568 instance=ExtResource("18_atq14")]
+position = Vector2(2779, -3076)
+scale = Vector2(0.7, 0.7)
+lines = Array[String](["¿Por qué no…?", "¿Por qué no lo haces?", "¿Por qué no acabas conmigo?", "Si… solo hay dos soluciones.", "O te vas, o te quedas.", "Ninguna de esas es...", "... dejarme aquí solo...", "Yo… yo estoy en segundo plano.", "En este lugar…", "Este lugar tan lleno de todo.", "Este lugar asqueroso y sobreestimulante.", "Este lugar cálido y generoso…", "...", "Hay que acabar con esto.", "Pero… no quiero desaparecer.", "...", "...", "... De acuerdo.", "No deberías quedarte aquí por siempre.", "Pero… ¿puedes venir a visitar de vez en cuando?", "...", "¿Me escuch—?"])
+glitchy = true
+glitch_duration = 1.0
+glitch_max = 0.4
+fade_duration = 10000.0

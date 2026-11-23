@@ -2,7 +2,18 @@
 
 [ext_resource type="Script" uid="uid://bxpnksgncbxe2" path="res://scripts/Entidades/rarana.gd" id="1_75vbp"]
 [ext_resource type="Texture2D" uid="uid://cks2nu66u6vf0" path="res://assets/Rarana/rarana idle.png" id="1_nlwt2"]
+[ext_resource type="Shader" uid="uid://dnnqrt2n24icm" path="res://scenes/Entidades/glitch.gdshader" id="2_tmrld"]
 [ext_resource type="PackedScene" uid="uid://csxy11t01wylw" path="res://scenes/Utilidades/burbuja_dialogo.tscn" id="3_b73eh"]
+[ext_resource type="Texture2D" uid="uid://cwthsl23hp2lo" path="res://assets/Rarana/raranasad2.png" id="4_egfyu"]
+[ext_resource type="Texture2D" uid="uid://dv7ilbxx70vsb" path="res://assets/Rarana/raranasad1.png" id="5_tyx0v"]
+[ext_resource type="Texture2D" uid="uid://cytupkdpo8hhm" path="res://assets/Rarana/raranaojoscerrados.png" id="6_scad4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_atq14"]
+shader = ExtResource("2_tmrld")
+shader_parameter/intensity = 0.0
+shader_parameter/max_shift = 0.015
+shader_parameter/bands = 40.0
+shader_parameter/fps = 12.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75vbp"]
 atlas = ExtResource("1_nlwt2")
@@ -17,6 +28,22 @@ atlas = ExtResource("1_nlwt2")
 region = Rect2(1980, 0, 990, 1200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nxdkl"]
+atlas = ExtResource("1_nlwt2")
+region = Rect2(2970, 0, 990, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdli4"]
+atlas = ExtResource("1_nlwt2")
+region = Rect2(0, 0, 990, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcbtt"]
+atlas = ExtResource("1_nlwt2")
+region = Rect2(990, 0, 990, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77gs1"]
+atlas = ExtResource("1_nlwt2")
+region = Rect2(1980, 0, 990, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0ry0"]
 atlas = ExtResource("1_nlwt2")
 region = Rect2(2970, 0, 990, 1200)
 
@@ -38,6 +65,32 @@ animations = [{
 "loop": 1,
 "name": &"default",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_egfyu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tyx0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdli4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcbtt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_scad4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77gs1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0ry0")
+}],
+"loop": 1,
+"name": &"derrotado",
+"speed": 1.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uii18"]
@@ -51,12 +104,20 @@ size = Vector2(742, 168)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_75vbp")
+lines = null
+glitchy = null
+glitch_duration = null
+glitch_max = null
+fade_duration = null
+arana_2_path = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1297553586]
+material = SubResource("ShaderMaterial_atq14")
 scale = Vector2(0.354, 0.354)
 sprite_frames = SubResource("SpriteFrames_uii18")
+animation = &"derrotado"
 autoplay = "default"
-frame_progress = 0.5245612
+frame_progress = 0.559246
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1004840897]
 shape = SubResource("CapsuleShape2D_uii18")

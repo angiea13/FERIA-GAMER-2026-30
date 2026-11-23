@@ -2,9 +2,12 @@ class_name Enemigo2
 extends CharacterBody2D
 ## Araña: si te ve de lejos se lanza con un DASH (su ataque principal).
 ## Si estás pegado a ella, MUERDE. Si el dash no está listo, te PERSIGUE.
+## Con poca vida, se glitchea y suelta un diálogo (invulnerable mientras habla).
+## Al terminar el diálogo, deja de atacar para siempre pero sigue siendo matable.
+## Al morir: fade del sprite + fundido a negro de pantalla completa, luego emite "murio".
 ## Animaciones: "Movimiento" (en bucle), "Ataque", "Dash", "Golpeado", "Muerte" (sin bucle).
 
-enum Estado { PATRULLA, ALERTA, PERSEGUIR, DASH, MORDIDA, RECUPERAR, GOLPEADO, MUERTO }
+enum Estado { PATRULLA, ALERTA, PERSEGUIR, DASH, MORDIDA, RECUPERAR, GOLPEADO, DIALOGO, MUERTO }
 
 @export_group("General")
 @export var vida_maxima := 5
@@ -49,6 +52,17 @@ enum Estado { PATRULLA, ALERTA, PERSEGUIR, DASH, MORDIDA, RECUPERAR, GOLPEADO, M
 @export var frame_despegue := 2
 @export var frame_aire_fin := 4              # pose de vuelo: se congela hasta tocar el suelo
 
+@export_group("Diálogo (vida baja)")
+@export var umbral_dialogo: int = 15
+@export var lines: Array[String] = [""]
+@export var glitch_duration: float = 20.0    # segundos de diálogo hasta el glitch máximo
+@export_range(0.0, 1.0) var glitch_max: float = 1.0
+@export_group("")
+
+@export_group("Muerte")
+@export var fundido_duracion: float = 1.0
+@export_group("")
+
 var estado := Estado.PATRULLA
 var vida: Vida
 var direccion := 1
@@ -67,6 +81,30 @@ var aterrizo := false
 @onready var hitbox: CollisionShape2D = $Hitbox
 @onready var ray_derecha: RayCast2D = $Derecha
 @onready var ray_izquierda: RayCast2D = $Izquierda
+@onready var dialog_bubble = $BurbujaDialogo
+
+signal usado
+signal murio
+signal fin_dialogo    # se emite cuando termina el diálogo de vida baja, si sobrevive
+
+@export var fade_in: float = 2.0
+
+var activo := false
+var jugador_cerca := false
+var congelado := false
+
+var _layer_guardada := 0
+var _mask_guardada := 0
+
+# --- Diálogo / glitch de vida baja ---
+var ya_glitcheo := false
+var dialog_active := false
+var current_line := 0
+var glitch_time := 0.0
+var glitch_mat: ShaderMaterial
+
+# --- Pacífica (tras el diálogo, ya no ataca, pero sigue siendo matable) ---
+var pacifico := false
 
 
 func _ready() -> void:
@@ -77,6 +115,47 @@ func _ready() -> void:
 	sprite.animation_finished.connect(_al_terminar_animacion)
 	_crear_zona_dano()
 	_orientar()
+
+	dialog_bubble.visible = false
+	dialog_bubble.line_finished.connect(_on_line_finished)
+
+	if sprite.material is ShaderMaterial:
+		# duplicate() para que esta araña tenga su propia intensidad de glitch
+		glitch_mat = sprite.material.duplicate()
+		sprite.material = glitch_mat
+	else:
+		push_warning("Arana_2: el AnimatedSprite2D no tiene un ShaderMaterial para el glitch.")
+
+	_layer_guardada = collision_layer
+	_mask_guardada = collision_mask
+	_desactivar()
+
+
+func _desactivar() -> void:
+	activo = false
+	visible = false
+	set_physics_process(false)
+	collision_layer = 0
+	collision_mask = 0
+	hitbox.set_deferred("disabled", true)
+	zona_dano.monitoring = false
+	sprite.modulate.a = 0.0
+
+
+func activar() -> void:
+	if activo:
+		return
+	activo = true
+	visible = true
+	collision_layer = _layer_guardada
+	collision_mask = _mask_guardada
+	hitbox.set_deferred("disabled", false)
+	zona_dano.monitoring = true
+	set_physics_process(true)
+
+	sprite.modulate.a = 0.0
+	var t := create_tween()
+	t.tween_property(sprite, "modulate:a", 1.0, fade_in)
 
 
 func _crear_zona_dano() -> void:
@@ -93,9 +172,31 @@ func _crear_zona_dano() -> void:
 	add_child(zona_dano)
 
 
+func _input(event: InputEvent) -> void:
+	if dialog_active and event.is_action_pressed("interact"):
+		dialog_bubble.advance()
+
+
+func _process(delta: float) -> void:
+	# Solo se distorsiona mientras hay diálogo activo
+	if not dialog_active or glitch_mat == null:
+		return
+	glitch_time += delta
+	var t := clampf(glitch_time / glitch_duration, 0.0, 1.0)
+	glitch_mat.set_shader_parameter("intensity", t * t * glitch_max)
+
+
 func _physics_process(delta: float) -> void:
 	if estado == Estado.MUERTO:
 		return
+
+	if congelado or estado == Estado.DIALOGO:
+		if not is_on_floor():
+			velocity += get_gravity() * delta
+		velocity.x = move_toward(velocity.x, 0.0, friccion * delta)
+		move_and_slide()
+		return
+
 	if not is_instance_valid(jugador):
 		jugador = get_tree().get_first_node_in_group("jugador") as Jugador
 
@@ -134,7 +235,6 @@ func _estado_patrulla(delta: float) -> void:
 
 
 func _estado_alerta(delta: float) -> void:
-	# Te ha visto: se frena y te mira un instante antes de actuar
 	_frenar(delta)
 	_mirar_al_jugador()
 	if temporizador <= 0.0:
@@ -152,13 +252,12 @@ func _estado_perseguir(delta: float) -> void:
 	_animar("Movimiento")
 	var objetivo := velocidad_persecucion * direccion
 	if is_on_floor() and not _hay_suelo_delante():
-		objetivo = 0.0                      # no se tira por el borde
+		objetivo = 0.0
 	_mover_hacia(objetivo, delta)
 
 
 func _estado_dash(delta: float) -> void:
 	if not despego:
-		# 1) Se agazapa apuntándote
 		_frenar(delta)
 		_mirar_al_jugador()
 		if sprite.frame >= frame_carga and sprite.is_playing():
@@ -168,29 +267,26 @@ func _estado_dash(delta: float) -> void:
 		return
 
 	if not aterrizo:
-		# 2) En el aire: pose de vuelo congelada y hace daño si te toca
 		if sprite.frame >= frame_aire_fin and sprite.is_playing():
 			sprite.pause()
 		_pegar_si_toca(dano_dash)
 		if is_on_floor() and temporizador <= 0.0:
 			aterrizo = true
-			temporizador = 0.3              # tiempo de derrape
-			sprite.play()                   # sigue con la animación de aterrizaje
+			temporizador = 0.3
+			sprite.play()
 		return
 
-	# 3) Aterrizó: derrapa y luego decide
 	_frenar(delta)
 	_pegar_si_toca(dano_dash)
 	if temporizador <= 0.0:
 		if _jugador_cerca():
-			_empezar_mordida()              # combo: si quedaste cerca, muerde
+			_empezar_mordida()
 		else:
 			_empezar_recuperar(recuperacion_dash)
 
 
 func _estado_mordida(delta: float) -> void:
 	if sprite.frame < frame_golpe:
-		# Preparando: se sigue acercando si aún no te alcanza
 		_mirar_al_jugador()
 		if not _jugador_en_zona() and _hay_suelo_delante():
 			_mover_hacia(velocidad_persecucion * 0.6 * direccion, delta)
@@ -204,7 +300,7 @@ func _estado_mordida(delta: float) -> void:
 		else:
 			_frenar(delta)
 		_pegar_si_toca(dano)
-	if temporizador <= 0.0:                 # seguridad por si "Ataque" tuviera bucle
+	if temporizador <= 0.0:
 		_empezar_recuperar(recuperacion_mordida)
 
 
@@ -222,13 +318,12 @@ func _estado_recuperar(delta: float) -> void:
 func _estado_golpeado(delta: float) -> void:
 	velocity.x = move_toward(velocity.x, 0.0, 800.0 * delta)
 	if temporizador <= 0.0:
-		_cambiar(Estado.PERSEGUIR)          # tras recibir un golpe va a por ti
+		_cambiar(Estado.PERSEGUIR)
 
 
 #Que puede decidir
 func _elegir_ataque() -> bool:
-	# Devuelve true si empezó un ataque
-	if jugador == null:
+	if pacifico or jugador == null:
 		return false
 	var dist := absf(_dx())
 	if _dash_listo() and dist >= dash_distancia_min and dist <= dash_distancia_max:
@@ -264,10 +359,9 @@ func _empezar_dash() -> void:
 
 func _despegar() -> void:
 	despego = true
-	temporizador = 0.1                      # margen para que no "aterrice" en el mismo frame
+	temporizador = 0.1
 	sprite.play("Dash")
 	sprite.frame = frame_despegue
-	# Calcula el salto para caer donde estará el jugador
 	var g := maxf(get_gravity().y, 1.0)
 	var t_aire := 2.0 * salto_dash / g
 	var dx := _dx()
@@ -318,7 +412,6 @@ func _ve_al_jugador(rango: float) -> bool:
 
 
 func _medio_ancho() -> float:
-	# Mitad del ancho de su propio cuerpo (para medir desde el borde, no desde el centro)
 	var w := 20.0
 	var s := hitbox.shape
 	if s is RectangleShape2D:
@@ -345,7 +438,7 @@ func _jugador_en_zona() -> bool:
 
 
 func _pegar_si_toca(cantidad: int) -> void:
-	if ya_pego:
+	if pacifico or ya_pego:
 		return
 	for cuerpo in zona_dano.get_overlapping_bodies():
 		if cuerpo is Jugador:
@@ -360,7 +453,6 @@ func _dash_listo() -> bool:
 
 
 func _hay_suelo_delante() -> bool:
-	# Si ningún rayo toca suelo estando en el piso, los rayos están mal colocados: se ignoran
 	if is_on_floor() and not ray_derecha.is_colliding() and not ray_izquierda.is_colliding():
 		return true
 	var rayo := ray_derecha if direccion == 1 else ray_izquierda
@@ -406,37 +498,103 @@ func _imprimir_estado() -> void:
 	#print(txt)
 
 #Dano
-# Lo llama el jugador (player.gd -> golpear()) cuando la espada lo toca.
 func recibir_golpe(dir: Vector2, cantidad: int) -> void:
-	if estado == Estado.MUERTO:
-		return
+	if estado == Estado.MUERTO or estado == Estado.DIALOGO:
+		return    # invulnerable mientras habla: el jugador está obligado a escuchar
 	vida._recibir_dano(cantidad)
 	sprite.self_modulate = Color(1.0, 0.35, 0.35)
 	create_tween().tween_property(sprite, "self_modulate", Color.WHITE, 0.25)
 	if vida.muerte:
 		_morir()
 		return
+
+	if not ya_glitcheo and vida.vida <= umbral_dialogo:
+		ya_glitcheo = true
+		_entrar_modo_dialogo()
+		return
+
 	_cambiar(Estado.GOLPEADO)
 	temporizador = 0.35
 	velocity = Vector2(dir.x * retroceso_golpe, -200.0)
 	sprite.play("Golpeado")
 
-signal murio
+
+func _entrar_modo_dialogo() -> void:
+	_cambiar(Estado.DIALOGO)
+	dialog_active = true
+	current_line = 0
+	glitch_time = 0.0
+	velocity = Vector2.ZERO
+	sprite.play("Movimiento")
+	sprite.pause()
+	get_tree().call_group("enemigos", "set", "congelado", true)
+	if jugador:
+		jugador.in_dialog = true
+	dialog_bubble.visible = true
+	dialog_bubble.show_dialog(lines[current_line])
+
+
+func _on_line_finished() -> void:
+	current_line += 1
+	if current_line < lines.size():
+		dialog_bubble.show_dialog(lines[current_line])
+	else:
+		_salir_modo_dialogo()
+
+
+func _salir_modo_dialogo() -> void:
+	dialog_active = false
+	dialog_bubble.visible = false
+	if jugador:
+		jugador.in_dialog = false
+
+	get_tree().call_group("enemigos", "set", "congelado", false)   # descongela a los demás
+
+	pacifico = true
+	zona_dano.monitoring = false
+	estado = Estado.PATRULLA     # sale de DIALOGO -> ya puede recibir daño y morir
+	congelado = true             # pero queda fija en idle, nunca más se mueve ni ataca
+	sprite.play("Movimiento")
+	sprite.pause()
+
+	fin_dialogo.emit()
+
 
 func morir() -> void:
-	murio.emit()
-	queue_free()
+	_morir()
+
 
 func _morir() -> void:
+	if muerto:
+		return
 	estado = Estado.MUERTO
 	muerto = true
-	morir()
 	remove_from_group("golpeable")
 	hitbox.set_deferred("disabled", true)
 	zona_dano.set_deferred("monitoring", false)
 	velocity = Vector2.ZERO
 	sprite.play("Muerte")
 	await sprite.animation_finished
+
 	var t := create_tween()
 	t.tween_property(sprite, "modulate:a", 0.0, 0.5)
-	t.tween_callback(queue_free)
+	await t.finished
+
+	await _fundido_negro(fundido_duracion)
+
+	murio.emit()   # con la pantalla ya en negro, level_9.gd cambia de escena
+
+
+func _fundido_negro(duracion: float) -> void:
+	var capa := CanvasLayer.new()
+	capa.layer = 100                       # por encima de todo, incluida la UI
+	var negro := ColorRect.new()
+	negro.set_anchors_preset(Control.PRESET_FULL_RECT)
+	negro.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	negro.color = Color(0, 0, 0, 0)         # negro, pero invisible al inicio
+	capa.add_child(negro)
+	get_tree().root.add_child(capa)         # cuelga de root, sigue en pantalla durante el change_scene_to_file
+
+	var t := create_tween()
+	t.tween_property(negro, "color:a", 1.0, duracion)
+	await t.finished

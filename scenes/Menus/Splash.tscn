@@ -11,13 +11,15 @@ offset_bottom = 40.0
 script = ExtResource("1_h3uba")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2075352841]
+visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=183801724]
+z_index = 1
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 texture = ExtResource("2_ol6vw")

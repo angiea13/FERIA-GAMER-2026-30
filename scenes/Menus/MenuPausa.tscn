@@ -1,30 +1,21 @@
 [gd_scene format=3 uid="uid://w4nh7kf42v42"]
 
 [ext_resource type="Script" uid="uid://jtfyqa2khgmm" path="res://scripts/Menus/menu_pausa.gd" id="1_403vn"]
+[ext_resource type="Texture2D" uid="uid://dwikvj6e5dqch" path="res://assets/UI Menus/menu_pausa.png" id="2_wj0je"]
 [ext_resource type="AudioStream" uid="uid://dfspyunwpwxa4" path="res://assets/Sonidos/Musica De Fondo/H32 Moss Cave-60 SUB.ogg" id="3_wj0je"]
+[ext_resource type="FontFile" uid="uid://cygwxomp8pjhl" path="res://resources/Rotulo-Normal-Regular.otf" id="4_3ye3i"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7as3h"]
-bg_color = Color(0.1882353, 0.1254902, 0.26666668, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mk4g1"]
+bg_color = Color(0.56078434, 0.5254902, 0.57254905, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnpof"]
-bg_color = Color(0.34901962, 0.26666668, 0.46666667, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yowha"]
+bg_color = Color(0.26666668, 0.18039216, 0.19607843, 1)
 
-[sub_resource type="FontVariation" id="FontVariation_qnpof"]
-variation_embolden = 0.8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tu2c"]
-bg_color = Color(0.5686275, 0.4745098, 0.80784315, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yuyls"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iyve1"]
+bg_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
 
 [node name="Menu Pausa" type="Control" unique_id=47701127]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,77 +24,79 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_403vn")
 
-[node name="Panel" type="Panel" parent="." unique_id=1715298251]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7as3h")
-
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1900560591]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -299.5
-offset_top = -163.0
-offset_right = 299.5
-offset_bottom = 163.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qnpof")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=247940910]
-layout_mode = 2
-theme_override_constants/separation = 40
-
-[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1104233630]
-layout_mode = 2
-theme_override_constants/h_separation = 7
-theme_override_fonts/font = SubResource("FontVariation_qnpof")
-theme_override_font_sizes/font_size = 45
-theme_override_styles/normal = SubResource("StyleBoxFlat_2tu2c")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_yuyls")
-text = "CONTINUAR"
-
-[node name="Reinicio" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1269216871]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.9490196, 0.8745098, 1)
-theme_override_fonts/font = SubResource("FontVariation_qnpof")
-theme_override_font_sizes/font_size = 45
-theme_override_styles/normal = SubResource("StyleBoxFlat_2tu2c")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_yuyls")
-text = "REINICIAR"
-
-[node name="MenuPrincipal" type="Button" parent="PanelContainer/VBoxContainer" unique_id=868380126]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.9490196, 0.8745098, 1)
-theme_override_fonts/font = SubResource("FontVariation_qnpof")
-theme_override_font_sizes/font_size = 45
-theme_override_styles/normal = SubResource("StyleBoxFlat_2tu2c")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_yuyls")
-text = "MENU PRINCIPAL"
-
-[node name="Salir" type="Button" parent="PanelContainer/VBoxContainer" unique_id=344489428]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.9490196, 0.8745098, 1)
-theme_override_constants/h_separation = 26
-theme_override_fonts/font = SubResource("FontVariation_qnpof")
-theme_override_font_sizes/font_size = 45
-theme_override_styles/normal = SubResource("StyleBoxFlat_2tu2c")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_yuyls")
-text = "SALIR"
+[node name="TextureRect" type="TextureRect" parent="." unique_id=173902222]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.84, 0.84)
+texture = ExtResource("2_wj0je")
 
 [node name="Sonido" type="AudioStreamPlayer" parent="." unique_id=67526531]
 stream = ExtResource("3_wj0je")
 volume_db = -7.172
 bus = &"EFECTO"
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Reinicio" to="." method="_on_reinicio_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MenuPrincipal" to="." method="_on_menu_principal_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Salir" to="." method="_on_salir_pressed"]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=247940910]
+layout_mode = 0
+offset_left = 565.0
+offset_top = 369.0
+offset_right = 1035.0
+offset_bottom = 741.0
+theme_override_constants/separation = 40
+
+[node name="Resume" type="Button" parent="VBoxContainer" unique_id=1104233630]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.56078434, 0.5254902, 0.57254905, 1)
+theme_override_colors/icon_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/icon_hover_color = Color(0.26666668, 0.18039216, 0.19607843, 1)
+theme_override_fonts/font = ExtResource("4_3ye3i")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_mk4g1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yowha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_iyve1")
+text = "CONTINUAR"
+
+[node name="Reinicio" type="Button" parent="VBoxContainer" unique_id=1269216871]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.56078434, 0.5254902, 0.57254905, 1)
+theme_override_colors/icon_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/icon_hover_color = Color(0.26666668, 0.18039216, 0.19607843, 1)
+theme_override_fonts/font = ExtResource("4_3ye3i")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_mk4g1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yowha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_iyve1")
+text = "REINICIAR"
+
+[node name="MenuPrincipal" type="Button" parent="VBoxContainer" unique_id=868380126]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.56078434, 0.5254902, 0.57254905, 1)
+theme_override_colors/icon_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/icon_hover_color = Color(0.26666668, 0.18039216, 0.19607843, 1)
+theme_override_fonts/font = ExtResource("4_3ye3i")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_mk4g1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yowha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_iyve1")
+text = "MENU PRINCIPAL"
+
+[node name="Salir" type="Button" parent="VBoxContainer" unique_id=344489428]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.56078434, 0.5254902, 0.57254905, 1)
+theme_override_colors/icon_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/icon_hover_color = Color(0.26666668, 0.18039216, 0.19607843, 1)
+theme_override_fonts/font = ExtResource("4_3ye3i")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_mk4g1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yowha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_iyve1")
+text = "SALIR"
+
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Reinicio" to="." method="_on_reinicio_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuPrincipal" to="." method="_on_menu_principal_pressed"]
+[connection signal="pressed" from="VBoxContainer/Salir" to="." method="_on_salir_pressed"]

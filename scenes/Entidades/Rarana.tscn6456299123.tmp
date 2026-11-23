@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://ckiof2qmg7fu7"]
+
+[ext_resource type="Script" uid="uid://bxpnksgncbxe2" path="res://scripts/Entidades/rarana.gd" id="1_75vbp"]
+[ext_resource type="Texture2D" uid="uid://cks2nu66u6vf0" path="res://assets/Rarana/rarana idle.png" id="1_nlwt2"]
+[ext_resource type="Shader" uid="uid://dnnqrt2n24icm" path="res://scenes/Entidades/glitch.gdshader" id="2_tmrld"]
+[ext_resource type="PackedScene" uid="uid://csxy11t01wylw" path="res://scenes/Utilidades/burbuja_dialogo.tscn" id="3_b73eh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_atq14"]
+shader = ExtResource("2_tmrld")
+shader_parameter/intensity = 0.0
+shader_parameter/max_shift = 0.015
+shader_parameter/bands = 40.0
+shader_parameter/fps = 12.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75vbp"]
+atlas = ExtResource("1_nlwt2")
+region = Rect2(0, 0, 990, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b73eh"]
+atlas = ExtResource("1_nlwt2")
+region = Rect2(990, 0, 990, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmrld"]
+atlas = ExtResource("1_nlwt2")
+region = Rect2(1980, 0, 990, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxdkl"]
+atlas = ExtResource("1_nlwt2")
+region = Rect2(2970, 0, 990, 1200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uii18"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75vbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b73eh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmrld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxdkl")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uii18"]
+radius = 58.0
+height = 330.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uii18"]
+size = Vector2(742, 168)
+
+[node name="Rarana" type="CharacterBody2D" unique_id=1900945835]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_75vbp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1297553586]
+material = SubResource("ShaderMaterial_atq14")
+scale = Vector2(0.354, 0.354)
+sprite_frames = SubResource("SpriteFrames_uii18")
+autoplay = "default"
+frame_progress = 0.5245612
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1004840897]
+shape = SubResource("CapsuleShape2D_uii18")
+
+[node name="BurbujaDialogo" parent="." unique_id=1283445994 instance=ExtResource("3_b73eh")]
+position = Vector2(-49, -387)
+scale = Vector2(0.8, 0.8)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=362419980]
+
+[node name="AreaInteraccion" type="CollisionShape2D" parent="Area2D" unique_id=111072856]
+position = Vector2(-361, 74)
+shape = SubResource("RectangleShape2D_uii18")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

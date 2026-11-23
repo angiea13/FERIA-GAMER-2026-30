@@ -2,10 +2,17 @@
 
 [ext_resource type="Script" uid="uid://bsewtl1geobek" path="res://scripts/Entidades/Enemigos/arana_2.gd" id="1_2gfgy"]
 [ext_resource type="Texture2D" uid="uid://cugy2j5qr1873" path="res://assets/Enemigo/devoradora_preview.png" id="2_k77eo"]
+[ext_resource type="Shader" uid="uid://dnnqrt2n24icm" path="res://scenes/Entidades/glitch.gdshader" id="2_stw4m"]
+[ext_resource type="PackedScene" uid="uid://5c6h0vh7gmsm" path="res://scenes/Utilidades/burbuja_dialogo_arana.tscn" id="4_yag82"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sk4q6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_naha6"]
+shader = ExtResource("2_stw4m")
+shader_parameter/intensity = 0.0
+shader_parameter/max_shift = 0.015
+shader_parameter/bands = 40.0
+shader_parameter/fps = 12.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_stw4m"]
 atlas = ExtResource("2_k77eo")
@@ -264,7 +271,7 @@ material = SubResource("ShaderMaterial_sk4q6")
 collision_layer = 6
 collision_mask = 6
 script = ExtResource("1_2gfgy")
-vida_maxima = 70
+vida_maxima = 40
 dano = 15
 dano_dash = 20
 velocidad_patrulla = 150.0
@@ -280,6 +287,7 @@ dash_distancia_max = 1400.0
 salto_dash = 500.0
 velocidad_dash_max = 1600.0
 enfriamiento_dash = 1.2
+lines = Array[String](["Obtuviste… ", "... lo que querías...", "Yo…", "No sé lo que quiero…", "Me gustaría quedarme contigo.", "Pero este lugar…", "… Este lugar es repugnante.", "Tan solo mira la cantidad de...", "... de cosas.", "Y no… ", "No creo poder sobrevivir…", "Fuera de aquí…", "Lo siento…", "Acaba conmigo."])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1257274974]
 light_mask = 2
@@ -291,16 +299,19 @@ sprite_frames = SubResource("SpriteFrames_qnpof")
 animation = &"Dash"
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1777075416]
+visible = false
 light_mask = 2
 position = Vector2(-3, 96)
 shape = SubResource("RectangleShape2D_yuyls")
 
 [node name="Ataque_Derecha" type="CollisionShape2D" parent="." unique_id=1970560452]
+visible = false
 position = Vector2(112.640625, 96)
 shape = SubResource("RectangleShape2D_qnpof")
 disabled = true
 
 [node name="Ataque_Izquierda" type="CollisionShape2D" parent="." unique_id=2099686288]
+visible = false
 position = Vector2(-110, 97)
 shape = SubResource("RectangleShape2D_qnpof")
 disabled = true
@@ -312,3 +323,6 @@ target_position = Vector2(0, 40)
 [node name="Izquierda" type="RayCast2D" parent="." unique_id=579646956]
 position = Vector2(-57, 103)
 target_position = Vector2(0, 40)
+
+[node name="BurbujaDialogo" parent="." unique_id=1283445994 instance=ExtResource("4_yag82")]
+position = Vector2(-33, -248)

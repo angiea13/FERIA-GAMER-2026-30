@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://1o7bs4h0axiu" path="res://assets/Sonidos/sonido_del_juego.tscn" id="18_l8fry"]
 [ext_resource type="AudioStream" uid="uid://cy8t5ay4grvtv" path="res://assets/Sonidos/Musica De Fondo/H15-111 MAIN ACTION.ogg" id="19_dndmb"]
 [ext_resource type="PackedScene" uid="uid://cjfthqjiv4v0x" path="res://scenes/Entidades/Notificador.tscn" id="21_ax8na"]
+[ext_resource type="PackedScene" uid="uid://ckiof2qmg7fu7" path="res://scenes/Entidades/Rarana.tscn" id="23_rle21"]
 
 [sub_resource type="Animation" id="Animation_kwk0u"]
 resource_name = "Movimiento"
@@ -264,6 +265,9 @@ position = Vector2(-5222, -1917)
 [node name="CheckPoints5" parent="." unique_id=1787135378 instance=ExtResource("14_gdsvh")]
 position = Vector2(-7182, -1868)
 
+[node name="CheckPoints7" parent="." unique_id=538646440 instance=ExtResource("14_gdsvh")]
+position = Vector2(-6306, -1155)
+
 [node name="Tunel_Impulso10" parent="." unique_id=1354953907 instance=ExtResource("9_hvuyf")]
 position = Vector2(-5831, -655)
 velocidad_impulso = 0.0
@@ -357,3 +361,8 @@ position = Vector2(-8967, -2165)
 
 [node name="Notificador10" parent="." unique_id=913423359 instance=ExtResource("21_ax8na")]
 position = Vector2(-8439, -2156)
+
+[node name="Rarana" parent="." unique_id=1900945835 instance=ExtResource("23_rle21")]
+position = Vector2(-9253, -1309)
+scale = Vector2(0.7, 0.7)
+lines = Array[String](["¿Y qué se supone que tengo que—?", "Oh, hola.", "No te vi ahí.", "Yo tampoco sé cómo llegué aquí.", "Literalmente, y figurativamente.", "...", "Te he estado observando.", "Voy a compartir mis pensamientos.", "Va a parecer algo raro, pero quizás este lugar es más acogedor de lo que pensaba.", "¿Piensas lo mismo?", "... Okey.", "No lo sé.", "Podría quedarme aquí por un buen tiempo.", "Es tóxico, sí—", "—pero mira este ambiente.", "¿Alguna vez has estado en algún lugar así?", "¿No?", "...", "Una de las telarañas me retuvo por un rato y, oh…", "Era muy, [i]muy[/i] cómodo.", "Ya sabes, ver todo lo inerte moverse.", "Pero, Dios mío.", "En serio.", "¿No puede haber menos bichitos?", " Y ni siquiera es porque sean insectos sucios y repudiantes.", "Afectan mi ánimo.", "Quiero estar atrapado aquí para siempre, quizás.", "Pero todos ellos [i]tienen[/i] que desaparecer.", "Así solo seríamos tú y yo, y así…", "...", "¿Qué estoy diciendo…?", "Aj.", "Sigue.", "Probablemente estás a mitad del camino… supongo…", "Yo me quedaré aquí."])

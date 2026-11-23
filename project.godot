@@ -27,6 +27,7 @@ buses/default_bus_layout="uid://7hly8f30llyg"
 
 UtilsGlobal="*uid://bm3n1q2xqgsgs"
 GlobalAccesibilidad="*uid://ddan04yax80a1"
+TransicionNivel="*uid://brfxp10w77mdk"
 
 [display]
 

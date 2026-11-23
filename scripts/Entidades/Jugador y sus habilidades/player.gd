@@ -95,13 +95,13 @@ var offsets_por_animacion = {
 	"atacando_2": Vector2(0, 55),
 	"atacando_3": Vector2(0, 115),
 	"deslizarse": Vector2(-18, 38),
-	"idle": Vector2(0, -80),
-	"moving": Vector2(0, -80),
-	"jump": Vector2(0, -80),
-	"falling": Vector2(0, -80),
-	"double_jump": Vector2(0, -80),
-	"entrar": Vector2(0, -80),
-	"viajar": Vector2(0, -80)
+	"idle": Vector2(0, -50),
+	"moving": Vector2(0, -50),
+	"jump": Vector2(0, -50),
+	"falling": Vector2(0, -50),
+	"double_jump": Vector2(0, -50),
+	"entrar": Vector2(0, -50),
+	"viajar": Vector2(0, -50)
 }
 
 signal vida_cambiada(actual: int, maxima: int)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cxk4bfa3rrj0c"]
 
 [ext_resource type="Script" uid="uid://cipqy4t2mmw5y" path="res://scripts/World Building/panel_container.gd" id="1_3a2g1"]
+[ext_resource type="FontFile" uid="uid://cygwxomp8pjhl" path="res://resources/Rotulo-Normal-Regular.otf" id="2_fa5lp"]
 
 [node name="Indicador" type="Node2D" unique_id=1748779737]
 script = ExtResource("1_3a2g1")
@@ -13,5 +14,6 @@ offset_bottom = 24.0
 
 [node name="Label" type="Label" parent="Indicador_Tecla" unique_id=1902762345]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fa5lp")
 horizontal_alignment = 1
 vertical_alignment = 1

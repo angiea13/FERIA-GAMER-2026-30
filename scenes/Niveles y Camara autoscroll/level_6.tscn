@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://crbijb3w8ffu5"]
 
+[ext_resource type="Script" uid="uid://c2lrnhlm7mg6w" path="res://scenes/Niveles y Camara autoscroll/level_6.gd" id="1_l1xyu"]
 [ext_resource type="PackedScene" uid="uid://cwo3m2mm53kof" path="res://scenes/World/fondo_parallax.tscn" id="1_lqevt"]
 [ext_resource type="Texture2D" uid="uid://058ip756a71a" path="res://assets/Mundo/fondo_niebla_doble.png" id="1_pyxlf"]
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="2_0fguu"]
@@ -63,6 +64,7 @@ _data = {
 
 [node name="Level 6" type="Node2D" unique_id=1469763414]
 position = Vector2(4, 8)
+script = ExtResource("1_l1xyu")
 
 [node name="Fondo_Parallax" parent="." unique_id=894798477 instance=ExtResource("1_lqevt")]
 visible = false

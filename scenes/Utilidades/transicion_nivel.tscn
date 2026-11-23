@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://brfxp10w77mdk"]
+
+[ext_resource type="Script" uid="uid://dhuen0ka1bhf1" path="res://scripts/UI/transicion_nivel.gd" id="1_dwyd8"]
+[ext_resource type="FontFile" uid="uid://cygwxomp8pjhl" path="res://resources/Rotulo-Normal-Regular.otf" id="2_emq8g"]
+
+[node name="TransicionNivel" type="CanvasLayer" unique_id=121605533]
+script = ExtResource("1_dwyd8")
+
+[node name="Fondo" type="ColorRect" parent="." unique_id=459031898]
+offset_right = 1600.0
+offset_bottom = 900.0
+color = Color(0, 0, 0, 1)
+
+[node name="Titulo" type="Label" parent="." unique_id=1362003968]
+offset_left = 250.0
+offset_top = 250.0
+offset_right = 1350.0
+offset_bottom = 650.0
+theme_override_fonts/font = ExtResource("2_emq8g")
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cwo3m2mm53kof" path="res://scenes/World/fondo_parallax.tscn" id="1_lmffv"]
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_lurn8"]
 [ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Utilidades/Pausa_En_Lvls.tscn" id="1_mfs3m"]
+[ext_resource type="Script" uid="uid://deh4ylav0ksdj" path="res://scenes/Niveles y Camara autoscroll/level_3.gd" id="1_v4j7v"]
 [ext_resource type="TileSet" uid="uid://bnoc84ls8didp" path="res://resources/tileset_mundo.tres" id="2_qcljp"]
 [ext_resource type="Script" uid="uid://dh4x8b2foxbk7" path="res://scripts/World Building/tilemap_peligros.gd" id="3_rblny"]
 [ext_resource type="PackedScene" uid="uid://c4j2fv3it820u" path="res://scenes/Entidades/Caballero_Enemy.tscn" id="4_4q82l"]
@@ -18,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cjfthqjiv4v0x" path="res://scenes/Entidades/Notificador.tscn" id="16_yfy2k"]
 
 [node name="Level3" type="Node2D" unique_id=33640553]
+script = ExtResource("1_v4j7v")
 
 [node name="Fondo_Parallax" parent="." unique_id=894798477 instance=ExtResource("1_lmffv")]
 position = Vector2(-18, 5)
@@ -59,15 +61,6 @@ tile_set = ExtResource("7_x6dac")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1889290063]
 tile_set = ExtResource("8_kweve")
-
-[node name="Pista1" type="Label" parent="." unique_id=1221328980]
-offset_left = 3840.0
-offset_top = -952.0
-offset_right = 4540.0
-offset_bottom = -902.0
-theme_override_colors/font_color = Color(1, 1, 1, 0.75)
-theme_override_font_sizes/font_size = 28
-text = "Telaraña: E para cruzar"
 
 [node name="Enemigo1" parent="." unique_id=1886066031 instance=ExtResource("4_4q82l")]
 position = Vector2(1856, -114)
@@ -125,7 +118,7 @@ position = Vector2(-100, -119)
 position = Vector2(546, -148)
 
 [node name="Indicador" parent="." unique_id=1748779737 instance=ExtResource("15_v4j7v")]
-position = Vector2(-334, -337)
+position = Vector2(-332, -194)
 
 [node name="Notificador" parent="." unique_id=1328097470 instance=ExtResource("16_yfy2k")]
 position = Vector2(1163, -310)

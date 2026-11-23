@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://c31p0xb6q8v3f"]
 
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_5ni3f"]
+[ext_resource type="Script" uid="uid://ct7ou0auojsf" path="res://scenes/Niveles y Camara autoscroll/level_2.gd" id="1_e20ww"]
 [ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Utilidades/Pausa_En_Lvls.tscn" id="1_o4rip"]
 [ext_resource type="PackedScene" uid="uid://cwo3m2mm53kof" path="res://scenes/World/fondo_parallax.tscn" id="1_vuylb"]
 [ext_resource type="TileSet" uid="uid://dgggmodsham0s" path="res://resources/detalles2.tres" id="8_efu0d"]
@@ -20,6 +21,7 @@
 subpixel_positioning = 0
 
 [node name="Level2" type="Node2D" unique_id=1179149509]
+script = ExtResource("1_e20ww")
 
 [node name="Fondo_Parallax" parent="." unique_id=894798477 instance=ExtResource("1_vuylb")]
 position = Vector2(117.1653, -125.77789)

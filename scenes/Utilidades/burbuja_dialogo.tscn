@@ -16,17 +16,20 @@ stretch_mode = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="TextureRect" unique_id=1816440006]
 layout_mode = 0
-offset_left = 466.0
-offset_top = 356.0
-offset_right = 1433.0
-offset_bottom = 676.0
+offset_left = 188.0
+offset_top = 240.0
+offset_right = 1696.0
+offset_bottom = 660.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TextureRect/MarginContainer" unique_id=1734699521]
 layout_mode = 2
-theme_override_colors/default_color = Color(0.89679736, 0.8336471, 0.60605204, 1)
+theme_override_colors/default_color = Color(0.24009728, 0.17313129, 0.12975189, 1)
+theme_override_colors/font_outline_color = Color(0.9647059, 0.9137255, 0.8784314, 1)
+theme_override_constants/outline_size = 100
 theme_override_fonts/normal_font = ExtResource("2_54oq7")
 theme_override_font_sizes/normal_font_size = 128
 bbcode_enabled = true
+text = "okokokok"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1

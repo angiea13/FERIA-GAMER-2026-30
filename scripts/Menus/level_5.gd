@@ -1,5 +1,4 @@
 extends Node2D
 
-
-func _process(delta: float) -> void:
-	pass
+func _ready() -> void:
+	TransicionNivel.mostrar("— Nivel 5 - PERSISTIR —")

@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://c40scd1ldowtj"]
 
+[ext_resource type="Script" uid="uid://7pxfvs5lqjgs" path="res://scenes/Niveles y Camara autoscroll/level_7.gd" id="1_8c5gh"]
 [ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Utilidades/Pausa_En_Lvls.tscn" id="1_q085r"]
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_wy3yu"]
 [ext_resource type="TileSet" uid="uid://bnoc84ls8didp" path="res://resources/tileset_mundo.tres" id="2_308j0"]
@@ -174,6 +175,7 @@ _data = {
 }
 
 [node name="level 7" type="Node2D" unique_id=1469763414]
+script = ExtResource("1_8c5gh")
 
 [node name="Fondo" type="CanvasLayer" parent="." unique_id=1123093262]
 layer = -10

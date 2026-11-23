@@ -3,14 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://writvj33c04c" path="res://assets/Mundo/platform.png" id="1_rkcww"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uii18"]
-size = Vector2(166, 26)
+size = Vector2(166, 33)
 
 [node name="Plataforma" type="StaticBody2D" unique_id=2092135741]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1474357706]
-scale = Vector2(0.35999998, 0.35999998)
+position = Vector2(-1, 5.9999995)
+scale = Vector2(0.08944445, 0.08944445)
 texture = ExtResource("1_rkcww")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1392961780]
+position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_uii18")
 one_way_collision = true

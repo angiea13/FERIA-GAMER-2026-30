@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://ibbforeucl4n"]
 
 [ext_resource type="Texture2D" uid="uid://c2upkxsoeask3" path="res://assets/Mundo/fondo_niebla.png" id="1_4rgqc"]
+[ext_resource type="Script" uid="uid://crma2bqfwxxy1" path="res://scenes/Niveles y Camara autoscroll/level_4.gd" id="1_26u0m"]
 [ext_resource type="PackedScene" uid="uid://cwo3m2mm53kof" path="res://scenes/World/fondo_parallax.tscn" id="1_euuk0"]
 [ext_resource type="PackedScene" uid="uid://w4nh7kf42v42" path="res://scenes/Menus/MenuPausa.tscn" id="1_o3nvj"]
 [ext_resource type="PackedScene" uid="uid://d3qenmpk1gtrd" path="res://scenes/Utilidades/Pausa_En_Lvls.tscn" id="2_eu0hj"]
@@ -24,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cjfthqjiv4v0x" path="res://scenes/Entidades/Notificador.tscn" id="20_q752j"]
 
 [node name="Level4" type="Node2D" unique_id=49675082]
+script = ExtResource("1_26u0m")
 metadata/_edit_horizontal_guides_ = [-1784.0]
 
 [node name="Fondo_Parallax" parent="." unique_id=894798477 instance=ExtResource("1_euuk0")]
